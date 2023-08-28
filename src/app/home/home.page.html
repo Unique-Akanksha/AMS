@@ -1,20 +1,106 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content>
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+      <ion-card-header>
+        <img src="assets/images/small.svg">
+
+        <ion-item id="item-username">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input placeholder="Enter username here" type="text" id="user-name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input placeholder="Enter email-id here" type="email" id="user-email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input placeholder="Enter password here" type="Password" id="user-password"></ion-input>
+        </ion-item>
+ 
+
+
+        <ion-button color="danger" expand="full" id="set-btn">
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-label>Sign UP</ion-label>
+        </ion-button>
+
+        <ion-button color="success" expand="full" id="access-btn" style="display: none;">
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-label>Login</ion-label>
+        </ion-button>
+
+        <small id="password-empty-notice" style="color: red; display: none;">Please fill all fields !</small>
+
+
+        <small id="password-wrong" style="color: red; display: none;">Your username & password is wrong !</small>
+
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <div id="app-page" style="display: none;">
+    <h1 class = "title"><ion-label>Super Admin Dashboard</ion-label></h1>
+       
+
+    <ion-card style="display: none;" id="contact-form">
+      <ion-card-header>
+        <img src="assets/images/user.jpg">
+        <ion-input placeholder="First Name" style="border-bottom: 0.5px solid #ccc;" class="ion-margin-bottom" id="first-name"></ion-input>
+        <ion-input placeholder="Last Name" style="border-bottom: 0.5px solid #ccc;" class="ion-margin-bottom" id="last-name"></ion-input>
+
+        <ion-select placeholder="Select Department" id="department">
+          <ion-select-option value="development">Development</ion-select-option>
+          <ion-select-option value="design">Design</ion-select-option>
+          <ion-select-option value="qa">QA</ion-select-option>
+        </ion-select>
+        
+
+        
+        <ion-select placeholder="Select Position" id="position">
+          <ion-select-option value="developer">Developer</ion-select-option>
+          <ion-select-option value="designer">Designer</ion-select-option> 
+          <ion-select-option value="qa">QA Tester</ion-select-option>
+          <ion-select-option value="project-manager">Project Manager</ion-select-option>
+       </ion-select>
+      
+      
+       <ion-input type="email" placeholder="Enter your email"></ion-input>
+
+       
+       <ion-input type="password" placeholder="Enter your password"></ion-input>
+      
+       <!-- <ion-label position="floating">Confirm Password</ion-label> -->
+       <ion-input type="password" placeholder="Confirm your password"></ion-input>
+
+      </ion-card-header>
+    </ion-card>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" id="add-btn">
+      <ion-fab-button class="custom-fab-button">
+        <ion-icon name="add"></ion-icon>
+        <ion-label>Employee</ion-label>
+      </ion-fab-button>
+
+      <!-- <ion-fab-button class="custom-fab-button">
+        <ion-icon name="add"></ion-icon>
+        <ion-label>Project</ion-label>
+      </ion-fab-button>
+
+      <ion-fab-button class="custom-fab-button">
+        <ion-icon name="add"></ion-icon>
+        <ion-label>Employee</ion-label>
+      </ion-fab-button> -->
+      
+    </ion-fab>
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end" id="save-btn" style="display: none;">
+      <ion-fab-button color="danger">
+        <ion-icon name="save"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
   </div>
 </ion-content>
