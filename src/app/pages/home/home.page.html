@@ -7,7 +7,19 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">home</ion-title>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="danger" shape="full" expand="full" (click)="logout()">
+            <ion-icon name="key" slot="start"></ion-icon>
+            Logout
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <!-- Display the session timer -->
+      <div *ngIf="isLoggedIn">
+        <p>Session Timer: {{ formatTime(remainingTime) }}</p>
+      </div>
+
     </ion-toolbar>
   </ion-header>
 </ion-content>

@@ -8,39 +8,61 @@
   <div id="container">
     <ion-card>
       <ion-card-header>
+        <!-- <form #userSignUp="ngForm" (ngSubmit)="signUp(userSignUp.value)"> -->
+
+          
+        <form [formGroup]="signupForm" (ngSubmit)="signUp()">
         <img src="assets/images/small.svg">
+        <ion-list lines="full">
 
-        <ion-item id="item-username">
-          <ion-label position="floating">Username</ion-label>
-          <ion-input placeholder="Enter username here" type="text" id="user-name"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label position="floating">Enter User Name</ion-label>
+            <ion-input type="text" name="name" formControlName="name"></ion-input>
+          </ion-item>
+          <div *ngIf="signupForm.controls['name'].touched && signupForm.controls['name'].invalid">
+            <ion-text color="danger">Name is required.</ion-text>
+          </div>
 
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input placeholder="Enter email-id here" type="email" id="user-email"></ion-input>
-        </ion-item>
+          <ion-item>
+            <ion-label position="floating">Enter Email</ion-label>
+            <ion-input type="email" name="email" formControlName="email"></ion-input>
+          </ion-item>
+          <div *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid">
+            <ion-text color="danger">
+              <ng-container *ngIf="signupForm.controls['email'].hasError('required')">
+                Email is required.
+              </ng-container>
+              <ng-container *ngIf="signupForm.controls['email'].hasError('email') && !signupForm.controls['email'].hasError('required')">
+                Invalid email format.
+              </ng-container>
+            </ion-text>
+          </div>
 
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input placeholder="Enter password here" type="Password" id="user-password"></ion-input>
-        </ion-item>
- 
+          <ion-item>
+            <ion-label position="floating">Enter Password</ion-label>
+            <ion-input type="password" name="password" formControlName="password"></ion-input>
+          </ion-item>
+          <div *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
+            <ion-text color="danger">
+              <ng-container *ngIf="signupForm.controls['password'].hasError('required')">
+                Password is required.
+              </ng-container>
+              <ng-container *ngIf="signupForm.controls['password'].hasError('minlength')">
+                Password must be at least 3 characters long.
+              </ng-container>
+            </ion-text>
+          </div>
 
-
-        <ion-button color="danger" expand="full" id="set-btn">
-          <ion-icon name="key" slot="start"></ion-icon>
-          <ion-label>Sign UP</ion-label>
-        </ion-button>
-
-        <ion-button color="success" expand="full" id="access-btn" style="display: none;">
-          <ion-icon name="key" slot="start"></ion-icon>
-          <ion-label>Login</ion-label>
-        </ion-button>
-
-        <small id="password-empty-notice" style="color: red; display: none;">Please fill all fields !</small>
-
-
-        <small id="password-wrong" style="color: red; display: none;">Your username & password is wrong !</small>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" [disabled]="signupForm.invalid" color="danger" shape="full" expand="full">
+                <ion-icon name="key" slot="start"></ion-icon>
+                Sign UP
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </form>
 
       </ion-card-header>
     </ion-card>
