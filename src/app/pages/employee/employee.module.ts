@@ -7,18 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { EmployeePageRoutingModule } from './employee-routing.module';
 
 import { EmployeePage } from './employee.page';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AlphabetDirective } from 'src/app/alphabet.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EmployeePageRoutingModule,
-    ReactiveFormsModule,
-    
+    EmployeePageRoutingModule
   ],
-  declarations: [EmployeePage, AlphabetDirective]
+  declarations: [EmployeePage]
 })
 export class EmployeePageModule {}

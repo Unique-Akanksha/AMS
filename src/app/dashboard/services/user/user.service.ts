@@ -16,7 +16,7 @@ export class UserService {
   constructor(private http:HttpClient, private router:Router) { }
 
   userSignUp(user:SignUp){
-    this.http.post("http://localhost/ionic/AttendanceManagementSystem/backend/user_Create.php",user,{observe:'response'}).subscribe((result)=>{
+    this.http.post("https://demo101.websartech.com/AMS_APIS/backend/user_Create.php",user,{observe:'response'}).subscribe((result)=>{
       console.warn(result);
       if(result){
         // localStorage.setItem('user',JSON.stringify(result.body));
@@ -26,12 +26,12 @@ export class UserService {
   }
 
   userLogin(data:Login){
-    this.http.get<SignUp[]>(`http://localhost/ionic/AttendanceManagementSystem/backend/user_read.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
+    this.http.get<SignUp[]>(`https://demo101.websartech.com/AMS_APIS/backend/user_read.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
     subscribe((result:any)=>{
       if(result && result.body?.length){
         console.warn("User logged in");
         localStorage.setItem('user',JSON.stringify(result.body[0]));
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
       }else{
         console.warn("login failed");
         this.isLoginError.emit(true);

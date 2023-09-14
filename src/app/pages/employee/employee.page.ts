@@ -1,65 +1,30 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder , Validator, Validators } from '@angular/forms';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { log } from 'console';
+import { Component, OnInit,Input,ViewChild } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
-
-interface IUser {
-  name: string;
-  des: string;
-
-}
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.page.html',
   styleUrls: ['./employee.page.scss'],
 })
-
 export class EmployeePage implements OnInit {
- 
-  empForm: FormGroup;
-  EmployeeList : any=[];
+  EmployeeList :any=[];
+  ModalTitle:string='';
+  ActivateAddEditEmpComp:boolean=false;
+  @Input() emp: any;
 
-  @ViewChild(IonModal)
-  model!:IonModal;
-  name:string|undefined;
+  EmployeeIdFilter:string='';
+  FirstNameFilter:string='';
+  MiddleNameFilter:string='';
+  LastNameFilter:string='';
+  EmailFilter:string='';
+  HireDateFilter:string='';
+  DepartmentFilter:string='';
+  PositionFilter:string='';
 
-  constructor(private employeeService: EmployeeService,private fb: FormBuilder,private _formBuilder: FormBuilder,) {
-    
 
-    this.empForm = this.fb.group({
-      first_name:['',Validators.required],
-      middle_name:["",],
-      last_name:["",],
-      email:['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')],],
-      hire_date:["",],
-      department:["",],
-      position:["",],
-      password:["",],
-      
-    
-    })
+  EmployeeListWithoutFilter:any=[];
 
-   
-   }
-   firstFormGroup = this._formBuilder.group({
-
-     
-    name: ['', Validators.required],
-   
-      
-
-  })
-  
-   
-  get f() { return this.empForm.controls; }
-  
-  get first_name() { return this.empForm.get('name')}
-  get email(){
-    return this.empForm.get('email');
-  }
+  constructor(private employeeService:EmployeeService) { }
 
   ngOnInit() {
     this.refreshEmpList();
@@ -68,57 +33,76 @@ export class EmployeePage implements OnInit {
   refreshEmpList(){
     this.employeeService.getEmpList().subscribe((data)=>{
       this.EmployeeList=data;
+      console.warn("emp list : ",this.EmployeeList);
+      this.EmployeeListWithoutFilter=data;
+    })
+  }
+
+  addClick(){
+    this.emp={
+      EmployeeId:0,
+      EmployeeName:"",
+      Department:"",
+      DateOfJoining:"",
+      PhotoFileName:"anonymous.png"
+    }
+    this.ModalTitle="Add Employee";
+    this.ActivateAddEditEmpComp=true;
+}
+
+closeClick(){
+  this.ActivateAddEditEmpComp=false;
+  this.refreshEmpList();
+}
+
+editClick(item:any){
+  this.emp=item;
+  this.ModalTitle="Edit Employee";
+  this.ActivateAddEditEmpComp=true;
+}
+
+deleteClick(item:any){
+  console.log("deleteClick : ",item.employee_id);
+  if(confirm("Are you sure??")){
+    this.employeeService.deleteEmployee(item.employee_id).subscribe(data=>{
+      this.refreshEmpList();
     });
   }
-
-  // cancel(){
-  //   this.model.dismiss(null,'cancel');
-  // }
-
-  savedata(){
-    this.model.dismiss();
-    // this.model.dismiss(this.name,'confirm');
-    if(this.empForm.valid){
-      this.employeeService.add_Employee(this.empForm.value);
-      console.log("form data ts file :",this.empForm.value);
-      
-      
-      
-    } 
-  }
-  empinsert(){
-  }
-
-  // onWillDismiss(event:Event){
-  //   // const ev = event as CustomEvent<OverlayEventDetail<string>>;
-  //   // if(ev.detail.role === 'confirm'){
-  //   //   if(this.empForm.valid){
-  //   //     // console.log("form data ts file :",this.empForm.value);
-  //   //     this.employeeService.add_Employee(this.empForm.value);
-  //   //   } 
-  //   // }
-  // }
- 
-  deleteClick(item:any){
-    console.log("id for delete:",item.employee_id)
-    if(confirm("Are you sure to delete ?")){
-      this.employeeService.delEmployee(item.employee_id).subscribe((data)=>{
-        this.refreshEmpList();
-      })
-    }
-
-  }
-  numberOnly(event: any): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
-    // if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-    if ((charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122) ) {
-      return false;
-    }
-
-    return true;
-
-  }
 }
-// if ((this.key < 64 || this.key > 90) && ( this.key < 7 || this.key  > 9 )) {
-//   event.preventDefault();
-// }
+
+FilterFn(){
+  
+  var EmployeeIdFilter = this.EmployeeIdFilter;
+  var FirstNameFilter = this.FirstNameFilter;
+  var MiddleNameFilter = this.MiddleNameFilter;
+  var LastNameFilter =this.LastNameFilter;
+  var EmailFilter =this.EmailFilter;
+  var HireDateFilter =this.HireDateFilter;
+  var DepartmentFilter =this.DepartmentFilter;
+  var PositionFilter =this.PositionFilter;
+
+
+  this.EmployeeList =this.EmployeeListWithoutFilter.filter(function(el:any){
+  
+    return el.employee_id.toString().toLowerCase().includes(EmployeeIdFilter.toString().trim().toLowerCase())&&
+    el.first_name.toString().toLowerCase().includes(FirstNameFilter.toString().trim().toLowerCase())&&
+    el.middle_name.toString().toLowerCase.includes(MiddleNameFilter.toString().trim().toLowerCase())&&
+    el.last_name.toString().toLowerCase.includes(LastNameFilter.toString().trim().toLowerCase())&&
+    el.email.toString().toLowerCase.includes(EmailFilter.toString().trim().toLowerCase())&&
+    el.hire_date.toString().toLowerCase.includes(HireDateFilter.toString().trim().toLowerCase())&&
+    el.department.toString().toLowerCase.includes(DepartmentFilter.toString().trim().toLowerCase())&&
+    el.position.toString().toLowerCase.includes(PositionFilter.toString().trim().toLowerCase())
+  });
+}
+
+sortResult(prop:any,asc:any){
+  this.EmployeeList = this.EmployeeListWithoutFilter.sort(function(a:any,b:any){
+   if(asc){
+     return (a[prop]>b[prop])?1 : ((a[prop]<b[prop]) ?-1:0);
+   }else{
+     return (b[prop]>a[prop])?1 : ((b[prop]<a[prop]) ?-1:0);
+   }
+  })
+ }
+
+}
