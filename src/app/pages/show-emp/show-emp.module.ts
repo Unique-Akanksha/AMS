@@ -8,6 +8,7 @@ import { ShowEmpPageRoutingModule } from './show-emp-routing.module';
 
 import { ShowEmpPage } from './show-emp.page';
 import {MatIconModule} from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     IonicModule,
     ShowEmpPageRoutingModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
   declarations: [ShowEmpPage]
 })

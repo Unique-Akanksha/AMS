@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { AddEditEmpPage } from '../add-edit-emp/add-edit-emp.page';
 import { EmployeeService } from 'src/app/services/employee.service';
 
+
 @Component({
   selector: 'app-show-emp',
   templateUrl: './show-emp.page.html',
@@ -12,7 +13,9 @@ export class ShowEmpPage implements OnInit {
   modelOutput: string = '';
   ModalTitle: string = '';
   EmployeeList: any = [];
-  
+  dataSource:any;
+  displayedColumns: string[] = ['employee_id', 'first_name', 'middle_name',  'last_name', 'email','hire_date', 'department', 'position', 'action' ];
+
   constructor(private employeeService: EmployeeService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
@@ -29,6 +32,7 @@ export class ShowEmpPage implements OnInit {
   refreshEmpList() {
     this.employeeService.getEmpList().subscribe((data) => {
       this.EmployeeList = data;
+      this.dataSource = data;
     })
   }
 
