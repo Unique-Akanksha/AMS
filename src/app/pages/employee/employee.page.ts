@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder , Validator, Validators } from '@angular/forms';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { log } from 'console';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 interface IUser {
@@ -80,6 +81,9 @@ export class EmployeePage implements OnInit {
     if(this.empForm.valid){
       this.employeeService.add_Employee(this.empForm.value);
       console.log("form data ts file :",this.empForm.value);
+      
+      
+      
     } 
   }
   empinsert(){
