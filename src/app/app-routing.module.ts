@@ -34,7 +34,51 @@ const routes: Routes = [
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule),
     canActivate: [AuthGuard]
   },
- 
+  {
+    path: 'employee',
+    loadChildren: () => import('./pages/employee/employee.module').then( m => m.EmployeePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-edit-dep',
+    loadChildren: () => import('./pages/add-edit-dep/add-edit-dep.module').then( m => m.AddEditDepPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'show-dep',
+    loadChildren: () => import('./pages/show-dep/show-dep.module').then( m => m.ShowDepPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-edit-emp',
+    loadChildren: () => import('./pages/add-edit-emp/add-edit-emp.module').then( m => m.AddEditEmpPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'show-emp',
+    loadChildren: () => import('./pages/show-emp/show-emp.module').then( m => m.ShowEmpPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'pages',
+    loadChildren: () => import('./pages/pages.module').then( m => m.PagesPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'show-project',
+    loadChildren: () => import('./pages/show-project/show-project.module').then( m => m.ShowProjectPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'show-attendance',
+    loadChildren: () => import('./pages/show-attendance/show-attendance.module').then( m => m.ShowAttendancePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-edit-project',
+    loadChildren: () => import('./pages/add-edit-project/add-edit-project.module').then( m => m.AddEditProjectPageModule),
+    canActivate: [AuthGuard]
+  },
   
   
 ];

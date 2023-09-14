@@ -1,0 +1,63 @@
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Employee Page</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" size-md="1" size-lg="1">
+          <ion-button expand="block" (click)="openModal('')" > Add </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="for_scroll">
+
+    <table class="custom-ion-table">
+      <thead>
+        <tr>
+          <th scope="col">EmployeeId</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Middle Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Hire Date</th>
+          <th scope="col">Department</th>
+          <th scope="col">Position</th>
+          <th scope="col" colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dataItem of EmployeeList">
+          <td>{{dataItem.employee_id}}</td>
+          <td>{{dataItem.first_name}}</td>
+          <td>{{dataItem.middle_name}}</td>
+          <td>{{dataItem.last_name}}</td>
+          <td>{{dataItem.email}}</td>
+          <td>{{dataItem.hire_date}}</td>
+          <td>{{dataItem.department}}</td>
+          <td>{{dataItem.position}}</td>
+          <td>
+            <ion-button color="primary" (click)="openModal(dataItem)">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="deleteClick(dataItem)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  </ion-content>
+</div>
