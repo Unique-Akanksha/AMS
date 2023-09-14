@@ -9,7 +9,7 @@ import { map, takeWhile } from 'rxjs/operators';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   remainingTime: number = 0; // Remaining time in seconds
   private sessionSubscription: Subscription | undefined;
@@ -58,6 +58,7 @@ export class HomePage implements OnInit {
       .subscribe(remainingTime => {
         this.remainingTime = remainingTime;
         // if (remainingTime <= 0) {
+        //   alert('Your session has expired. You will be logged out.');
         //   this.logout(); 
         // }
       });

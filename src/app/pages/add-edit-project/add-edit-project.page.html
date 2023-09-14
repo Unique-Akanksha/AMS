@@ -1,0 +1,45 @@
+<ion-content class="ion-padding">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="medium" (click)="closeModal(false)">Cancel</ion-button>
+      </ion-buttons>
+      <ion-title>{{ actionType === 'update' ? 'Update Project' : 'Add Project' }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal(true)" [strong]="true" [disabled]="projectForm.invalid">Confirm</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <form [formGroup]="projectForm" (ngSubmit)="closeModal(true)">
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Project name" formControlName="name" placeholder="Project name"></ion-input>
+      </ion-item>
+      <div *ngIf="projectForm.controls['name'].touched && projectForm.controls['name'].invalid">
+        <ion-text color="danger">Name is required.</ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Project Description" formControlName="description" placeholder="Description"></ion-input>
+      </ion-item>
+      <div *ngIf="projectForm.controls['description'].touched && projectForm.controls['description'].invalid">
+        <ion-text color="danger">Description is required.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Select Start Date" formControlName="start_date" placeholder="Start Date" type="date"></ion-input>
+      </ion-item>
+      <div *ngIf="projectForm.controls['start_date'].touched && projectForm.controls['start_date'].invalid">
+        <ion-text color="danger">Start Date is required.</ion-text>
+      </div>
+      
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Select End Date" formControlName="end_date" placeholder="End Date" type="date" [min]="projectForm.get('start_date')?.value"></ion-input>
+      </ion-item>
+      <div *ngIf="projectForm.controls['end_date'].touched && projectForm.controls['end_date'].invalid">
+        <ion-text color="danger">End Date is required.</ion-text>
+      </div>
+    </form>
+  </ion-content>

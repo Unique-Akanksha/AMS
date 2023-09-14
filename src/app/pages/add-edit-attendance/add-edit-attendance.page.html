@@ -1,0 +1,50 @@
+<ion-content class="ion-padding">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="medium" (click)="closeModal(false)">Cancel</ion-button>
+      </ion-buttons>
+      <ion-title>{{ actionType === 'update' ? 'Update Attendance' : 'Add Attendance' }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal(true)" [strong]="true" [disabled]="attendanceForm.invalid">Confirm</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <form [formGroup]="attendanceForm" (ngSubmit)="closeModal(true)">
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Employee" formControlName="employee" placeholder="Select a Employee">
+          <ion-select-option
+            *ngFor="let employee of employees"
+            [value]="employee.id"
+          >
+            {{ employee.first_name + " " + employee.last_name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="attendanceForm.controls['employee'].touched && attendanceForm.controls['employee'].invalid">
+        <ion-text color="danger">Please select a employee.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Date" formControlName="date" placeholder="Start Date" type="date"></ion-input>
+      </ion-item>
+      <div *ngIf="attendanceForm.controls['date'].touched && attendanceForm.controls['date'].invalid">
+        <ion-text color="danger">Date is required.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Status" formControlName="status" placeholder="Select Status">
+          <ion-select-option value="Present">Present</ion-select-option>
+          <ion-select-option value="Absent">Absent</ion-select-option>
+          <ion-select-option value="Late">Late</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="attendanceForm.controls['status'].touched && attendanceForm.controls['status'].invalid">
+        <ion-text color="danger">Status is required.</ion-text>
+      </div>
+      
+    </form>
+  </ion-content>

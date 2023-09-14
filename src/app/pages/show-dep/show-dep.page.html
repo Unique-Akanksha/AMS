@@ -1,0 +1,52 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Department Page</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" size-md="1" size-lg="1">
+          <ion-button expand="block" (click)="openModal('')" > Add </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="for_scroll">
+      <!-- <app-dynamic-table [displayedColumns]="departmentColumns" [dataSource]="departmentData"></app-dynamic-table> -->
+    <table class="custom-ion-table">
+      <thead>
+        <tr>
+          <th scope="col">DepartmentId</th>
+          <th scope="col">Department Name</th>
+          <th scope="col">Department Description</th>
+          <th scope="col" colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dataItem of DepartmentList">
+          <td>{{ dataItem.department_id }}</td>
+          <td>{{ dataItem.name }}</td>
+          <td>{{ dataItem.description }}</td>
+          <td>
+            <ion-button color="primary" (click)="openModal(dataItem)">
+              <ion-icon name="create"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="deleteClick(dataItem)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </ion-content>
+</div>
