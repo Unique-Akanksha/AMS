@@ -16,6 +16,9 @@ export class ShowEmpPage implements OnInit {
   ModalTitle: string = '';
   EmployeeList: any = [];
   dataSource: any;
+   
+  filterdata :string= "";
+  filterValue: string = '';
   displayedColumns: string[] = [
     'employee_id',
     'first_name',
@@ -30,6 +33,7 @@ export class ShowEmpPage implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
 
   constructor(
     private employeeService: EmployeeService,
@@ -58,6 +62,9 @@ export class ShowEmpPage implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue);
+    this.filterdata = filterValue;
+    
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
