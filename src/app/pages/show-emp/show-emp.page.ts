@@ -54,8 +54,8 @@ export class ShowEmpPage implements OnInit {
   refreshEmpList() {
     this.employeeService.getEmpList().subscribe((data) => {
       this.dataSource = new MatTableDataSource<any>(data);
-      // this.dataSource.sort = this.sort!;
-      // this.dataSource.paginator = this.paginator!;
+      this.dataSource.sort = this.sort!;
+      this.dataSource.paginator = this.paginator!;
       // this.EmployeeList = data;
     });
   }
