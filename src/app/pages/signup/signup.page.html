@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-title>SignUp Page</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,14 +12,19 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12" size-md="6">
+                <img class="logo_phone" src="assets/images/Websar_logo.png" alt="">
+                <h2 class="display_mobile text-center"> <b>Welcome to Websar </b> </h2>
                 <img src="assets/images/small.svg" class="image-resize">
               </ion-col>
+
+
               <ion-col size="12" size-md="6">
                 <ion-list lines="full">
 
                   <ion-item>
                     <ion-input labelPlacement="stacked" label="Enter User Name" id="name" type="text" name="name" formControlName="name"></ion-input>
                   </ion-item>
+
                   <div *ngIf="signupForm.controls['name'].touched && signupForm.controls['name'].invalid">
                     <ion-text color="danger">Name is required.</ion-text>
                   </div>
@@ -27,6 +32,7 @@
                   <ion-item>
                     <ion-input labelPlacement="stacked" label="Enter Email" type="email" id="email" name="email" formControlName="email"></ion-input>
                   </ion-item>
+
                   <div *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid">
                     <ion-text color="danger">
                       <ng-container *ngIf="signupForm.controls['email'].hasError('required')">
@@ -41,6 +47,7 @@
                   <ion-item>
                     <ion-input labelPlacement="stacked" label="Enter Password" type="password" id="password" name="password" formControlName="password"></ion-input>
                   </ion-item>
+
                   <div *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
                     <ion-text color="danger">
                       <ng-container *ngIf="signupForm.controls['password'].hasError('required')">
@@ -58,9 +65,18 @@
                         <ion-icon name="key" slot="start"></ion-icon>
                         Sign UP
                       </ion-button>
+                      <!-- <p>If already registered, <a href="/login" class="ion-anchor">click here to login</a>.</p> -->
+                    </ion-col>
+                  </ion-row>
+
+
+                  <ion-row>
+                    <ion-col>
                       <p>If already registered, <a href="/login" class="ion-anchor">click here to login</a>.</p>
                     </ion-col>
                   </ion-row>
+
+                  
                 </ion-list>
               </ion-col>
             </ion-row>

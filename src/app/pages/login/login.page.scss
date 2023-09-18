@@ -29,3 +29,77 @@ ion-card-content {
 ion-button {
   margin-top: 20px;
 }
+
+.auth-error {
+  color: red;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.image-resize {
+  width: 400px; 
+  height: auto; 
+}
+
+.display_heading{
+color: #ef5659;
+display: none;
+}
+
+.login-card {
+max-width: 400px;
+margin: 0 auto;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+ion-card-header {
+text-align: center;
+}
+
+ion-card-content {
+padding: 20px;
+}
+
+ion-button {
+margin-top: 20px;
+}
+
+.display_mobile{
+display: block;
+}
+
+.logo{
+width: 200px;
+}
+.logo_phone{
+display: none;
+}
+
+@media screen and (max-width: 600px) {
+ 
+.image-resize{
+  width: 400px;
+  height: 150px;
+  display: none;
+}
+.logo{
+  display: block;
+}
+.logo_phone{
+  display: block;
+ }
+
+// ion-button {
+//   width: 100%;
+//   margin-top: 20px;
+//   margin-left: 50%;
+// }
+
+.display_heading{
+display: block;
+color: #ef5659;
+}
+
+}
+

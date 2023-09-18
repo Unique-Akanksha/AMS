@@ -15,14 +15,14 @@
 <ion-content class="ion-padding">
   <form [formGroup]="depForm" (ngSubmit)="closeModal(true)">
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter your name" formControlName="name" placeholder="Your name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter your name" formControlName="name" appAlphabetOnly placeholder="Your name"></ion-input>
     </ion-item>
     <div *ngIf="depForm.controls['name'].touched && depForm.controls['name'].invalid">
       <ion-text color="danger">Name is required.</ion-text>
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Department Description" formControlName="description" placeholder="Description"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Department Description" formControlName="description" appAlphabetOnly  placeholder="Description"></ion-input>
     </ion-item>
     <div *ngIf="depForm.controls['description'].touched && depForm.controls['description'].invalid">
       <ion-text color="danger">Description is required.</ion-text>

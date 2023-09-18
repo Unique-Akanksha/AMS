@@ -79,7 +79,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-edit-project/add-edit-project.module').then( m => m.AddEditProjectPageModule),
     canActivate: [AuthGuard]
   },
-  
+  {
+    path: 'check-in',
+    loadChildren: () => import('./pages/check-in/check-in.module').then( m => m.CheckInPageModule)
+  },
+ 
   
 ];
 

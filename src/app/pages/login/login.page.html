@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Login Page</ion-title>
+    <!-- <ion-title>  <img class="logo" src="assets/images/Websar_logo.png" alt=""></ion-title> -->
   </ion-toolbar>
 </ion-header>
 
@@ -8,18 +9,24 @@
   <div id="container">
     <ion-card>
       <ion-card-header>
+
+
         <form [formGroup]="loginForm" (ngSubmit)="Login()">
-          <ion-grid>
+          <ion-grid >
             <ion-row>
               <ion-col size="12" size-md="6">
+                <img class="logo_phone" src="assets/images/Websar_logo.png" alt="">
+                <h2 class="display_heading"> <b>Welcome to Websar </b> </h2>
                 <img class="image-resize" src="assets/images/small.svg">
               </ion-col>
 
               <ion-col size="12" size-md="6">
                 <ion-list lines="full">
+
                   <ion-item>
                     <ion-input labelPlacement="stacked" label="Enter User Name/Email" type="email" id="emailField" name="email" formControlName="email"></ion-input>
                   </ion-item>
+
                   <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
                     <ion-text color="danger">
                       <ng-container *ngIf="loginForm.controls['email'].hasError('required')">
@@ -34,6 +41,8 @@
                   <ion-item>
                     <ion-input labelPlacement="stacked" label="Enter Password" id="passwordField" type="password" name="password" formControlName="password"></ion-input>
                   </ion-item>
+
+
                   <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
                     <ion-text color="danger">
                       <ng-container *ngIf="loginForm.controls['password'].hasError('required')">
@@ -44,124 +53,39 @@
                       </ng-container>
                     </ion-text>
                   </div>
-        
                 
                   <ion-label class="auth-error" *ngIf="authError" color="danger">{{ authError }}</ion-label>
         
                   <ion-row>
                     <ion-col>
-                      <ion-button type="submit" [disabled]="loginForm.invalid" color="danger" shape="full" expand="full">
+                      <ion-button  type="submit" [disabled]="loginForm.invalid" color="danger" shape="full"  expand="block">
                         <ion-icon name="key" slot="start"></ion-icon>
                         Login
                       </ion-button>
+                      <!-- <p>If not registered, <a href="/signup">click here</a> to sign up.</p> -->
+                    </ion-col>
+                   
+                  </ion-row>
+          
+                  <ion-row>
+                    <ion-col>
                       <p>If not registered, <a href="/signup">click here</a> to sign up.</p>
                     </ion-col>
-                    <ion-col>
-                      
-                    </ion-col>
                   </ion-row>
-        
-        
+
                 </ion-list>
+                
               </ion-col>
             </ion-row>
           </ion-grid>
-          
-        
-        
+
       </form>
 
+      
+
       </ion-card-header>
     </ion-card>
   </div>
+  
 </ion-content>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div id="container">
-    <ion-card class="login-card">
-      <ion-card-header>
-        <form [formGroup]="loginForm" (ngSubmit)="Login()">
-          <img class="image-resize" src="assets/images/small.svg">
-          <ion-list lines="full">
-            <ion-item>
-              <ion-label position="floating">Enter User Name</ion-label>
-              <ion-input type="email" formControlName="email"></ion-input>
-            </ion-item>
-            <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
-              <ion-text color="danger">
-                <ng-container *ngIf="loginForm.controls['email'].hasError('required')">
-                  Email is required.
-                </ng-container>
-                <ng-container *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
-                  Invalid email format.
-                </ng-container>
-              </ion-text>
-            </div>
-
-            <ion-item>
-              <ion-label position="floating">Enter Password</ion-label>
-              <ion-input type="password" formControlName="password"></ion-input>
-            </ion-item>
-            <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
-              <ion-text color="danger">
-                <ng-container *ngIf="loginForm.controls['password'].hasError('required')">
-                  Password is required.
-                </ng-container>
-                <ng-container *ngIf="loginForm.controls['password'].hasError('minlength')">
-                  Password must be at least 3 characters long.
-                </ng-container>
-              </ion-text>
-            </div>
-
-            <ion-label class="auth-error" *ngIf="authError" color="danger">{{ authError }}</ion-label>
-
-            <ion-row>
-              <ion-col>
-                <ion-button type="submit" [disabled]="loginForm.invalid" color="danger" expand="full">
-                  <ion-icon name="key" slot="start"></ion-icon>
-                  Login
-                </ion-button>
-                <p>If not registered, <a href="/signup">click here</a> to sign up.</p>
-              </ion-col>
-            </ion-row>
-          </ion-list>
-        </form>
-      </ion-card-header>
-    </ion-card>
-  </div>
-</ion-content> -->

@@ -13,32 +13,29 @@
   </ion-header>
   
   <ion-content class="ion-padding">
-    <form [formGroup]="empForm" (ngSubmit)="closeModal(true)">
-      <!-- <ion-item>
-      <ion-label position="stacked">Upload Employee Photo</ion-label>
-      <ion-input formControlName="employeePhoto" type="file"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['employeePhoto'].touched && empForm.controls['employeePhoto'].invalid">
-      <ion-text color="danger">Please upload a valid employee photo.</ion-text>
-    </div> -->
-    
-
+    <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" placeholder="Your First Name"></ion-input>
+      <ion-img [src]="imageUrl"></ion-img>
+      <ion-button (click)="chooseFile()">Choose Image</ion-button>
+      <ion-button (click)="uploadImage()">Upload Image</ion-button>
+    </ion-item>
+      
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly placeholder="Your First Name"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['first_name'].touched && empForm.controls['first_name'].invalid">
       <ion-text color="danger">First Name is required.</ion-text>
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" placeholder="Your Middle Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" appAlphabetOnly placeholder="Your Middle Name"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['middle_name'].touched && empForm.controls['middle_name'].invalid">
       <ion-text color="danger">Middle Name is required.</ion-text>
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" placeholder="Your Last Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" appAlphabetOnly placeholder="Your Last Name"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['last_name'].touched && empForm.controls['last_name'].invalid">
       <ion-text color="danger">Last Name is required.</ion-text>
@@ -55,8 +52,15 @@
         <ng-container *ngIf="empForm.controls['email'].hasError('email') && !empForm.controls['email'].hasError('required')">
           Invalid email format.
         </ng-container>
+        <ng-container *ngIf="empForm.controls['email'].hasError('startsWithNumber')">
+          Email cannot start with a number.
+        </ng-container>
+        <ng-container *ngIf="empForm.controls['email'].hasError('containsInvalidSymbols')">
+          Email cannot contain symbols other than "@" and ".".
+        </ng-container>
       </ion-text>
     </div>
+    
 
     <ion-item>
       <ion-input labelPlacement="stacked" label="Enter Hire Date" formControlName="hire_date" placeholder="Hire Date" type="date"></ion-input>
@@ -100,10 +104,10 @@
     <ion-item>
       <ion-input labelPlacement="stacked" label="Confirm Password" formControlName="confirmPassword" placeholder="Confirm Password" type="password"></ion-input>
     </ion-item>
-    <div *ngIf="empForm.controls['confirmPassword'].touched && empForm.controls['confirmPassword'].invalid">
+    <div *ngIf="empForm.controls['confirmPassword'].touched && empForm.controls['confirmPassword'].hasError('required')">
       <ion-text color="danger">Confirm Password is required.</ion-text>
     </div>
-    <div *ngIf="empForm.get('confirmPassword')?.hasError('passwordMismatch')">
+    <div *ngIf="empForm.get('confirmPassword')?.touched && empForm.get('confirmPassword')?.hasError('passwordMismatch')">
       <ion-text color="danger">Passwords do not match.</ion-text>
     </div>
 

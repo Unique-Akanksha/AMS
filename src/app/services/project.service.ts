@@ -12,10 +12,16 @@ export class ProjectService {
   // readonly deleteProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/project_Delete.php";
   // readonly updateProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/project_Update.php";
 
-  readonly addProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Create.php";
-  readonly getProjectListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_read.php";
-  readonly deleteProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Delete.php";
-  readonly updateProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Update.php";
+
+  readonly addProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/projectAPI.php";
+  readonly getProjectListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/projectAPI.php";
+  readonly deleteProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/projectAPI.php";
+  readonly updateProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/projectAPI.php";
+
+  // readonly addProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Create.php";
+  // readonly getProjectListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_read.php";
+  // readonly deleteProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Delete.php";
+  // readonly updateProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Update.php";
 
   constructor(private http:HttpClient) { }
 

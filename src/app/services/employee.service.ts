@@ -7,27 +7,23 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EmployeeService {
-  // readonly addEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Create.php";
-  // readonly getEmpListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_read.php";
-  // readonly deleteEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Delete.php";
-  // readonly updateEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Update.php";
+  readonly addEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Create.php";
+  readonly getEmpListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_read.php";
+  readonly deleteEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Delete.php";
+  readonly updateEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Update.php";
+ 
+  // readonly addEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
+  // readonly getEmpListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
+  // readonly deleteEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
+  // readonly updateEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
  
   
-  readonly addEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Create.php";
-  readonly getEmpListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_read.php";
-  readonly deleteEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Delete.php";
-  readonly updateEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Update.php";
+  // readonly addEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Create.php";
+  // readonly getEmpListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_read.php";
+  // readonly deleteEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Delete.php";
+  // readonly updateEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Update.php";
   
   constructor(private http:HttpClient) { }
-
-
-  // addEmployee(val:any){
-  //   console.log("In employee service",val);
-  //   this.http.post(this.addEmpAPIUrl,val,{observe:'response'}).subscribe((result)=>{
-  //   console.warn(result);
-  //   })
-  // }
-
 
   addEmployee(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     this.http.post(this.addEmpAPIUrl, val, { observe: 'response' }).subscribe(
@@ -66,13 +62,6 @@ export class EmployeeService {
     return this.http.delete(url, { body: data });
   }
 
-  // updateEmployee(item: any): Observable<any> {
-  //   console.log("In employee update Service ",item);
-  //   const url = `${this.updateEmpAPIUrl}`;
-  //   return this.http.put<any>(url, item);
-  // }
-
-
   updateEmployee(data: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     this.http.put(this.updateEmpAPIUrl, data, { observe: 'response' }).subscribe(
       (response) => {
@@ -86,5 +75,4 @@ export class EmployeeService {
       }
     );
   }
-  
 }

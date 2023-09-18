@@ -33,6 +33,8 @@
           <th scope="col">Hire Date</th>
           <th scope="col">Department</th>
           <th scope="col">Position</th>
+          <th scope="col">UserPhoto</th>
+
           <th scope="col" colspan="2">Action</th>
         </tr>
       </thead>
@@ -46,6 +48,8 @@
           <td>{{dataItem.hire_date}}</td>
           <td>{{dataItem.department}}</td>
           <td>{{dataItem.position}}</td>
+          <td>{{dataItem.userPhoto}}</td>
+
           <td>
             <ion-button color="primary" (click)="openModal(dataItem)">
               <ion-icon name="create"></ion-icon>

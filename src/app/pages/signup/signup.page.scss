@@ -2,3 +2,39 @@
     width: 400px; 
     height: auto;
 }
+.image-resize {
+    width: 400px; 
+    height: auto;
+}
+
+.logo_phone{
+    display: none;
+   }
+  
+   .display_mobile{
+    color: #ef5659;
+  }
+   .display_mobile{
+    display: block;
+  }
+@media screen and (max-width: 600px) {
+   
+    .image-resize{
+      width: 400px;
+      height: 150px;
+      display: none;
+    }
+    .logo{
+      display: block;
+    }
+    .logo_phone{
+      display: block;
+     }
+     .display_mobile{
+        display: block;
+        color: #ef5659;
+        text-align: center;
+      }
+ 
+  }
+  

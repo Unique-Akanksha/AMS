@@ -31,6 +31,7 @@ export class ShowDepPage implements OnInit {
       this.DepartmentList = data;
     });
   }
+  
 
   async openModal(dataToUpdate: any) {
     let actionType = dataToUpdate ? 'update' : 'add';

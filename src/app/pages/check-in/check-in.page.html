@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title > </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="12" size-lg="12"> <h2 class="y_color text-center"> <b>Welcome {{userName}} </b></h2> 
+        <h5 class=" text-center"> <b>{{userdesignation}}</b></h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" size-md="12" size-lg="12">
+        <h1 class="text-center"><b>{{ currentTime | date: 'hh:mm a' }}</b></h1>
+        <h3 class="text-center"><b>{{ currentDate | date: 'EEEE, MMM d' }}</b></h3>
+      </ion-col>
+    </ion-row>
+
+
+  <ion-row >
+    <ion-col size="12" size-md="12" size-lg="12" >  
+      <div class="btn_center">
+        <div class="icon-wrapper"> <ion-button color="light" *ngIf="showButton" (click)="checkIn()"><i class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch IN </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
+        <div class="icon-wrapper"> <ion-button  color="light" *ngIf="!showButton" (click)="checkOut()" ><i  class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
+        <!-- <div class="icon-wrapper"><i class="fa fa-hand-pointer-o custom-icon2" style="display: none;"> <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span></i></div> -->
+      <!-- <div class="icon-wrapper" style="display: none;" ><i class="fa fa-hand-pointer-o custom-icon2"><span class="fix-editor">&nbsp;</span></i> <br></div> -->
+    </div>
+      <!-- <button class="btn"><ion-icon name="logo-twitter"></ion-icon></button> -->
+    </ion-col>
+  </ion-row>
+
+  <ion-row >
+    <ion-col size="12" size-md="12" size-lg="12" > 
+       <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon> &nbsp; Kothrud Pune ,  Maharashtra</h3>
+       
+    </ion-col>
+  </ion-row>
+
+  <ion-row >
+
+    <ion-col size="4" size-md="4" size-lg="4" > 
+      <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""> </h3>
+       <h3 class="text-center"> <b>{{checkInTime}}</b></h3>
+       <h3 class="text-center">Cheak In </h3>
+     
+    </ion-col>
+
+    <ion-col size="4" size-md="4" size-lg="4" > 
+      <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""> </h3>
+      <h3 class="text-center"> <b>{{checkOutTime}}</b></h3>
+      <h3 class="text-center">Cheak Out</h3>
+    
+   </ion-col>
+
+   <!-- <ion-col size="4" size-md="4" size-lg="4" > 
+    <div class="icon-wrapper"><i class="fa fa-hand-pointer-o custom-icon"><span class="fix-editor">&nbsp;</span></i></div>
+  
+ </ion-col> -->
+
+ <ion-col size="4" size-md="4" size-lg="4" > 
+  <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""> </h3>
+  <h3 class="text-center"> <b>{{totalHrsTime}}</b></h3>
+  <h3 class="text-center">Total  Hrs</h3>
+
+</ion-col>
+
+    
+  </ion-row>
+
+
+

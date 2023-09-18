@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddEditEmpPageRoutingModule } from './add-edit-emp-routing.module';
 
 import { AddEditEmpPage } from './add-edit-emp.page';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { AddEditEmpPage } from './add-edit-emp.page';
     FormsModule,
     IonicModule,
     AddEditEmpPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [AddEditEmpPage]
 })
