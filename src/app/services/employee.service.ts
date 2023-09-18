@@ -13,10 +13,10 @@ export class EmployeeService {
   // readonly updateEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Update.php";
  
   
-  readonly addEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Create.php";
-  readonly getEmpListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_read.php";
-  readonly deleteEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Delete.php";
-  readonly updateEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employee_Update.php";
+  readonly addEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
+  readonly getEmpListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
+  readonly deleteEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
+  readonly updateEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
   
   constructor(private http:HttpClient) { }
 
