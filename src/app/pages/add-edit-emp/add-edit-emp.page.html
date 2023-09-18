@@ -21,7 +21,9 @@
     </ion-item>
       
     <ion-item>
+
       <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly placeholder="Your First Name"></ion-input>
+
     </ion-item>
     <div *ngIf="empForm.controls['first_name'].touched && empForm.controls['first_name'].invalid">
       <ion-text color="danger">First Name is required.</ion-text>
@@ -73,7 +75,7 @@
       <ion-select labelPlacement="stacked" label="Select Department" formControlName="department" placeholder="Select a department">
         <ion-select-option
           *ngFor="let department of departments"
-          [value]="department.id"
+          
         >
           {{ department.name }}
         </ion-select-option>

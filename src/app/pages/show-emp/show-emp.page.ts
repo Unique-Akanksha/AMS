@@ -1,7 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddEditEmpPage } from '../add-edit-emp/add-edit-emp.page';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-show-emp',
@@ -12,8 +15,30 @@ export class ShowEmpPage implements OnInit {
   modelOutput: string = '';
   ModalTitle: string = '';
   EmployeeList: any = [];
-  
-  constructor(private employeeService: EmployeeService, private modalCtrl: ModalController) { }
+  dataSource: any;
+   
+  filterdata :string= "";
+  filterValue: string = '';
+  displayedColumns: string[] = [
+    'employee_id',
+    'first_name',
+    'middle_name',
+    'last_name',
+    'email',
+    'hire_date',
+    'department',
+    'position',
+    'action',
+  ];
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+
+  constructor(
+    private employeeService: EmployeeService,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     this.refreshEmpList();
@@ -28,18 +53,31 @@ export class ShowEmpPage implements OnInit {
 
   refreshEmpList() {
     this.employeeService.getEmpList().subscribe((data) => {
-      this.EmployeeList = data;
-    })
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource.sort = this.sort!;
+      this.dataSource.paginator = this.paginator!;
+      // this.EmployeeList = data;
+    });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue);
+    this.filterdata = filterValue;
+    
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   async openModal(dataToUpdate: any) {
     let actionType = dataToUpdate ? 'update' : 'add';
-
     const modal = await this.modalCtrl.create({
       component: AddEditEmpPage,
       componentProps: {
         actionType: actionType,
-        dataToUpdate: dataToUpdate
+        dataToUpdate: dataToUpdate,
       },
     });
 
@@ -49,12 +87,13 @@ export class ShowEmpPage implements OnInit {
     return await modal.present();
   }
 
-  
   deleteClick(item: any) {
-    if (confirm("Are you sure??")) {
-      this.employeeService.deleteEmployee(item.employee_id).subscribe(data => {
-        this.refreshEmpList();
-      })
+    if (confirm('Are you sure??')) {
+      this.employeeService
+        .deleteEmployee(item.employee_id)
+        .subscribe((data) => {
+          this.refreshEmpList();
+        });
     }
   }
 }
