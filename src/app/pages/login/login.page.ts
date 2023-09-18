@@ -48,7 +48,6 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       const formData: Login = this.loginForm.value;
       this.user.userLogin(formData);
-      this.sessionService.startSession(formData, sessionTimeoutMinutes);
     }
     // this.user.userLogin(data);
     
@@ -58,5 +57,12 @@ export class LoginPage implements OnInit {
         this.authError="Email or Password is not correct";
       }
     });
+  }
+
+
+  // Triggered when user interacts with the application
+  onUserActivity() {
+    // Reset the session timer
+    this.sessionService.resetSessionTimer();
   }
 }

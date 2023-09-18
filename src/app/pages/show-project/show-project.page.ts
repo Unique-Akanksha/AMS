@@ -32,6 +32,7 @@ export class ShowProjectPage implements OnInit {
       this.ProjectList = data;
     })
   }
+  
 
   async openModal(dataToUpdate: any) {
     let actionType = dataToUpdate ? 'update' : 'add';

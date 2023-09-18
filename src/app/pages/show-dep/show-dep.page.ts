@@ -1,7 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewChild } from '@angular/core';
 import { DepartmentService } from 'src/app/services/department.service';
 import { ModalController } from '@ionic/angular';
 import { AddEditDepPage } from '../add-edit-dep/add-edit-dep.page';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-show-dep',
@@ -12,6 +16,18 @@ export class ShowDepPage implements OnInit {
   
   isModalOpen = false;
   DepartmentList: any = [];
+  dataSource: any;
+   
+  filterdata :string= "";
+  displayedColumns: string[] = [
+    'department_id',
+    'name',
+    'description',
+    'action',
+  ];
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private departmentService: DepartmentService, private modalCtrl: ModalController) { }
 
@@ -28,8 +44,21 @@ export class ShowDepPage implements OnInit {
 
   refreshDepList() {
     this.departmentService.getDepList().subscribe((data) => {
-      this.DepartmentList = data;
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource.sort = this.sort!;
+      this.dataSource.paginator = this.paginator!;
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue);
+    this.filterdata = filterValue;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   
 
