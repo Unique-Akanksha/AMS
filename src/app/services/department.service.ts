@@ -12,10 +12,12 @@ export class DepartmentService {
   // readonly deleteDepAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/department_Delete.php";
   // readonly updateDepAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/department_Update.php";
 
-  readonly addDepAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/departmentAPI.php";
-  readonly getDepListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/departmentAPI.php";
-  readonly deleteDepAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/departmentAPI.php";
-  readonly updateDepAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/departmentAPI.php";
+
+  readonly addDepAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/departmentAPI.php";
+  readonly getDepListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/departmentAPI.php";
+  readonly deleteDepAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/departmentAPI.php";
+  readonly updateDepAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/departmentAPI.php";
+
 
   // readonly addDepAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/department_Create.php";
   // readonly getDepListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/department_read.php";
