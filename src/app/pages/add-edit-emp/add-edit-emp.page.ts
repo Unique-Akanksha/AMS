@@ -8,7 +8,6 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem'; // Updated import
 import { Capacitor } from '@capacitor/core';
 
-
 @Component({
   selector: 'app-add-edit-emp',
   templateUrl: './add-edit-emp.page.html',
