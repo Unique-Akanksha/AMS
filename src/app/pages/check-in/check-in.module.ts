@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PagesPageRoutingModule } from './pages-routing.module';
+import { CheckInPageRoutingModule } from './check-in-routing.module';
 
-import { PagesPage } from './pages.page';
-
+import { CheckInPage } from './check-in.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PagesPageRoutingModule,
-    
+    CheckInPageRoutingModule
   ],
-  declarations: [PagesPage]
+  declarations: [CheckInPage]
 })
-export class PagesPageModule {}
+export class CheckInPageModule {}

@@ -8,7 +8,6 @@ import { ShowDepPageRoutingModule } from './show-dep-routing.module';
 
 import { ShowDepPage } from './show-dep.page';
 import {MatIconModule} from '@angular/material/icon';
-import { DynamicTableComponent } from '../../shared/components/dynamic-table/dynamic-table.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
+import { CommonDataTableModule } from 'src/app/shared/shared/common-data-table/common-data-table.module';
 
 @NgModule({
   imports: [
@@ -30,7 +30,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    CommonDataTableModule
   ],
-  declarations: [ShowDepPage,DynamicTableComponent]
+  declarations: [ShowDepPage]
 })
 export class ShowDepPageModule {}

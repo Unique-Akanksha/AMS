@@ -12,6 +12,7 @@ export class AttendanceService {
   // readonly deleteAttendanceAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/attendance_Delete.php";
   // readonly updateAttendanceAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/attendance_Update.php";
 
+
   // readonly addAttendanceAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/attendance_Create.php";
   // readonly getAttendanceListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/attendance_read.php";
   // readonly deleteAttendanceAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/attendance_Delete.php";
@@ -21,6 +22,7 @@ export class AttendanceService {
   readonly getAttendanceListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/attendanceAPI.php";
   readonly deleteAttendanceAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/attendanceAPI.php";
   readonly updateAttendanceAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/attendanceAPI.php";
+
   
    constructor(private http:HttpClient) { }
 

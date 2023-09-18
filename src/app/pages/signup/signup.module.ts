@@ -8,6 +8,9 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlphabetOnlyDirective } from 'src/app/shared/directive/alphabet-only.directive';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { EmailValidatorDirective } from 'src/app/shared/directive/email-validator.directive';
 
 @NgModule({
   imports: [
@@ -15,8 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     IonicModule,
     SignupPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
-  declarations: [SignupPage]
+  declarations: [SignupPage,EmailValidatorDirective]
 })
 export class SignupPageModule {}

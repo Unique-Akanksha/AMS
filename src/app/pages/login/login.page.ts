@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { UserService } from 'src/app/dashboard/services/user/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { Login } from 'src/app/datatype';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -16,13 +16,30 @@ export class LoginPage implements OnInit {
 
   constructor(private user:UserService, private fb: FormBuilder, private sessionService: SessionService) { 
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, this.emailValidator]],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
 
   ngOnInit() {
   }
+
+  emailValidator(control: FormControl) {
+  const email = control.value;
+  if (email) {
+    // Regular expression for email validation
+    const emailRegex = /^[a-z._+-][a-z0-9._+-]*@[a-z.-]+\.[a-z]{2,10}$/;
+
+    // Check if the email matches the regular expression
+    if (!emailRegex.test(email)) {
+      return { invalidEmail: true };
+    }
+  }
+  return null; // Valid email
+}
+
+
+  
 
   Login(){
     this.authError='';

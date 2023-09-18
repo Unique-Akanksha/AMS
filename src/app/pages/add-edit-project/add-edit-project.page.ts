@@ -131,9 +131,9 @@ export class AddEditProjectPage implements OnInit {
       formData,
       async (message) => {
         console.log("Response: ", message);
-        if (message === "project already exists") {
+        if (message === "Project already exists") {
           const toast = await this.toastController.create({
-            message: 'project already exists',
+            message: 'Project already exists',
             duration: 3000, // Duration in milliseconds (3 seconds in this case)
             position: 'bottom', // You can change the position (top, middle, bottom)
             color: 'danger', // You can specify a color (success, warning, danger, etc.)

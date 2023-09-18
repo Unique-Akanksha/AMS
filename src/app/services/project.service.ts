@@ -12,11 +12,12 @@ export class ProjectService {
   // readonly deleteProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/project_Delete.php";
   // readonly updateProjectAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/project_Update.php";
 
+
   readonly addProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/projectAPI.php";
   readonly getProjectListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/projectAPI.php";
   readonly deleteProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/projectAPI.php";
   readonly updateProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/projectAPI.php";
-  
+
   // readonly addProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Create.php";
   // readonly getProjectListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_read.php";
   // readonly deleteProjectAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/project_Delete.php";
