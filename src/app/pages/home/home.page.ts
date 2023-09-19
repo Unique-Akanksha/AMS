@@ -15,16 +15,6 @@ export class HomePage implements OnInit, OnDestroy {
   private sessionSubscription: Subscription | undefined;
 
   constructor(private user: UserService, private sessionService: SessionService) {
-    this.sessionService.isLoggedIn$.subscribe(isLoggedIn => {
-      this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        // Start the session countdown timer
-        this.startSessionTimer();
-      } else {
-        // Clear the session countdown timer
-        this.clearSessionTimer();
-      }
-    });
   }
 
   formatTime(timeInSeconds: number): string {

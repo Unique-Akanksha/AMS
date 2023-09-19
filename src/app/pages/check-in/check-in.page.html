@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="12" size-lg="12"> <h2 class="y_color text-center"> <b>Welcome {{userName}} </b></h2> 
+      <ion-col size="12" size-md="12" size-lg="12"> <h2 class="y_color text-center"> <b id="elementId2"> {{Message}} {{userName}}</b></h2> 
         <h5 class=" text-center"> <b>{{userdesignation}}</b></h5>
       </ion-col>
     </ion-row>
@@ -24,9 +24,11 @@
     <ion-col size="12" size-md="12" size-lg="12" >  
       <div class="btn_center">
         <div class="icon-wrapper"> <ion-button color="light" *ngIf="showButton" (click)="checkIn()"><i class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch IN </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
-        <div class="icon-wrapper"> <ion-button  color="light" *ngIf="!showButton" (click)="checkOut()" ><i  class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
-        <!-- <div class="icon-wrapper"><i class="fa fa-hand-pointer-o custom-icon2" style="display: none;"> <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span></i></div> -->
-      <!-- <div class="icon-wrapper" style="display: none;" ><i class="fa fa-hand-pointer-o custom-icon2"><span class="fix-editor">&nbsp;</span></i> <br></div> -->
+        <div id="elementId" class="icon-wrapper"> <ion-button  color="light" *ngIf="!showButton" (click)="checkOut()" ><i  class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
+     
+
+        <div id="Thanks_img"  class="Thanks_img">
+          <img (click)="checkOut()" src="../../../assets/images/user.jpg" alt=""></div>
     </div>
       <!-- <button class="btn"><ion-icon name="logo-twitter"></ion-icon></button> -->
     </ion-col>

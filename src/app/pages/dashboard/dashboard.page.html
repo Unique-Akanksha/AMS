@@ -166,8 +166,11 @@
     <ion-title>Admin Dashboard</ion-title>
   </ion-toolbar>
   
-  <ion-item (click)="logout()">
-    <ion-label class="menu-item">Logout</ion-label>
+  <ion-item>
+    <div class="timer" slot="end">
+      {{ formatTime(remainingSessionTime) }}
+    </div>
+    <ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button>
   </ion-item>
 </ion-header>
 
@@ -301,10 +304,10 @@
             </mat-icon>
           </ion-col>
           <ion-col size="12" size-md="10">
-            <ion-card-title><h1 class="text-center">Working on this page
+            <ion-card-title><h1 class="text-center">CheckIn
         
             </h1></ion-card-title>
-            <ion-card-subtitle><h3 class="text-center font_big">CheckIN</h3></ion-card-subtitle>
+            <ion-card-subtitle><h3 class="text-center font_big">0</h3></ion-card-subtitle>
           </ion-col>
         </ion-row>
       </ion-grid>

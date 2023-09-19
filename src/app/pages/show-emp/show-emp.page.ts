@@ -12,13 +12,9 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./show-emp.page.scss'],
 })
 export class ShowEmpPage implements OnInit {
-  modelOutput: string = '';
-  ModalTitle: string = '';
-  EmployeeList: any = [];
   dataSource: any;
    
   filterdata :string= "";
-  filterValue: string = '';
   displayedColumns: string[] = [
     'employee_id',
     'first_name',
@@ -28,6 +24,7 @@ export class ShowEmpPage implements OnInit {
     'hire_date',
     'department',
     'position',
+    'userPhoto',
     'action',
   ];
 
@@ -56,7 +53,6 @@ export class ShowEmpPage implements OnInit {
       this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.sort = this.sort!;
       this.dataSource.paginator = this.paginator!;
-      // this.EmployeeList = data;
     });
   }
   applyFilter(event: Event) {
@@ -64,7 +60,6 @@ export class ShowEmpPage implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     console.log(filterValue);
     this.filterdata = filterValue;
-    
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

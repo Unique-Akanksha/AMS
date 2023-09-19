@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, ElementRef, OnInit, Renderer2  } from '@angular/core';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-check-in',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckInPage implements OnInit {
 
+  Message : string ="Welcome";
   userName: string = "";
   userdesignation: string = "Frontend Developer";
   currentTime: Date = new Date();
@@ -16,8 +18,16 @@ export class CheckInPage implements OnInit {
   totalHrsTime: string = "";
   showSecondPunchOutButton: boolean = true;
   showButton: boolean = true;
+  EmployeeList: any = [];
+  showImg: boolean = true;
 
-  constructor() {}
+  constructor(private employeeService: EmployeeService,private renderer: Renderer2, private el: ElementRef) {
+
+    this.employeeService.getEmpList().subscribe((data) => {
+      this.EmployeeList = data;
+      console.log("employeelist: ",this.EmployeeList);
+    })
+  }
 
   ngOnInit() {
 
@@ -73,7 +83,42 @@ export class CheckInPage implements OnInit {
   
     // Calculate the total hours by finding the difference
     this.calculateTotalHours();
+
+    const myTimeout = setTimeout(this.showthanksImg, 2000);
+
   }
+  
+ showthanksImg() {
+  
+  const elementToHidee = document.getElementById('elementId2');
+
+// Check if the element exists before attempting to hide it
+if (elementToHidee) {
+  // Set the style.display property to "none" to hide the element
+  elementToHidee.innerText = 'Succssfully Punch Out';
+ 
+}
+  
+  // Get a reference to the HTML element you want to hide
+const elementToHide = document.getElementById('elementId');
+
+// Check if the element exists before attempting to hide it
+if (elementToHide) {
+  // Set the style.display property to "none" to hide the element
+  elementToHide.style.display = 'none';
+ 
+}
+
+const Thanksimg= document.getElementById('Thanks_img');
+
+// Check if the element exists before attempting to hide it
+if (Thanksimg) {
+  // Set the style.display property to "none" to hide the element
+  Thanksimg.style.display = 'block';
+  
+  
+}
+ }
   
   calculateTotalHours() {
     if (this.checkInTime && this.checkOutTime) {
@@ -122,7 +167,10 @@ export class CheckInPage implements OnInit {
       this.totalHrsTime = "N/A"; // You can set it to a suitable default value
     }
   }
-  
+
+
+
+
   // Function to format time in a 12-hour clock format with AM/PM
   private formatTimeIn12HourClock(hours: number, minutes: number, seconds: number): string {
     const ampm = hours >= 12 ? 'PM' : 'AM';

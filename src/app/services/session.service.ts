@@ -1,42 +1,55 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
+  private readonly sessionTimeout = 30 * 60 * 1000; // 30 minutes in milliseconds
+  private lastActivityTimestamp: number = 0;
+  private timer: any;
 
-  constructor() {
-    // Check if user is already logged in when the service is initialized
-    this.checkLoginStatus();
+  // BehaviorSubject to track the session state
+  private sessionActiveSubject = new BehaviorSubject<boolean>(false);
+
+  constructor(private router: Router) {
+    this.startTimer();
   }
 
-  startSession(userData: any, sessionTimeoutMinutes: number) {
-    localStorage.setItem('userData', JSON.stringify(userData));
-    this.isLoggedInSubject.next(true);
-
-    // Set session timeout timer
-    timer(sessionTimeoutMinutes * 60 * 1000).subscribe(() => {
-      this.endSession();
-    });
+  // Start the session timer
+  private startTimer() {
+    this.lastActivityTimestamp = Date.now();
+    this.timer = setInterval(() => {
+      const currentTime = Date.now();
+      if (currentTime - this.lastActivityTimestamp >= this.sessionTimeout) {
+        this.logout();
+      }
+    }, 1000); // Check every second
   }
 
-  endSession() {
-    localStorage.removeItem('userData');
-    this.isLoggedInSubject.next(false);
+  // Method to reset the session timer
+  public resetSessionTimer() {
+    this.lastActivityTimestamp = Date.now();
   }
 
-  private checkLoginStatus() {
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-      this.isLoggedInSubject.next(true);
-    }
+  // Method to check if the session is active
+  public isSessionActive(): Observable<boolean> {
+    return this.sessionActiveSubject.asObservable();
   }
 
-  isLoggedIn() {
-    return this.isLoggedInSubject.value;
+  // Method to perform user logout
+  public logout() {
+    // Clear the session timer
+    clearInterval(this.timer);
+
+    // Perform logout logic here (e.g., clearing user data, navigating to login page)
+    // For example, navigate to the login page
+    this.router.navigate(['/home']);
+  }
+
+  // Method to get the last activity timestamp
+  getLastActivityTimestamp(): number {
+    return this.lastActivityTimestamp;
   }
 }
