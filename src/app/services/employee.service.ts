@@ -2,33 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  // readonly addEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Create.php";
-  // readonly getEmpListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_read.php";
-  // readonly deleteEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Delete.php";
-  // readonly updateEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employee_Update.php";
- 
-  readonly addEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
-  readonly getEmpListAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
-  readonly deleteEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
-  readonly updateEmpAPIUrl = "http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php";
- 
-
-  // readonly addEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
-  // readonly getEmpListAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
-  // readonly deleteEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
-  // readonly updateEmpAPIUrl = "https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php";
-
-
+  apiURL = environment.apiURLserver;
+  readonly EmployeeAPIUrl = this.apiURL+"employeeAPI.php";
   
   constructor(private http:HttpClient) { }
 
   addEmployee(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
-    this.http.post(this.addEmpAPIUrl, val, { observe: 'response' }).subscribe(
+    this.http.post(this.EmployeeAPIUrl, val, { observe: 'response' }).subscribe(
       (response) => {
         const responseBody = response.body as { message: string };
         if (responseBody) {
@@ -43,12 +29,12 @@ export class EmployeeService {
   }
 
   getEmpList(){
-    return this.http.get<any[]>(this.getEmpListAPIUrl);
+    return this.http.get<any[]>(this.EmployeeAPIUrl);
   }
 
   // Implement a function to get the department count.
   getEmployeeCount(): Observable<number> {
-    const endpoint = `${this.getEmpListAPIUrl}/your_endpoint_for_department_count`;
+    const endpoint = `${this.EmployeeAPIUrl}/your_endpoint_for_department_count`;
 
     return this.http.get<any[]>(endpoint).pipe(
       map((employees:any) => {
@@ -59,13 +45,13 @@ export class EmployeeService {
   }
 
   deleteEmployee(val:any){
-    const url = this.deleteEmpAPIUrl;
+    const url = this.EmployeeAPIUrl;
     const data = { id: val };
     return this.http.delete(url, { body: data });
   }
 
   updateEmployee(data: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
-    this.http.put(this.updateEmpAPIUrl, data, { observe: 'response' }).subscribe(
+    this.http.put(this.EmployeeAPIUrl, data, { observe: 'response' }).subscribe(
       (response) => {
         const responseBody = response.body as { message: string };
         if (responseBody) {

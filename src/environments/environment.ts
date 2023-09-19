@@ -11,7 +11,9 @@ export const environment = {
     storageBucket: 'YOUR_STORAGE_BUCKET',
     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
     appId: 'YOUR_APP_ID'
-  }
+  },
+  // apiURLserver:'http://localhost/ionic/AttendanceManagementSystem/backend/',
+  apiURLserver:'https://demo101.websartech.com/AMS_APIS/backend/',
 };
 
 /*

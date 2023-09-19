@@ -5,7 +5,10 @@ import { DepartmentService } from 'src/app/services/department.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ToastController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Filesystem } from '@capacitor/filesystem';
+import { Plugins, Capacitor } from '@capacitor/core';
+import { Filesystem, FilesystemDirectory } from '@capacitor/filesystem';
+
+
 
 @Component({
   selector: 'app-add-edit-emp',
@@ -19,7 +22,9 @@ export class AddEditEmpPage implements OnInit {
   @Input() empdata: any; // Input property to receive dept data
   empForm!: FormGroup;
   departments: any[] = [];
-  imageUrl: string = 'assets/images/user.jpg'; // Set a default image path
+  // imageUrl: string = 'assets/images/user.jpg'; // Set a default image path
+  imageUrl: string | undefined = ''; // Set a default image path
+  
 
   constructor(
     private toastController: ToastController,
@@ -75,6 +80,7 @@ export class AddEditEmpPage implements OnInit {
         confirmPassword: '',
       });
     }
+    this.requestStoragePermissions();
   }
 
   cancel() {
@@ -210,59 +216,74 @@ export class AddEditEmpPage implements OnInit {
       }
     }
     return null;
-  }
+  }   
 
-  async chooseFile() {
-    const image = await Camera.getPhoto({
-      quality: 100,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
-    });
-
-    if (image && image.webPath) {
-      this.imageUrl = image.webPath;
-    }
-  }
-
-  async uploadImage() {
+async requestStoragePermissions() {
+  console.log('requestStoragePermissions');
+  if (Capacitor.isNative) {
     try {
-      const image = await Camera.getPhoto({
-        quality: 100,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Photos,
-      });
-  
-      if (image && image.webPath) {
-        const savedImage = await this.saveImageToAssets(image.webPath);
-  
-        this.imageUrl = savedImage;
+      const { state } = await Capacitor.Plugins['Permissions']['query']({ name: 'storage' });
+
+      if (state === 'granted') {
+        // Storage permissions already granted
+        console.log('Storage permissions already granted');
+      } else if (state === 'prompt') {
+        // Request storage permissions
+        const permissionResult = await Capacitor.Plugins['Permissions']['request']({ name: 'storage' });
+
+        if (permissionResult.state === 'granted') {
+          // Storage permissions granted
+          console.log('Storage permissions granted');
+        } else {
+          // Storage permissions denied
+          console.warn('Storage permissions denied');
+        }
+      } else {
+        // Storage permissions denied
+        console.warn('Storage permissions denied');
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
+      // Handle errors
+      console.error('Error requesting storage permissions:', error);
     }
   }
-  
-  async saveImageToAssets(imagePath: string): Promise<string> {
-    const path = 'assets/images/';
-    const fileName = 'new_user.jpg';
-  
-    try {
-      const copyResult = await Filesystem.copy({
-        from: imagePath,
-        to: path + fileName,
-      });
-  
-      if (copyResult.uri) {
-        console.log('Image saved to assets folder:', copyResult.uri);
-        return copyResult.uri;
-      } else {
-        console.error('Failed to save image to assets folder');
-        return imagePath;
-      }
-    } catch (err) {
-      console.error('Error saving image:', err);
-      return imagePath;
-    }
+}
+
+//take Photo
+async onImageSelected(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const imageUrl = URL.createObjectURL(file);
+    this.imageUrl = imageUrl;
+
+    // Save the selected image to the device's file system
+    const imageFileName = 'selected_image.jpg';
+    const imageData = await this.readFileAsBase64(file);
+    await this.saveImageToFileSystem(imageData, imageFileName);
   }
+}
+
+async readFileAsBase64(file: File): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async saveImageToFileSystem(data: string, fileName: string): Promise<void> {
+  try {
+    const savedFile = await Filesystem.writeFile({
+      path: fileName,
+      data: data,
+      directory: FilesystemDirectory.Data, // Save to the device's data directory
+    });
+    console.log('Image saved to filesystem:', savedFile.uri);
+  } catch (error) {
+    console.error('Error saving image to filesystem:', error);
+  }
+}
   
+
 }

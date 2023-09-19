@@ -45,7 +45,7 @@ export class SessionService {
 
     // Perform logout logic here (e.g., clearing user data, navigating to login page)
     // For example, navigate to the login page
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 
   // Method to get the last activity timestamp

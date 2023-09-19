@@ -15,10 +15,14 @@
   <ion-content class="ion-padding">
     <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
     <ion-item>
-      <ion-img [src]="imageUrl"></ion-img>
-      <ion-button (click)="chooseFile()">Choose Image</ion-button>
-      <ion-button (click)="uploadImage()">Upload Image</ion-button>
+      <!-- <ion-img [src]="imageUrl"></ion-img> -->
+      <!-- <ion-button (click)="chooseFile()">Choose Image</ion-button> -->
+      <!-- <ion-button (click)="uploadImage()">Upload Image</ion-button> -->
+      <input type="file" accept="image/*" (change)="onImageSelected($event)">
+      <ion-img [src]="imageUrl" *ngIf="imageUrl"></ion-img>
+
     </ion-item>
+
       
     <ion-item>
 

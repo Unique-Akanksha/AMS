@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { AddEditProjectPage } from '../add-edit-project/add-edit-project.page';
 import { ModalController } from '@ionic/angular';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -13,6 +16,20 @@ export class ShowProjectPage implements OnInit {
   
   isModalOpen = false;
   ProjectList: any = [];
+  dataSource: any;
+   
+  filterdata :string= "";
+  displayedColumns: string[] = [
+    'project_id',
+    'name',
+    'description',
+    'start_date',
+    'end_date',
+    'action',
+  ];
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   
   constructor(private projectService:ProjectService,private modalCtrl:ModalController) { }
 
@@ -29,10 +46,22 @@ export class ShowProjectPage implements OnInit {
 
   refreshProjectList() {
     this.projectService.getProjectList().subscribe((data) => {
-      this.ProjectList = data;
+      this.dataSource = new MatTableDataSource<any>(data);
+      this.dataSource.sort = this.sort!;
+      this.dataSource.paginator = this.paginator!;
     })
   }
   
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(filterValue);
+    this.filterdata = filterValue;
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   async openModal(dataToUpdate: any) {
     let actionType = dataToUpdate ? 'update' : 'add';
