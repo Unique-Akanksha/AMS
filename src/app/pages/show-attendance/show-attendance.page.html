@@ -20,34 +20,51 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <div class="example-header">
+      <mat-form-field class="example-filter">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+      </mat-form-field>
+    </div>
     <div class="for_scroll">
-    <table class="custom-ion-table">
-      <thead>
-        <tr>
-          <th scope="col">AttendanceId</th>
-          <th scope="col">Employee</th>
-          <th scope="col">Date</th>
-          <th scope="col">Status</th>
-          <th scope="col" colspan="2">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dataItem of AttendanceList">
-          <th>{{dataItem.attendance_id}}</th>
-          <td>{{dataItem.employee}}</td>
-          <td>{{dataItem.date}}</td>
-          <td>{{dataItem.status}}</td>
-          <td>
-            <ion-button color="primary" (click)="openModal(dataItem)">
+      <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8" matSort>
+        <ng-container matColumnDef="attendance_id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> AttendanceId </th>
+          <td mat-cell *matCellDef="let element"> {{element.attendance_id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="employee">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.employee}} </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef style="padding-left:60px"> Action </th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+            <ion-button color="primary" (click)="openModal(element)">
+
               <ion-icon name="create"></ion-icon>
             </ion-button>
-            <ion-button color="danger" (click)="deleteClick(dataItem)">
+            <ion-button color="danger" (click)="deleteClick(element)">
               <ion-icon name="trash"></ion-icon>
             </ion-button>
           </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching {{filterdata}}</td>
         </tr>
-      </tbody>
-    </table>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
     </div>
   </ion-content>
 </div>

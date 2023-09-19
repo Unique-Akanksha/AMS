@@ -15,8 +15,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
-import { CommonDataTableModule } from 'src/app/shared/shared/common-data-table/common-data-table.module';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -29,8 +27,7 @@ import { CommonDataTableModule } from 'src/app/shared/shared/common-data-table/c
     MatInputModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule,
-    CommonDataTableModule
+    MatPaginatorModule
   ],
   declarations: [ShowDepPage]
 })

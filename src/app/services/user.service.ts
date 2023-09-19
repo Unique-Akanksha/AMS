@@ -18,8 +18,8 @@ export class UserService {
   userSignUp(user: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     // Modify the URL to match your server's endpoint
 
-    // const signUpUrl = 'https://demo101.websartech.com/AMS_APIS/backend/user_Create.php';
-    const signUpUrl = 'http://localhost/ionic/AttendanceManagementSystem/backend/user_Create.php';
+    const signUpUrl = 'https://demo101.websartech.com/AMS_APIS/backend/user_Create.php';
+    // const signUpUrl = 'http://localhost/ionic/AttendanceManagementSystem/backend/user_Create.php';
 
 
 
@@ -40,9 +40,9 @@ export class UserService {
     });
   }
 
-  // https://demo101.websartech.com/AMS_APIS/backend/user_read.php
+  // http://localhost/ionic/AttendanceManagementSystem/backend/user_read.php
   userLogin(data:Login){
-    this.http.get<SignUp[]>(`http://localhost/ionic/AttendanceManagementSystem/backend/user_read.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
+    this.http.get<SignUp[]>(`https://demo101.websartech.com/AMS_APIS/backend/user_read.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
     subscribe((result:any)=>{
       if(result && result.body?.length){
         console.warn("User logged in");
