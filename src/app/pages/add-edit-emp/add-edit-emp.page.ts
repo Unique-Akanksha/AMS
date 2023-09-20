@@ -4,10 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { DepartmentService } from 'src/app/services/department.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ToastController } from '@ionic/angular';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Plugins, Capacitor } from '@capacitor/core';
-import { Filesystem, FilesystemDirectory } from '@capacitor/filesystem';
-
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -21,9 +18,11 @@ export class AddEditEmpPage implements OnInit {
   @Input() dataToUpdate: any; // Input property to receive data to update
   @Input() empdata: any; // Input property to receive dept data
   empForm!: FormGroup;
+  userRoleList: any[] = [];
   departments: any[] = [];
-  // imageUrl: string = 'assets/images/user.jpg'; // Set a default image path
   imageUrl: string | undefined = ''; // Set a default image path
+   // Add a property to store the selected image as base64
+   selectedImageBase64: string | undefined = '';
   
 
   constructor(
@@ -31,13 +30,16 @@ export class AddEditEmpPage implements OnInit {
     private departmentService: DepartmentService,
     private employeeService: EmployeeService,
     private fb: FormBuilder,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.departmentService.getDepList().subscribe((departments) => {
       this.departments = departments;
     });
+    
+    this.refreshRolesList();
 
     this.empForm = this.fb.group({
       first_name: ['', Validators.required],
@@ -45,6 +47,7 @@ export class AddEditEmpPage implements OnInit {
       last_name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email, this.emailValidator]],
       hire_date: ['', [Validators.required]],
+      role: ['', [Validators.required]],
       department: ['', [Validators.required]],
       position: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(3)]],
@@ -65,6 +68,7 @@ export class AddEditEmpPage implements OnInit {
         position: this.dataToUpdate.position,
         password: this.dataToUpdate.password,
         confirmPassword: this.dataToUpdate.password,
+        role: this.dataToUpdate.role,
       });
     } else {
       // Initialize form with default values for add mode
@@ -78,9 +82,15 @@ export class AddEditEmpPage implements OnInit {
         position: '',
         password: '',
         confirmPassword: '',
+        role: ''
       });
     }
-    this.requestStoragePermissions();
+  }
+
+  refreshRolesList() {
+    this.userService.getRolesList().subscribe((data) => {
+      this.userRoleList = data;
+    });
   }
 
   cancel() {
@@ -95,7 +105,7 @@ export class AddEditEmpPage implements OnInit {
 
         // Add the image path to the employeeData object
         employeeData.userPhoto = this.imageUrl;
-
+        
         // Perform add or update logic here based on actionType
         if (this.actionType === 'update') {
           this.updateEmployee(employeeData);
@@ -109,6 +119,10 @@ export class AddEditEmpPage implements OnInit {
   }
 
   updateEmployee(dataToEdit: any) {
+    // Check if a new image was selected
+    if (this.selectedImageBase64) {
+       dataToEdit.userPhoto = this.selectedImageBase64;
+    }
 
     // Create an object with the data you want to update
     const updatedData = {
@@ -122,6 +136,7 @@ export class AddEditEmpPage implements OnInit {
       password: dataToEdit.password,
       confirmPassword: dataToEdit.password,
       userPhoto:dataToEdit.userPhoto,
+      role:dataToEdit.role,
       id: this.dataToUpdate.employee_id
     };
 
@@ -150,17 +165,18 @@ export class AddEditEmpPage implements OnInit {
     );
   }
 
-  addEmployee(formData: any) {
+  // Modify the addEmployee function to send the image to the server
+  async addEmployee(formData: any) {
     console.log('formData: ', formData);
-    const employeeDataWithImage = {
-      ...formData,
-      imagePath: formData.imagePath,
-    };
+    if (this.selectedImageBase64) {
+      formData.userPhoto = this.selectedImageBase64;
+    }
+
     this.employeeService.addEmployee(
-      employeeDataWithImage,
+      formData,
       async (message) => {
-        console.log("Response: ", message);
-        if (message === "employee already exists") {
+        console.log('Response: ', message);
+        if (message === 'employee already exists') {
           const toast = await this.toastController.create({
             message: 'employee already exists',
             duration: 3000,
@@ -218,36 +234,6 @@ export class AddEditEmpPage implements OnInit {
     return null;
   }   
 
-async requestStoragePermissions() {
-  console.log('requestStoragePermissions');
-  if (Capacitor.isNative) {
-    try {
-      const { state } = await Capacitor.Plugins['Permissions']['query']({ name: 'storage' });
-
-      if (state === 'granted') {
-        // Storage permissions already granted
-        console.log('Storage permissions already granted');
-      } else if (state === 'prompt') {
-        // Request storage permissions
-        const permissionResult = await Capacitor.Plugins['Permissions']['request']({ name: 'storage' });
-
-        if (permissionResult.state === 'granted') {
-          // Storage permissions granted
-          console.log('Storage permissions granted');
-        } else {
-          // Storage permissions denied
-          console.warn('Storage permissions denied');
-        }
-      } else {
-        // Storage permissions denied
-        console.warn('Storage permissions denied');
-      }
-    } catch (error) {
-      // Handle errors
-      console.error('Error requesting storage permissions:', error);
-    }
-  }
-}
 
 //take Photo
 async onImageSelected(event: any) {
@@ -256,10 +242,8 @@ async onImageSelected(event: any) {
     const imageUrl = URL.createObjectURL(file);
     this.imageUrl = imageUrl;
 
-    // Save the selected image to the device's file system
-    const imageFileName = 'selected_image.jpg';
-    const imageData = await this.readFileAsBase64(file);
-    await this.saveImageToFileSystem(imageData, imageFileName);
+    // Save the selected image as base64
+    this.selectedImageBase64 = await this.readFileAsBase64(file);
   }
 }
 
@@ -271,19 +255,5 @@ async readFileAsBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
   });
 }
-
-async saveImageToFileSystem(data: string, fileName: string): Promise<void> {
-  try {
-    const savedFile = await Filesystem.writeFile({
-      path: fileName,
-      data: data,
-      directory: FilesystemDirectory.Data, // Save to the device's data directory
-    });
-    console.log('Image saved to filesystem:', savedFile.uri);
-  } catch (error) {
-    console.error('Error saving image to filesystem:', error);
-  }
-}
-  
 
 }

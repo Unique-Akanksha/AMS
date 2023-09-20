@@ -76,11 +76,19 @@
     </div>
 
     <ion-item>
+      <ion-select labelPlacement="stacked" label="Select Role" formControlName="role" placeholder="Select a role">
+        <ion-select-option *ngFor="let role of userRoleList">
+          {{ role.name }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="empForm.controls['role'].touched && empForm.controls['role'].invalid">
+      <ion-text color="danger">Please select a role.</ion-text>
+    </div>
+
+    <ion-item>
       <ion-select labelPlacement="stacked" label="Select Department" formControlName="department" placeholder="Select a department">
-        <ion-select-option
-          *ngFor="let department of departments"
-          
-        >
+        <ion-select-option *ngFor="let department of departments">
           {{ department.name }}
         </ion-select-option>
       </ion-select>

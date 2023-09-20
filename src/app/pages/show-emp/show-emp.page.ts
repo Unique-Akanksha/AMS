@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./show-emp.page.scss'],
 })
 export class ShowEmpPage implements OnInit {
+
   dataSource: any;
    
   filterdata :string= "";
@@ -24,7 +25,7 @@ export class ShowEmpPage implements OnInit {
     'hire_date',
     'department',
     'position',
-    'userPhoto',
+    'role',
     'action',
   ];
 
@@ -48,6 +49,7 @@ export class ShowEmpPage implements OnInit {
     }, 2000);
   }
 
+
   refreshEmpList() {
     this.employeeService.getEmpList().subscribe((data) => {
       this.dataSource = new MatTableDataSource<any>(data);
@@ -55,6 +57,7 @@ export class ShowEmpPage implements OnInit {
       this.dataSource.paginator = this.paginator!;
     });
   }
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
