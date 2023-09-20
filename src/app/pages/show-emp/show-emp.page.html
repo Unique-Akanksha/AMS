@@ -58,9 +58,13 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Position </th>
           <td mat-cell *matCellDef="let element"> {{element.position}} </td>
         </ng-container>
-        <ng-container matColumnDef="userPhoto">
+        <!-- <ng-container matColumnDef="userPhoto">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Photo </th>
           <td mat-cell *matCellDef="let element"> {{element.userPhoto}} </td>
+        </ng-container> -->
+         <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>User Role </th>
+          <td mat-cell *matCellDef="let element"> {{element.role}} </td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef style="padding-left:60px"> Action </th>

@@ -21,7 +21,7 @@ export class DashboardPage implements OnInit {
 
   private sessionSubscription!: Subscription;
   remainingSessionTime: number = 0;
-  sessionTimeout: number = 30 * 60 * 1000; // 30 minutes in milliseconds
+  sessionTimeout: number = 600 * 60 * 1000; // 30 minutes in milliseconds
 
   constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService,private router: Router) { }
 
