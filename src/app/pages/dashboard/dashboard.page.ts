@@ -17,15 +17,25 @@ export class DashboardPage implements OnInit {
   projectCount:number=0;
   employeeCount:number=0;
   attendanceCount:number=0;
+  loginUser = '';
 
 
   private sessionSubscription!: Subscription;
   remainingSessionTime: number = 0;
   sessionTimeout: number = 600 * 60 * 1000; // 30 minutes in milliseconds
 
-  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService,private router: Router) { }
+  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService,private router: Router) { 
+  }
 
   ngOnInit() {
+    // code for get user role 
+    const userJson = localStorage.getItem('user');
+
+    if (userJson){
+      const user = JSON.parse(userJson);
+      const userRole = user.role;
+      this.loginUser = userRole;
+    }
    this.FatchData();
 
    // Subscribe to the session timer
