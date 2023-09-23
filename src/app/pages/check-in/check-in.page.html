@@ -7,8 +7,8 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="12" size-lg="12"> <h2 class="y_color text-center"> <b id="elementId2"> {{Message}} {{userName}}</b></h2> 
-        <h5 class=" text-center"> <b>{{userdesignation}}</b></h5>
+      <ion-col size="12" size-md="12" size-lg="12"> <h2 class="y_color text-center"> <b id="elementId2"> Welcome {{userName}}</b></h2> 
+        <h5 class=" text-center"> <b>{{department}}</b></h5>
       </ion-col>
     </ion-row>
 
@@ -30,14 +30,23 @@
         <div id="Thanks_img"  class="Thanks_img">
           <img (click)="checkOut()" src="../../../assets/images/user.jpg" alt=""></div>
     </div>
-      <!-- <button class="btn"><ion-icon name="logo-twitter"></ion-icon></button> -->
+      <button class="btn"><ion-icon name="logo-twitter"></ion-icon></button>
     </ion-col>
   </ion-row>
 
   <ion-row >
     <ion-col size="12" size-md="12" size-lg="12" > 
-       <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon> &nbsp; Kothrud Pune ,  Maharashtra</h3>
-       
+      <!-- <ion-button expand="full" (click)="getCurrentLocation()">Get Current Location</ion-button>
+       <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon> &nbsp;{{coordinates}}</h3>
+        -->
+        <ion-button (click)="getCurrentLocation()">Get Location</ion-button>
+
+  <!-- Display coordinates or error message in this div -->
+  <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon>
+  <div *ngIf="coordinatesMessage" class="message">
+    {{ coordinatesMessage }}
+  </div>
+</h3>
     </ion-col>
   </ion-row>
 

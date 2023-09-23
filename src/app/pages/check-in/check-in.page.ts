@@ -1,5 +1,8 @@
 import {  Component, ElementRef, OnInit, Renderer2  } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { Geolocation } from '@capacitor/geolocation';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-check-in',
@@ -7,9 +10,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
   styleUrls: ['./check-in.page.scss'],
 })
 export class CheckInPage implements OnInit {
+  coordinatesMessage: string = '';
 
-  Message : string ="Welcome";
+
   userName: string = "";
+  department: string = "";
+  coordinates: GeolocationPosition | null = null; 
+  
   userdesignation: string = "Frontend Developer";
   currentTime: Date = new Date();
   currentDate: Date = new Date();
@@ -21,25 +28,22 @@ export class CheckInPage implements OnInit {
   EmployeeList: any = [];
   showImg: boolean = true;
 
-  constructor(private employeeService: EmployeeService,private renderer: Renderer2, private el: ElementRef) {
+  constructor(private employeeService: EmployeeService,private renderer: Renderer2, private el: ElementRef, private toastController:ToastController) {
 
     this.employeeService.getEmpList().subscribe((data) => {
       this.EmployeeList = data;
-      console.log("employeelist: ",this.EmployeeList);
     })
   }
 
   ngOnInit() {
+    // get current location
+    // this.getCurrentLocation();
 
     const userJSON = localStorage.getItem('user');
     if (userJSON !== null) {
       const user = JSON.parse(userJSON);
-      if (user.name) {
-        this.userName = user.name;
-        console.log("user", this.userName);
-      } else {
-        this.userName = ''; // Or some other default value
-      }
+      this.userName = user.first_name;
+      this.department = user.department;
     } else {
       this.userName = ''; // Or some other default value
     }
@@ -187,4 +191,43 @@ if (Thanksimg) {
   showSecondPunchOut() {
     this.showSecondPunchOutButton = true;
   }
+
+  async getCurrentLocation() {
+    try {
+      const position = await Geolocation.getCurrentPosition();
+      const coordinates: GeolocationPosition = {
+        coords: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          altitude: position.coords.altitude || null,
+          accuracy: position.coords.accuracy,
+          altitudeAccuracy: position.coords.altitudeAccuracy || null,
+          heading: position.coords.heading || null,
+          speed: position.coords.speed || null,
+        },
+        timestamp: position.timestamp,
+      };
+      // Update the message to display the coordinates.
+      this.coordinatesMessage = `Current coordinates: Latitude ${coordinates.coords.latitude}, Longitude ${coordinates.coords.longitude}`;
+    } catch (error) {
+      console.error('Geolocation error:', error);
+      if (error instanceof GeolocationPositionError) {
+        // Show a toast with the error message.
+        this.presentErrorToast(error.message);
+      } else {
+        // Handle unexpected errors here.
+      }
+    }    
+  }
+  
+  async presentErrorToast(errorMessage: string) {
+    const toast = await this.toastController.create({
+      message: errorMessage,
+      duration: 3000, // Display for 3 seconds
+      color: 'danger', // Set the color to red for error
+      position: 'top' // You can change the position as needed
+    });
+    toast.present();
+  }
+  
 }

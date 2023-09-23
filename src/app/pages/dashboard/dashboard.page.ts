@@ -13,12 +13,12 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+  isMenuButtonVisible = true; 
   departmentCount:number=0;
   projectCount:number=0;
   employeeCount:number=0;
   attendanceCount:number=0;
   loginUser = '';
-
 
   private sessionSubscription!: Subscription;
   remainingSessionTime: number = 0;
@@ -36,6 +36,8 @@ export class DashboardPage implements OnInit {
       const userRole = user.role;
       this.loginUser = userRole;
     }
+
+    
    this.FatchData();
 
    // Subscribe to the session timer
@@ -115,4 +117,5 @@ export class DashboardPage implements OnInit {
   padZero(num: number): string {
     return num < 10 ? `0${num}` : num.toString();
   }
+  
 }

@@ -13,6 +13,7 @@ const routes: Routes = [
     loadChildren: () => import('./add-edit-attendance/add-edit-attendance.module').then( m => m.AddEditAttendancePageModule)
   },
   
+  
 ];
 
 @NgModule({

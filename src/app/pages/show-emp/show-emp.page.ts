@@ -5,6 +5,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-emp',
@@ -12,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./show-emp.page.scss'],
 })
 export class ShowEmpPage implements OnInit {
-
+  loginUser = '';
   dataSource: any;
    
   filterdata :string= "";
@@ -35,10 +36,20 @@ export class ShowEmpPage implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    // code for get user role 
+    const userJson = localStorage.getItem('user');
+
+    if (userJson){
+      const user = JSON.parse(userJson);
+      const userRole = user.role;
+      this.loginUser = userRole;
+    }
+    
     this.refreshEmpList();
   }
 
@@ -94,4 +105,11 @@ export class ShowEmpPage implements OnInit {
         });
     }
   }
+
+  // Implement the logout function
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
+
 }

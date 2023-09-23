@@ -5,6 +5,7 @@ import { AddEditAttendancePage } from '../add-edit-attendance/add-edit-attendanc
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 
 
@@ -15,6 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./show-attendance.page.scss'],
 })
 export class ShowAttendancePage implements OnInit {
+  loginUser = '';
   isModalOpen = false;
   AttendanceList: any = [];
   dataSource: any;
@@ -31,9 +33,17 @@ export class ShowAttendancePage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private attendanceService:AttendanceService,private modalCtrl:ModalController) { }
+  constructor(private attendanceService:AttendanceService,private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
+    // code for get user role 
+    const userJson = localStorage.getItem('user');
+
+    if (userJson){
+      const user = JSON.parse(userJson);
+      const userRole = user.role;
+      this.loginUser = userRole;
+    }
     this.refreshAttendanceList();
   }
 
@@ -88,6 +98,12 @@ export class ShowAttendancePage implements OnInit {
         this.refreshAttendanceList();
       })
     }
+  }
+
+  // Implement the logout function
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
 }

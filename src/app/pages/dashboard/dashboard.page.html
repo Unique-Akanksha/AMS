@@ -1,3 +1,68 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{ loginUser }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <!-- Common menu items for all users -->
+    <ion-list>
+      <!-- <ion-item routerLink="/dashboard">
+        <ion-label>Home</ion-label>
+      </ion-item> -->
+    </ion-list>
+
+    <!-- Admin-specific menu items -->
+    <ng-container *ngIf="loginUser === ' Super Admin '">
+      <ion-list>
+        <ion-item routerLink="/show-dep">
+          <ion-label>Department</ion-label>
+        </ion-item>
+        <ion-item routerLink="/show-project">
+          <ion-label>Project</ion-label>
+        </ion-item>
+        <ion-item routerLink="/show-emp">
+          <ion-label>Employee</ion-label>
+        </ion-item>
+        <ion-item routerLink="/show-attendance">
+          <ion-label>Attendance</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
+        </ion-item>
+        
+        <!-- Add more admin-specific items here -->
+      </ion-list>
+    </ng-container>
+
+    <!-- User-specific menu items -->
+    <ng-container *ngIf="loginUser === ' Employee '">
+      <ion-list>
+        <ion-item routerLink="/dashboard">
+          <ion-label>Profile</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
+        </ion-item>
+        <!-- Add more user-specific items here -->
+      </ion-list>
+    </ng-container>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- <ion-content class="ion-padding">Tap the button in the toolbar to open the menu.</ion-content> -->
+</div>
+
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -7,11 +72,10 @@
   </ion-toolbar>
   
   <ion-item>
-    User Role  : {{ loginUser }}
     <div class="timer" slot="end">
-      {{ formatTime(remainingSessionTime) }}
+      Session: {{ formatTime(remainingSessionTime) }}
     </div>
-    <ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button>
+    
   </ion-item>
 </ion-header>
 
@@ -131,37 +195,93 @@
     </ion-card>
   </ion-col>
 
-
-
-
-  <ion-col>
-    <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/check-in">
-    <ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-md="2">
-            <mat-icon aria-hidden="false">
-              <mat-icon aria-hidden="true">event_note</mat-icon>
-            </mat-icon>
-          </ion-col>
-          <ion-col size="12" size-md="10">
-            <ion-card-title><h1 class="text-center">CheckIn
-        
-            </h1></ion-card-title>
-            <ion-card-subtitle><h3 class="text-center font_big">0</h3></ion-card-subtitle>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      
-      
-    </ion-card-header>
-  
-    <!-- <ion-card-content> Card Content </ion-card-content> -->
-  </ion-card>
-</ion-col>
-
     </ion-row>
   </ion-grid>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/profile-emp">
+        <ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="2">
+                <mat-icon aria-hidden="false">
+                  <mat-icon aria-hidden="true">event_note</mat-icon>
+                </mat-icon>
+              </ion-col>
+              <ion-col size="12" size-md="10">
+                <ion-card-title><h1 class="text-center">Employee
+            
+                </h1></ion-card-title>
+                <ion-card-subtitle><h3 class="text-center font_big"><h1>Profile</h1></h3></ion-card-subtitle>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+          
+        </ion-card-header>
+      
+        <!-- <ion-card-content> Card Content </ion-card-content> -->
+      </ion-card>
+      </ion-col>
+      
+    
+    
+      <ion-col>
+        <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/check-in">
+        <ion-card-header>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" size-md="2">
+                <mat-icon aria-hidden="false">
+                  <mat-icon aria-hidden="true">event_note</mat-icon>
+                </mat-icon>
+              </ion-col>
+              <ion-col size="12" size-md="10">
+                <ion-card-title><h1 class="text-center">Fill 
+            
+                </h1></ion-card-title>
+                <ion-card-subtitle><h3 class="text-center font_big"><h1>Attendance</h1></h3></ion-card-subtitle>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+          
+        </ion-card-header>
+      
+        <!-- <ion-card-content> Card Content </ion-card-content> -->
+      </ion-card>
+    </ion-col>
+    
+    
+    
+    <ion-col>
+      <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/check-in">
+      <ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="2">
+              <mat-icon aria-hidden="false">
+                <mat-icon aria-hidden="true">event_note</mat-icon>
+              </mat-icon>
+            </ion-col>
+            <ion-col size="12" size-md="10">
+              <ion-card-title><h1 class="text-center">Recent 
+          
+              </h1></ion-card-title>
+              <ion-card-subtitle><h3 class="text-center font_big"><h1>Attendance</h1></h3></ion-card-subtitle>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+        
+      </ion-card-header>
+    
+      <!-- <ion-card-content> Card Content </ion-card-content> -->
+    </ion-card>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

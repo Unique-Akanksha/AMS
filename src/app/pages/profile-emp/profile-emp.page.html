@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Profile - {{ first_name }} {{ last_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Profile - {{ first_name }} {{ last_name }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <div id="container">
+    <ion-card>
+      <ion-card-header>
+        <form>
+          <!-- ... Your form content here ... -->
+
+          <!-- Display user information -->
+          <ion-item>
+            <ion-label>First Name</ion-label>
+            <ion-text>{{ first_name }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-text>{{ last_name }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-text>{{ email }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Hire Date</ion-label>
+            <ion-text>{{ hire_date }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Department</ion-label>
+            <ion-text>{{ department }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Role</ion-label>
+            <ion-text>{{ role }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Position</ion-label>
+            <ion-text>{{ position }}</ion-text>
+          </ion-item>
+
+          <!-- ... Other form fields ... -->
+
+        </form>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>

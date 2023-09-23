@@ -5,6 +5,7 @@ import { AddEditDepPage } from '../add-edit-dep/add-edit-dep.page';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./show-dep.page.scss'],
 })
 export class ShowDepPage implements OnInit {
+  loginUser = '';
   
   isModalOpen = false;
   DepartmentList: any = [];
@@ -29,9 +31,18 @@ export class ShowDepPage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private departmentService: DepartmentService, private modalCtrl: ModalController) { }
+  constructor(private departmentService: DepartmentService, private modalCtrl: ModalController,private router: Router) { }
 
   ngOnInit() {
+    // code for get user role 
+    const userJson = localStorage.getItem('user');
+
+    if (userJson){
+      const user = JSON.parse(userJson);
+      const userRole = user.role;
+      this.loginUser = userRole;
+    }
+    
     this.refreshDepList();
   }
 
@@ -86,4 +97,11 @@ export class ShowDepPage implements OnInit {
       });
     }
   }
+
+  // Implement the logout function
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
+
 }

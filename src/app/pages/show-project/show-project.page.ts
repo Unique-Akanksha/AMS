@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./show-project.page.scss'],
 })
 export class ShowProjectPage implements OnInit {
-  
+  loginUser = '';
   isModalOpen = false;
   ProjectList: any = [];
   dataSource: any;
@@ -31,9 +32,18 @@ export class ShowProjectPage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   
-  constructor(private projectService:ProjectService,private modalCtrl:ModalController) { }
+  constructor(private projectService:ProjectService,private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
+    // code for get user role 
+    const userJson = localStorage.getItem('user');
+
+    if (userJson){
+      const user = JSON.parse(userJson);
+      const userRole = user.role;
+      this.loginUser = userRole;
+    }
+
     this.refreshProjectList();
   }
   
@@ -87,4 +97,11 @@ export class ShowProjectPage implements OnInit {
       })
     }
   }
+
+   // Implement the logout function
+   logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
+
 }
