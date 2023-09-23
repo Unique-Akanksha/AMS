@@ -83,7 +83,10 @@ const routes: Routes = [
     path: 'check-in',
     loadChildren: () => import('./pages/check-in/check-in.module').then( m => m.CheckInPageModule)
   },
- 
+  {
+    path: 'profile-emp',
+    loadChildren: () => import('./pages/profile-emp/profile-emp.module').then( m => m.ProfileEmpPageModule)
+  },
   
 ];
 
