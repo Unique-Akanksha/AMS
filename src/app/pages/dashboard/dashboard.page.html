@@ -38,7 +38,7 @@
     <!-- User-specific menu items -->
     <ng-container *ngIf="loginUser === ' Employee '">
       <ion-list>
-        <ion-item routerLink="/dashboard">
+        <ion-item routerLink="/profile-emp">
           <ion-label>Profile</ion-label>
         </ion-item>
         <ion-item>
@@ -68,7 +68,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Admin Dashboard</ion-title>
+    <ion-title>{{loginUser}} Dashboard</ion-title>
   </ion-toolbar>
   
   <ion-item>
@@ -257,7 +257,7 @@
     
     
     <ion-col>
-      <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/check-in">
+      <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="#">
       <ion-card-header>
         <ion-grid>
           <ion-row>

@@ -104,32 +104,12 @@ export class AddEditAttendancePage implements OnInit {
           console.log('Response in else part : ', message);
           this.modalCtrl.dismiss();
         }
-
       },
       (error) => {
         console.log('Error: ' + error);
       }
     );
   }
-  
-
-
-  // addAttendance(formData: any) {
-  //   this.attendanceService.addAttendance(formData);
-  // }
-
-  // addAttendance(formData: any) {
-  //   this.attendanceService.addAttendance(formData,
-  //     (message) => {
-  //       console.log("Success: ", message);
-  //       this.errorMessage = message; // Set errorMessage in the modal
-  //     },
-  //     (error) => {
-  //       console.log('Error: ' + error);
-  //       this.errorMessage = error; // Set errorMessage in the modal
-  //     }
-  //   );
-  // }
 
   addAttendance(formData: any) {
     this.attendanceService.addAttendance(

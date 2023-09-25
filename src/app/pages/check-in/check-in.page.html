@@ -1,13 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title > </ion-title>
+    <ion-title> </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="12" size-lg="12"> <h2 class="y_color text-center"> <b id="elementId2"> Welcome {{userName}}</b></h2> 
+      <ion-col size="12" size-md="12" size-lg="12">
+        <h2 class="y_color text-center"> <b id="elementId2"> Welcome {{userName}} {{lastName}}</b></h2>
         <h5 class=" text-center"> <b>{{department}}</b></h5>
       </ion-col>
     </ion-row>
@@ -20,66 +22,76 @@
     </ion-row>
 
 
-  <ion-row >
-    <ion-col size="12" size-md="12" size-lg="12" >  
-      <div class="btn_center">
-        <div class="icon-wrapper"> <ion-button color="light" *ngIf="showButton" (click)="checkIn()"><i class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch IN </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
-        <div id="elementId" class="icon-wrapper"> <ion-button  color="light" *ngIf="!showButton" (click)="checkOut()" ><i  class="fa fa-hand-pointer-o custom-icon"> <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span></i></ion-button></div>
-     
+    <ion-row>
+      <ion-col size="12" size-md="12" size-lg="12">
+        <div class="btn_center">
 
-        <div id="Thanks_img"  class="Thanks_img">
-          <img (click)="checkOut()" src="../../../assets/images/user.jpg" alt=""></div>
-    </div>
-      <button class="btn"><ion-icon name="logo-twitter"></ion-icon></button>
-    </ion-col>
-  </ion-row>
+          <div class="icon-wrapper"> <ion-button color="light" *ngIf="showButton" (click)="checkIn()"><i
+                class="fa fa-hand-pointer-o custom-icon">
+                <h5> <b>Punch IN </b></h5><span class="fix-editor">&nbsp;</span>
+              </i></ion-button>
+          </div>
 
-  <ion-row >
-    <ion-col size="12" size-md="12" size-lg="12" > 
-      <!-- <ion-button expand="full" (click)="getCurrentLocation()">Get Current Location</ion-button>
-       <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon> &nbsp;{{coordinates}}</h3>
-        -->
-        <ion-button (click)="getCurrentLocation()">Get Location</ion-button>
+          <div id="elementId" class="icon-wrapper"> <ion-button color="light" *ngIf="!showButton"
+              (click)="checkOut()"><i class="fa fa-hand-pointer-o custom-icon">
+                <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span>
+              </i></ion-button>
+          </div>
 
-  <!-- Display coordinates or error message in this div -->
-  <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon>
-  <div *ngIf="coordinatesMessage" class="message">
-    {{ coordinatesMessage }}
-  </div>
-</h3>
-    </ion-col>
-  </ion-row>
+          <div id="Thanks_img" class="Thanks_img">
+            <img (click)="checkOut()" src="../../../assets/images/user.jpg" alt="">
+          </div>
 
-  <ion-row >
+        </div>
+      </ion-col>
+    </ion-row>
 
-    <ion-col size="4" size-md="4" size-lg="4" > 
-      <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""> </h3>
-       <h3 class="text-center"> <b>{{checkInTime}}</b></h3>
-       <h3 class="text-center">Cheak In </h3>
-     
-    </ion-col>
+    <ion-row>
+      <ion-col size="12" size-md="12" size-lg="12">
+        <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon>
+          <div *ngIf="coordinatesMessage" class="message">
+            {{ coordinatesMessage }}
+          </div>
+        </h3>
+      </ion-col>
+    </ion-row>
 
-    <ion-col size="4" size-md="4" size-lg="4" > 
-      <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""> </h3>
-      <h3 class="text-center"> <b>{{checkOutTime}}</b></h3>
-      <h3 class="text-center">Cheak Out</h3>
+    <form [formGroup]="attendanceForm"  (ngSubmit)="checkOut()">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="4" size-md="4" size-lg="4">
+        <ion-select labelPlacement="stacked" label="Select Project" formControlName="project"  placeholder="Select a project">
+          <ion-select-option *ngFor="let project of ProjectList">
+            {{ project.name }}
+          </ion-select-option>
+        </ion-select>
+        <div *ngIf="attendanceForm.controls['project'].touched && attendanceForm.controls['project'].invalid">
+          <ion-text color="danger">Please select a project.</ion-text>
+        </div>
+      </ion-col>
+    </ion-row>
+    </form>
     
-   </ion-col>
 
-   <!-- <ion-col size="4" size-md="4" size-lg="4" > 
-    <div class="icon-wrapper"><i class="fa fa-hand-pointer-o custom-icon"><span class="fix-editor">&nbsp;</span></i></div>
-  
- </ion-col> -->
+    <ion-row>
+      <ion-col size="4" size-md="4" size-lg="4">
+        <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""></h3>
+        <h3 class="text-center"> <b>{{checkInTime}}</b></h3>
+        <h3 class="text-center">Cheak In </h3>
+      </ion-col>
 
- <ion-col size="4" size-md="4" size-lg="4" > 
-  <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""> </h3>
-  <h3 class="text-center"> <b>{{totalHrsTime}}</b></h3>
-  <h3 class="text-center">Total  Hrs</h3>
+      <ion-col size="4" size-md="4" size-lg="4">
+        <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""></h3>
+        <h3 class="text-center"> <b>{{checkOutTime}}</b></h3>
+        <h3 class="text-center">Cheak Out</h3>
+      </ion-col>
 
-</ion-col>
+      <ion-col size="4" size-md="4" size-lg="4">
+        <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""></h3>
+        <h3 class="text-center"> <b>{{totalHrsTime}}</b></h3>
+        <h3 class="text-center">Total Hrs</h3>
+      </ion-col>
 
-    
-  </ion-row>
+    </ion-row>
+  </ion-grid>
 
-
-
+</ion-content>

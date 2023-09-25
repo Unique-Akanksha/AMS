@@ -29,8 +29,8 @@ export class UserService {
 
   userSignUp(user: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
 
-    const signUpUrl = 'https://demo101.websartech.com/AMS_APIS/backend/user_Create.php';
-    // const signUpUrl = 'http://localhost/ionic/AttendanceManagementSystem/backend/user_Create.php';
+    // const signUpUrl = 'https://demo101.websartech.com/AMS_APIS/backend/user_Create.php';
+    const signUpUrl = 'http://localhost/ionic/AttendanceManagementSystem/backend/user_Create.php';
     
     // Perform the registration without checking if the user already exists
     this.http.post(signUpUrl, user, { observe: 'response' }).subscribe((result) => {
@@ -49,10 +49,10 @@ export class UserService {
     });
   }
 
-  //   http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php
+  //   http:// https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php
   userLogin(data:Login){
 
-  this.http.get<SignUp[]>(`https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
+  this.http.get<SignUp[]>(`http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
     subscribe((result:any)=>{
       if(result && result.body?.length){
         
