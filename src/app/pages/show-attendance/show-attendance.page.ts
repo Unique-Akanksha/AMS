@@ -23,10 +23,16 @@ export class ShowAttendancePage implements OnInit {
    
   filterdata :string= "";
   displayedColumns: string[] = [
-    'attendance_id',
-    'employee',
-    'date',
-    'status',
+    'attendanceID',
+    'employeeName',
+    'employeeDept',
+    'currentTime',
+    'currentDate',
+    'currentLocation',
+    'projectList',
+    'checkInTime',
+    'checkOutTime',
+    'totalHrsTime',
     'action',
   ];
 

@@ -26,7 +26,7 @@
       
     <ion-item>
 
-      <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly placeholder="Your First Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" placeholder="Your First Name"></ion-input>
 
     </ion-item>
     <div *ngIf="empForm.controls['first_name'].touched && empForm.controls['first_name'].invalid">
@@ -34,14 +34,14 @@
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" appAlphabetOnly placeholder="Your Middle Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name"  placeholder="Your Middle Name"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['middle_name'].touched && empForm.controls['middle_name'].invalid">
       <ion-text color="danger">Middle Name is required.</ion-text>
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" appAlphabetOnly placeholder="Your Last Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name"  placeholder="Your Last Name"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['last_name'].touched && empForm.controls['last_name'].invalid">
       <ion-text color="danger">Last Name is required.</ion-text>
