@@ -16,6 +16,7 @@ export class ProfileEmpPage implements OnInit {
   department : string = '';
   role : string = '';
   position : string = '';
+  userPhoto : string = '';
 
  
   ngOnInit() {
@@ -32,6 +33,7 @@ export class ProfileEmpPage implements OnInit {
        this.department = user.department;
        this.role = user.role;
        this.position = user.position;
+       this.userPhoto = user.userPhoto;
      }
   }
 

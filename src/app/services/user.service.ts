@@ -11,6 +11,7 @@ import { EmployeeService } from './employee.service';
   providedIn: 'root'
 })
 export class UserService {
+  loggedInUser: any;
   apiURL = environment.apiURLserver;
   readonly roleAPIUrl = this.apiURL+"rolesAPI.php";
 
@@ -21,7 +22,8 @@ export class UserService {
   private currentUser = new BehaviorSubject<any>(null);
   currentUser$ = this.currentUser.asObservable();
 
-  constructor(private http:HttpClient, private router:Router, private employeeService:EmployeeService) { }
+  constructor(private http:HttpClient, private router:Router, private employeeService:EmployeeService) { 
+  }
 
   getRolesList(){
     return this.http.get<any[]>(this.roleAPIUrl);
@@ -57,18 +59,15 @@ export class UserService {
       if(result && result.body?.length){
         
         const user = result.body[0];
-        console.log("User logged in :",user);
-        
-
-        // Assuming there is a 'role' property in your user object
+        // console.log("User logged in :",user);
+        this.loggedInUser = user;
+        // console.log("User logged in :",this.loggedInUser);
         const userRole = user.role;
 
 
         localStorage.setItem('user',JSON.stringify(user));
         this.isUserLoggedIn.next(true);
         this.currentUser.next(user);
-        // this.router.navigate(['/dashboard']);
-
 
         // Role-based navigation
         if (userRole === " Super Admin ") {
@@ -94,9 +93,16 @@ export class UserService {
         console.log("login failed");
         this.isLoginError.next(true);
       }
+      this.getLoginUser();
     });
+    
   }
   
+  // Function to retrieve the logged-in user
+  getLoginUser(): any {
+    // console.log("getLoginUser", this.loggedInUser);
+    return this.loggedInUser;
+  }
 
   logout() {
     localStorage.removeItem('user');

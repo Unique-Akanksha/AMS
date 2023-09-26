@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <form [formGroup]="attendanceForm"  (ngSubmit)="checkOut()">
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="12" size-lg="12">
@@ -56,7 +56,7 @@
       </ion-col>
     </ion-row>
 
-    <form [formGroup]="attendanceForm"  (ngSubmit)="checkOut()">
+    
     <ion-row class="ion-justify-content-center">
       <ion-col size="4" size-md="4" size-lg="4">
         <ion-select labelPlacement="stacked" label="Select Project" formControlName="project"  placeholder="Select a project">
@@ -69,7 +69,7 @@
         </div>
       </ion-col>
     </ion-row>
-    </form>
+    
     
 
     <ion-row>
@@ -93,5 +93,5 @@
 
     </ion-row>
   </ion-grid>
-
+</form>
 </ion-content>

@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ToastController } from '@ionic/angular';
+import { DepartmentService } from 'src/app/services/department.service';
 
 @Component({
   selector: 'app-add-edit-attendance',
@@ -16,8 +17,11 @@ export class AddEditAttendancePage implements OnInit {
   @Input() attendancedata: any; // Input property to receive dept data
   attendanceForm!: FormGroup;
   employees: any[] = [];
+  departments: any[] = [];
+  selectedTime : any;
 
-  constructor( private toastController: ToastController,private employeeService:EmployeeService,private attendanceService: AttendanceService, private fb: FormBuilder, private modalCtrl: ModalController) { }
+
+  constructor(private departmentService: DepartmentService,private toastController: ToastController,private employeeService:EmployeeService,private attendanceService: AttendanceService, private fb: FormBuilder, private modalCtrl: ModalController) { }
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
@@ -25,14 +29,19 @@ export class AddEditAttendancePage implements OnInit {
 
   ngOnInit() {
 
+    this.departmentService.getDepList().subscribe((departments) => {
+      this.departments = departments;
+      // console.log("departments list :",this.departments);
+    });
+
     this.employeeService.getEmpList().subscribe((employees) => {
       this.employees = employees;
-      console.log("emp list :",this.employees);
+      // console.log("emp list :",this.employees);
     });
 
     this.attendanceForm = this.fb.group({
-      employee: ['', Validators.required],
-      date: ['', [Validators.required]],
+      employeeName: ['', Validators.required],
+      employeeDept: ['', [Validators.required]],
       status: ['', [Validators.required]],
     });
 

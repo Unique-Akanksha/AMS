@@ -11,30 +11,43 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content class="ion-padding">
     <form [formGroup]="attendanceForm" (ngSubmit)="closeModal(true)">
       <ion-item>
-        <ion-select labelPlacement="stacked" label="Select Employee" formControlName="employee"  placeholder="Select a Employee">
-          <ion-select-option
-            *ngFor="let employee of employees"
-            [value]="employee.id"
-          >
+        <ion-select labelPlacement="stacked" label="Select Employee" formControlName="employeeName"
+          placeholder="Select a Employee">
+          <ion-select-option *ngFor="let employee of employees" [value]="employee.id">
             {{ employee.first_name + " " + employee.last_name }}
           </ion-select-option>
         </ion-select>
       </ion-item>
-      <div *ngIf="attendanceForm.controls['employee'].touched && attendanceForm.controls['employee'].invalid">
+      <div *ngIf="attendanceForm.controls['employeeName'].touched && attendanceForm.controls['employeeName'].invalid">
         <ion-text color="danger">Please select a employee.</ion-text>
       </div>
-  
+
       <ion-item>
-        <ion-input labelPlacement="stacked" label="Enter Date" formControlName="date" placeholder="Start Date" type="date"></ion-input>
+        <ion-select labelPlacement="stacked" label="Select Department" formControlName="employeeDept"
+          placeholder="Select a Department">
+          <ion-select-option *ngFor="let department of departments" [value]="department.id">
+            {{ department.name }}
+          </ion-select-option>
+        </ion-select>
       </ion-item>
-      <div *ngIf="attendanceForm.controls['date'].touched && attendanceForm.controls['date'].invalid">
-        <ion-text color="danger">Date is required.</ion-text>
+      <div *ngIf="attendanceForm.controls['employeeDept'].touched && attendanceForm.controls['employeeDept'].invalid">
+        <ion-text color="danger">Please select a employee.</ion-text>
       </div>
-  
+
+      <ion-item>
+        <ion-label>Choose a Time</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+
       <ion-item>
         <ion-select labelPlacement="stacked" label="Select Status" formControlName="status" placeholder="Select Status">
           <ion-select-option value="Present">Present</ion-select-option>
@@ -45,6 +58,6 @@
       <div *ngIf="attendanceForm.controls['status'].touched && attendanceForm.controls['status'].invalid">
         <ion-text color="danger">Status is required.</ion-text>
       </div>
-      
+
     </form>
   </ion-content>
