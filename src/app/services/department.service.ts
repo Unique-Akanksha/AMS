@@ -23,7 +23,7 @@ export class DepartmentService {
 
   // Implement a function to get the department count.
   getDepartmentCount(): Observable<number> {
-    const endpoint = `${this.DepartmentAPIUrl}/your_endpoint_for_department_count`;
+    const endpoint = `${this.DepartmentAPIUrl}`;
 
     return this.http.get<any[]>(endpoint).pipe(
       map((departments:any) => {

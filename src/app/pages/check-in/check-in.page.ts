@@ -6,6 +6,8 @@ import { ProjectService } from 'src/app/services/project.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AttendanceService } from 'src/app/services/attendance.service';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,6 +16,7 @@ import { AttendanceService } from 'src/app/services/attendance.service';
   styleUrls: ['./check-in.page.scss'],
 })
 export class CheckInPage implements OnInit {
+  loggedInUser: any;
   ProjectList: any[] = [];
   attendanceForm!: FormGroup;
   projectSubscription: Subscription | undefined;
@@ -35,7 +38,7 @@ export class CheckInPage implements OnInit {
 
   
   
-  constructor(private employeeService: EmployeeService, private renderer: Renderer2, private el: ElementRef, private toastController: ToastController, private projectService: ProjectService, private fb: FormBuilder, private attendanceService: AttendanceService) {
+  constructor(private router: Router,private userService: UserService,private employeeService: EmployeeService, private renderer: Renderer2, private el: ElementRef, private toastController: ToastController, private projectService: ProjectService, private fb: FormBuilder, private attendanceService: AttendanceService) {
 
     this.projectService.getProjectList().subscribe((data) => {
       this.ProjectList = data;
@@ -51,6 +54,23 @@ export class CheckInPage implements OnInit {
   }
 
   ngOnInit() {
+    // get login user info from user service
+    // this.loggedInUser = this.userService.getLoginUser();
+    // this.userName = this.loggedInUser.first_name;
+    // this.lastName = this.loggedInUser.last_name;
+    // this.department = this.loggedInUser.department;
+
+    // get value from localstorage 
+    const userJson = localStorage.getItem('user');
+
+     if (userJson){
+       const user = JSON.parse(userJson);
+       this.userName = user.first_name;
+       this.lastName = user.last_name;
+       this.department = user.department;
+
+     }
+
 
     // Subscribe to the 'project' form control's valueChanges observable
     this.projectSubscription = this.attendanceForm.get('project')?.valueChanges.subscribe((data) => {
@@ -65,16 +85,7 @@ export class CheckInPage implements OnInit {
     // get current location
     this.getCurrentLocation();
 
-    const userJSON = localStorage.getItem('user');
-    if (userJSON !== null) {
-      const user = JSON.parse(userJSON);
-      this.userName = user.first_name;
-      this.lastName = user.last_name;
-      this.department = user.department;
-    } else {
-      this.userName = ''; // Or some other default value
-    }
-
+    
     // Initialize the date and time
     this.updateDateTime();
 
@@ -129,6 +140,7 @@ export class CheckInPage implements OnInit {
       checkOutTime: this.checkOutTime,
       totalHrsTime: this.totalHrsTime
     };
+    
   
     console.log("dataToStore : ",dataToStore);
     // Send data to the server

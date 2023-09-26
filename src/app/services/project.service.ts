@@ -34,7 +34,7 @@ export class ProjectService {
 
   // Implement a function to get the department count.
   getProjectCount(): Observable<number> {
-    const endpoint = `${this.ProjectAPIUrl}/your_endpoint_for_department_count`;
+    const endpoint = `${this.ProjectAPIUrl}`;
     return this.http.get<any[]>(endpoint).pipe(
       map((projects:any) => {
         return projects.length;

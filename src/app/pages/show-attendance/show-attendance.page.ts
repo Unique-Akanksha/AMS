@@ -100,7 +100,7 @@ export class ShowAttendancePage implements OnInit {
 
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
-      this.attendanceService.deleteAttendance(item.attendance_id).subscribe(data => {
+      this.attendanceService.deleteAttendance(item.attendanceID).subscribe(data => {
         this.refreshAttendanceList();
       })
     }

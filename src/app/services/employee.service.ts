@@ -34,7 +34,7 @@ export class EmployeeService {
 
   // Implement a function to get the department count.
   getEmployeeCount(): Observable<number> {
-    const endpoint = `${this.EmployeeAPIUrl}/your_endpoint_for_department_count`;
+    const endpoint = `${this.EmployeeAPIUrl}`;
 
     return this.http.get<any[]>(endpoint).pipe(
       map((employees:any) => {

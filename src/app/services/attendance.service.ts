@@ -33,9 +33,15 @@ export class AttendanceService {
     return this.http.get<any[]>(this.AttendanceAPIUrl);
   }
 
+  getAttendanceListByLoginUser(employeeName:any){
+    const url = `${this.AttendanceAPIUrl}?employeeName=${employeeName}`;
+    return this.http.get<any[]>(url);
+  }
+
+
   // Implement a function to get the department count.
   getAttendanceCount(): Observable<number> {
-    const endpoint = `${this.AttendanceAPIUrl}/your_endpoint_for_department_count`;
+    const endpoint = `${this.AttendanceAPIUrl}`;
 
     return this.http.get<any[]>(endpoint).pipe(
       map((employees:any) => {
