@@ -15,49 +15,73 @@
   <ion-content class="ion-padding">
     <form [formGroup]="attendanceForm" (ngSubmit)="closeModal(true)">
       <ion-item>
-        <ion-select labelPlacement="stacked" label="Select Employee" formControlName="employeeName"
-          placeholder="Select a Employee">
-          <ion-select-option *ngFor="let employee of employees" [value]="employee.id">
-            {{ employee.first_name + " " + employee.last_name }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div *ngIf="attendanceForm.controls['employeeName'].touched && attendanceForm.controls['employeeName'].invalid">
-        <ion-text color="danger">Please select a employee.</ion-text>
-      </div>
-
-      <ion-item>
-        <ion-select labelPlacement="stacked" label="Select Department" formControlName="employeeDept"
-          placeholder="Select a Department">
-          <ion-select-option *ngFor="let department of departments" [value]="department.id">
-            {{ department.name }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div *ngIf="attendanceForm.controls['employeeDept'].touched && attendanceForm.controls['employeeDept'].invalid">
-        <ion-text color="danger">Please select a employee.</ion-text>
-      </div>
-
-      <ion-item>
-        <ion-label>Choose a Time</ion-label>
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="datetime"></ion-datetime>
-          </ng-template>
-        </ion-modal>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="Your name" readonly="true" formControlName="employeeName"  placeholder="Your name"></ion-input>
+        </ion-item>
       </ion-item>
 
       <ion-item>
-        <ion-select labelPlacement="stacked" label="Select Status" formControlName="status" placeholder="Select Status">
-          <ion-select-option value="Present">Present</ion-select-option>
-          <ion-select-option value="Absent">Absent</ion-select-option>
-          <ion-select-option value="Late">Late</ion-select-option>
-        </ion-select>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="Department name" readonly="true" formControlName="employeeDept"  placeholder="Department name"></ion-input>
+        </ion-item>
       </ion-item>
-      <div *ngIf="attendanceForm.controls['status'].touched && attendanceForm.controls['status'].invalid">
-        <ion-text color="danger">Status is required.</ion-text>
-      </div>
+      
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="Current Time" readonly="true" formControlName="currentTime"  placeholder="Current Time"></ion-input>
+        </ion-item>
+      </ion-item>
 
+
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="Current Date" readonly="true" formControlName="currentDate"  placeholder="Current Date"></ion-input>
+        </ion-item>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="Current Location" readonly="true" formControlName="currentLocation"  placeholder="Current Location"></ion-input>
+        </ion-item>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="Project List" readonly="true" formControlName="projectList"  placeholder="Project List"></ion-input>
+        </ion-item>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="CheckIn Time" readonly="true" formControlName="checkInTime"  placeholder="CheckIn Time"></ion-input>
+        </ion-item>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="CheckOut Time" formControlName="checkOutTime" placeholder="HH:MM:SS"[class.invalid]="attendanceForm.get('checkOutTime')?.invalid && attendanceForm.get('checkOutTime')?.touched"></ion-input>
+        </ion-item>
+      </ion-item>
+      
+      <ion-text color="danger" *ngIf="attendanceForm.get('checkOutTime')?.hasError('required') && attendanceForm.get('checkOutTime')?.touched">
+        CheckOut Time is required.
+      </ion-text>
+      
+      <ion-text color="danger" *ngIf="attendanceForm.get('checkOutTime')?.hasError('pattern') && attendanceForm.get('checkOutTime')?.touched">
+        Please enter a valid time in HH:MM:SS format.
+      </ion-text>
+      
+
+
+      <ion-item>
+        <ion-item>
+          <ion-input labelPlacement="stacked" label="TotalHrs Time" readonly="true" formControlName="totalHrsTime"  placeholder="TotalHrs Time"></ion-input>
+        </ion-item>
+      </ion-item>
+      
     </form>
   </ion-content>
