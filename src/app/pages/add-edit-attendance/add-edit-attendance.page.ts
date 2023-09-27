@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AttendanceService } from 'src/app/services/attendance.service';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -19,6 +19,7 @@ export class AddEditAttendancePage implements OnInit {
   employees: any[] = [];
   departments: any[] = [];
   selectedTime : any;
+  totalHrsTime: string =''; 
 
 
   constructor(private departmentService: DepartmentService,private toastController: ToastController,private employeeService:EmployeeService,private attendanceService: AttendanceService, private fb: FormBuilder, private modalCtrl: ModalController) { }
@@ -41,23 +42,32 @@ export class AddEditAttendancePage implements OnInit {
 
     this.attendanceForm = this.fb.group({
       employeeName: ['', Validators.required],
-      employeeDept: ['', [Validators.required]],
-      status: ['', [Validators.required]],
+      employeeDept: ['', Validators.required],
+      currentTime: ['', Validators.required],
+      currentDate: ['', Validators.required],
+      currentLocation: ['', Validators.required],
+      projectList: ['', Validators.required],
+      checkInTime: ['', Validators.required],
+      checkOutTime: ['', [
+        Validators.required, // Makes the field required
+        Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/), // Validates HH:MM:SS format
+      ]],  
+      totalHrsTime: ['', Validators.required],
     });
 
     if (this.actionType === 'update' && this.dataToUpdate) {
       // Initialize form with data to update
       this.attendanceForm.patchValue({
-        employee: this.dataToUpdate.employee,
-        date: this.dataToUpdate.date,
-        status: this.dataToUpdate.status
-      });
-    } else {
-      // Initialize form with default values for add mode
-      this.attendanceForm.patchValue({
-        employee: '',
-        date: '',
-        status: ''
+        employeeName: this.dataToUpdate.employeeName,
+        employeeDept: this.dataToUpdate.employeeDept,
+        currentTime: this.dataToUpdate.currentTime,
+        currentDate: this.dataToUpdate.currentDate,
+        currentLocation: this.dataToUpdate.currentLocation,
+        projectList: this.dataToUpdate.projectList,
+        checkInTime: this.dataToUpdate.checkInTime,
+        checkOutTime: this.dataToUpdate.checkOutTime,
+        totalHrsTime: this.dataToUpdate.totalHrsTime,
+        
       });
     }
   }
@@ -71,29 +81,24 @@ export class AddEditAttendancePage implements OnInit {
         // Perform add or update logic here based on actionType
         if (this.actionType === 'update') {
           console.log("In update mode");
-          // Update existing record with attendanceData
           this.updateAttendance(attendanceData);
-        } else {
-          console.log("In add mode");
-          // Add new record with attendanceData
-          this.addAttendance(attendanceData);
         }
       }
     }
 
     // Close the modal and pass data back to the parent component
-    this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data':{...{id:this.dataToUpdate.attendance_id},...this.attendanceForm.value}});
+    this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data':{...{id:this.dataToUpdate.attendanceID},...this.attendanceForm.value}});
   }
 
-  updateAttendance(dataToEdit: any) {
-    console.log("update function : ", dataToEdit);
-  
+  updateAttendance(dataToEdit: any) {  
+    // Calculate total hours using the provided function
+    const totalHours = this.calculateTotalHours(dataToEdit.checkInTime, dataToEdit.checkOutTime);
+
     // Create an object with the data you want to update
     const updatedData = {
-      employee: dataToEdit.employee,
-      date: dataToEdit.date,
-      status: dataToEdit.status,
-      id: this.dataToUpdate.attendance_id // Include the attendance ID for the update
+      checkOutTime: dataToEdit.checkOutTime, // Corrected to use dataToEdit.checkOutTime
+      totalHrsTime: totalHours,
+      id: this.dataToUpdate.attendanceID // Include the attendance ID for the update
     };
   
     // Call the updateDepartment function from the service
@@ -119,29 +124,60 @@ export class AddEditAttendancePage implements OnInit {
       }
     );
   }
-
-  addAttendance(formData: any) {
-    this.attendanceService.addAttendance(
-      formData,
-      async (message) => {
-        console.log("Response: ", message);
-        if (message === "Attendance already exists") {
-          const toast = await this.toastController.create({
-            message: 'Attendance already exists',
-            duration: 3000, // Duration in milliseconds (3 seconds in this case)
-            position: 'bottom', // You can change the position (top, middle, bottom)
-            color: 'danger', // You can specify a color (success, warning, danger, etc.)
-          });
-          toast.present();
-        } else {
-          this.modalCtrl.dismiss();
-        }
-      },
-      (error) => {
-        console.log('Error: ' + error);
-      }
-    );
-  }
   
 
+  calculateTotalHours(checkInTime: string, checkOutTime: string) {
+    if (checkInTime && checkOutTime) {
+      const checkInTimeParts = checkInTime.split(':');
+      const checkOutTimeParts = checkOutTime.split(':');
+  
+      // Check if both time parts arrays have the expected number of elements
+      if (checkInTimeParts.length === 3 && checkOutTimeParts.length === 3) {
+        // Parse check-in and check-out times
+        const checkInHours = parseInt(checkInTimeParts[0]);
+        const checkInMinutes = parseInt(checkInTimeParts[1]);
+        const checkInSeconds = parseInt(checkInTimeParts[2]);
+  
+        const checkOutHours = parseInt(checkOutTimeParts[0]);
+        const checkOutMinutes = parseInt(checkOutTimeParts[1]);
+        const checkOutSeconds = parseInt(checkOutTimeParts[2]);
+  
+        // Calculate total hours, minutes, and seconds
+        let totalHours = checkOutHours - checkInHours;
+        let totalMinutes = checkOutMinutes - checkInMinutes;
+        let totalSeconds = checkOutSeconds - checkInSeconds;
+  
+        // Handle borrowing minutes and seconds from hours if necessary
+        if (totalSeconds < 0) {
+          totalMinutes--;
+          totalSeconds += 60;
+        }
+  
+        if (totalMinutes < 0) {
+          totalHours--;
+          totalMinutes += 60;
+        }
+  
+        // Store total hours, minutes, and seconds in separate variables
+        const formattedTotalHours = this.formatTimeComponent(totalHours);
+        const formattedTotalMinutes = this.formatTimeComponent(totalMinutes);
+        const formattedTotalSeconds = this.formatTimeComponent(totalSeconds);
+  
+        // Set totalHrsTime as hours:minutes:seconds
+        this.totalHrsTime = `${formattedTotalHours}:${formattedTotalMinutes}:${formattedTotalSeconds}`;
+      } else {
+        this.totalHrsTime = "Invalid Time Format"; // Handle the case of invalid time format
+      }
+    } else {
+      // Handle the case where either checkInTime or checkOutTime is not set
+      this.totalHrsTime = "N/A"; // You can set it to a suitable default value
+    }
+    return this.totalHrsTime;
+  }
+  
+  // Function to format time component (hours, minutes, or seconds) with leading zeros
+  private formatTimeComponent(component: number): string {
+    return component < 10 ? `0${component}` : component.toString();
+  }
+  
 }

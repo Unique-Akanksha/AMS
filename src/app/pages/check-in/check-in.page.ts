@@ -29,7 +29,7 @@ export class CheckInPage implements OnInit {
   lastName: string = "";
   department: string = "";
   currentTime: Date = new Date();
-  currentDate: Date = new Date();
+  currentDate: string = new Date().toISOString().split('T')[0];
   coordinatesMessage: string = '';
   emp_project: string = "";
   checkInTime: string = "";
@@ -71,15 +71,14 @@ export class CheckInPage implements OnInit {
 
      }
 
+    this.attendanceForm = this.fb.group({
+      project: ['', Validators.required],
+    });
 
     // Subscribe to the 'project' form control's valueChanges observable
     this.projectSubscription = this.attendanceForm.get('project')?.valueChanges.subscribe((data) => {
       this.emp_project = data;
-      console.log('Selected Project Changed:', this.emp_project);
-    });
-
-    this.attendanceForm = this.fb.group({
-      project: ['', Validators.required],
+      // console.log('Selected Project Changed:', this.emp_project);
     });
 
     // get current location
@@ -98,8 +97,10 @@ export class CheckInPage implements OnInit {
 
   private updateDateTime() {
     this.currentTime = new Date();
-    this.currentDate = new Date();
+    // Extract the date part as a string in the "YYYY-MM-DD" format
+    this.currentDate = this.currentTime.toISOString().split('T')[0];
   }
+  
 
   checkIn() {
     const currentTime = new Date();
@@ -117,53 +118,114 @@ export class CheckInPage implements OnInit {
     const hours = currentTime.getHours();
     const minutes = currentTime.getMinutes();
     const seconds = currentTime.getSeconds();
-
+  
     // Format the current time as hh:mm:ss AM/PM
     this.checkOutTime = this.formatTimeIn12HourClock(hours, minutes, seconds);
     this.showButton = false;
-
+  
     // Calculate the total hours by finding the difference
     this.calculateTotalHours();
-
-    const myTimeout = setTimeout(this.showthanksImg, 2000);
-
-
-    // add attedance to the database 
-    const dataToStore = {
-      employeeName: this.userName + " " +this.lastName,
-      employeeDept: this.department,
-      currentTime:  this.currentTime,
-      currentDate:  this.currentTime,
-      currentLocation: this.coordinatesMessage,
-      projectList: this.emp_project,
-      checkInTime: this.checkInTime,
-      checkOutTime: this.checkOutTime,
-      totalHrsTime: this.totalHrsTime
-    };
-    
   
-    console.log("dataToStore : ",dataToStore);
-    // Send data to the server
-    this.attendanceService.addAttendance(
-      dataToStore,
-      async (message) => {
+    const myTimeout = setTimeout(this.showthanksImg, 2000);
+  
+    console.log("User Name : " + this.userName);
+    console.log("last Name : " + this.lastName);
+    console.log("department : " + this.department);
+    console.log("current Time : " + this.currentTime);          
+    console.log("current Date : " + this.currentDate);
+    console.log("coordinatesMessage : " + this.coordinatesMessage);
+    console.log("emp_project : " + this.emp_project);
+    console.log("checkInTime : " + this.checkInTime);
+    console.log("checkOutTime : " + this.checkOutTime);
+    console.log("totalHrsTime : " + this.totalHrsTime);
+
+    
+    // Create an immediately-invoked async function
+    (async () => {
+      // Check if essential data is not null
+      if (
+        this.userName &&
+        this.lastName &&
+        this.department &&
+        this.currentTime && 
+        this.currentDate &&
+        this.coordinatesMessage &&
+        this.emp_project &&
+        this.checkInTime &&
+        this.checkOutTime &&
+        this.totalHrsTime
+      ) {
+        // Prepare data to store
+        const dataToStore = {
+          employeeName: this.userName + " " + this.lastName,
+          employeeDept: this.department,
+          currentTime: this.currentTime,
+          currentDate: this.currentDate,
+          currentLocation: this.coordinatesMessage,
+          projectList: this.emp_project,
+          checkInTime: this.checkInTime,
+          checkOutTime: this.checkOutTime,
+          totalHrsTime: this.totalHrsTime,
+        };
+  
+        console.log("dataToStore: ", dataToStore);
+  
+        // Send data to the server
+        const message = await new Promise<string>((resolve, reject) => {
+          this.attendanceService.addAttendance(
+            dataToStore,
+            (response) => resolve(response),
+            (error) => reject(error)
+          );
+        });
+  
         console.log("Response: ", message);
+  
         if (message === "Attendance already exists") {
           const toast = await this.toastController.create({
-            message: 'Attendance already exists',
-            duration: 3000, // Duration in milliseconds (3 seconds in this case)
-            position: 'bottom', // You can change the position (top, middle, bottom)
-            color: 'danger', // You can specify a color (success, warning, danger, etc.)
+            message: "Attendance already exists",
+            duration: 3000,
+            position: "bottom",
+            color: "danger",
+          });
+          toast.present();
+        } else if (message === "Null values detected") {
+          // Check which specific values are null and create a custom message
+          const nullFields = [];
+          if (!this.userName) nullFields.push("User Name");
+          if (!this.lastName) nullFields.push("Last Name");
+          if (!this.department) nullFields.push("Department");
+          if (!this.coordinatesMessage) nullFields.push("Coordinates Message");
+          if (!this.emp_project) nullFields.push("Project");
+          if (!this.checkInTime) nullFields.push("Check-In Time");
+          if (!this.checkOutTime) nullFields.push("Check-Out Time");
+          if (!this.totalHrsTime) nullFields.push("Total Hours");
+  
+          const toast = await this.toastController.create({
+            message: `Null values detected for: ${nullFields.join(", ")}. Attendance not recorded.`,
+            duration: 3000,
+            position: "bottom",
+            color: "danger",
           });
           toast.present();
         }
-      },
-      (error) => {
-        console.log('Error: ' + error);
+      } else {
+        const toast = await this.toastController.create({
+          message: "Required data is null. Attendance not recorded.",
+          duration: 3000,
+          position: "bottom",
+          color: "danger",
+        });
+        toast.present();
+  
+        console.log("Required data is null. Skipping attendance record insertion.");
       }
-    );
-
+    })();
   }
+  
+  
+  
+  
 
   showthanksImg() {
 
@@ -279,7 +341,7 @@ export class CheckInPage implements OnInit {
         timestamp: position.timestamp,
       };
       // Update the message to display the coordinates.
-      this.coordinatesMessage = `Current coordinates: Latitude ${coordinates.coords.latitude}, Longitude ${coordinates.coords.longitude}`;
+      this.coordinatesMessage = `Latitude ${coordinates.coords.latitude}, Longitude ${coordinates.coords.longitude}`;
     }
 
     catch (error) {
