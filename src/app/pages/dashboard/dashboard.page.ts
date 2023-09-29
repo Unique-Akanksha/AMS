@@ -6,6 +6,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Subscription,timer} from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
+import { NavController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,13 +19,16 @@ export class DashboardPage implements OnInit {
   projectCount:number=0;
   employeeCount:number=0;
   attendanceCount:number=0;
-  loginUser = '';
+  userRole = '';
+  userRoleName = '';
+
 
   private sessionSubscription!: Subscription;
   remainingSessionTime: number = 0;
   sessionTimeout: number = 600 * 60 * 1000; // 30 minutes in milliseconds
 
-  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService,private router: Router) { 
+  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService,private router: Router) {
+
   }
 
   ngOnInit() {
@@ -34,7 +38,25 @@ export class DashboardPage implements OnInit {
     if (userJson){
       const user = JSON.parse(userJson);
       const userRole = user.role;
-      this.loginUser = userRole;
+      this.userRole = userRole;
+
+      if(userRole === '1'){
+        this.userRoleName = 'Super Admin';
+      }
+      else if(userRole === '2'){
+        this.userRoleName = 'Admin';
+      }
+      else if(userRole === '3')
+      {
+        this.userRoleName = 'Manager';
+      }
+      else if(userRole === '4')
+      {
+        this.userRoleName = 'Developer';
+      }
+      else{
+        this.userRoleName = 'Employee';
+      }
     }
 
     
@@ -117,5 +139,5 @@ export class DashboardPage implements OnInit {
   padZero(num: number): string {
     return num < 10 ? `0${num}` : num.toString();
   }
-  
+
 }

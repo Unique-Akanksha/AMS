@@ -1,7 +1,7 @@
 <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>{{ loginUser }}</ion-title>
+      <ion-title>{{ userRoleName }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -13,7 +13,7 @@
     </ion-list>
 
     <!-- Admin-specific menu items -->
-    <ng-container *ngIf="loginUser === ' Super Admin '">
+    <ng-container *ngIf="userRole === '1'">
       <ion-list>
         <ion-item routerLink="/show-dep">
           <ion-label>Department</ion-label>
@@ -36,10 +36,16 @@
     </ng-container>
 
     <!-- User-specific menu items -->
-    <ng-container *ngIf="loginUser === ' Employee '">
+    <ng-container *ngIf="userRole === '5'">
       <ion-list>
         <ion-item routerLink="/profile-emp">
           <ion-label>Profile</ion-label>
+        </ion-item>
+        <ion-item routerLink="/check-in">
+          <ion-label>Fill Attendance</ion-label>
+        </ion-item>
+        <ion-item routerLink="/show-emp-attendance">
+          <ion-label>Recent Attendance</ion-label>
         </ion-item>
         <ion-item>
           <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
@@ -68,7 +74,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{loginUser}} Dashboard</ion-title>
+    <ion-title>{{userRoleName}} Dashboard</ion-title>
   </ion-toolbar>
   
   <ion-item>
@@ -88,7 +94,7 @@
     <ion-row>
 
       <ion-col>
-        <ion-card *ngIf="loginUser === ' Super Admin '"  color="success" routerLink="/show-dep">
+        <ion-card *ngIf="userRole === '1'"  color="success" routerLink="/show-dep">
           <ion-card-header>
             <ion-grid>
               <ion-row>
@@ -115,7 +121,7 @@
       </ion-col>
 
       <ion-col>
-        <ion-card *ngIf="loginUser === ' Super Admin '" color="danger" routerLink="/show-project">
+        <ion-card *ngIf="userRole === '1'" color="danger" routerLink="/show-project">
         <ion-card-header>
           <ion-grid>
             <ion-row>
@@ -143,7 +149,7 @@
 
 
     <ion-col>
-      <ion-card  *ngIf="loginUser === ' Super Admin '" color="warning" class="text-white" routerLink="/show-emp">
+      <ion-card  *ngIf="userRole === '1'" color="warning" class="text-white" routerLink="/show-emp">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -170,7 +176,7 @@
 
 
     <ion-col>
-      <ion-card *ngIf="loginUser === ' Super Admin '" color="primary" routerLink="/show-attendance">
+      <ion-card *ngIf="userRole === '1'" color="primary" routerLink="/show-attendance">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -201,7 +207,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/profile-emp">
+        <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/profile-emp">
         <ion-card-header>
           <ion-grid>
             <ion-row>
@@ -229,7 +235,7 @@
     
     
       <ion-col>
-        <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/check-in">
+        <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/check-in">
         <ion-card-header>
           <ion-grid>
             <ion-row>
@@ -257,7 +263,7 @@
     
     
     <ion-col>
-      <ion-card *ngIf="loginUser === ' Employee '" color="primary" routerLink="/show-emp-attendance">
+      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/show-emp-attendance">
       <ion-card-header>
         <ion-grid>
           <ion-row>

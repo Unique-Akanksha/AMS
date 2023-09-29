@@ -14,6 +14,7 @@ export class UserService {
   loggedInUser: any;
   apiURL = environment.apiURLserver;
   readonly roleAPIUrl = this.apiURL+"rolesAPI.php";
+  readonly EmployeeAPIUrl = this.apiURL+"employeeAPI.php";
 
   isUserLoggedIn = new BehaviorSubject<boolean>(false);
   invalidUserAuth = new BehaviorSubject<boolean>(false);
@@ -31,58 +32,48 @@ export class UserService {
 
   userSignUp(user: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
 
-    const signUpUrl = 'https://demo101.websartech.com/AMS_APIS/backend/user_Create.php';
+    // const signUpUrl = 'https://demo101.websartech.com/AMS_APIS/backend/user_Create.php';
     // const signUpUrl = 'http://localhost/ionic/AttendanceManagementSystem/backend/user_Create.php';
     
-    // Perform the registration without checking if the user already exists
-    this.http.post(signUpUrl, user, { observe: 'response' }).subscribe((result) => {
-      const responseBody = result.body as { message: string };
-      if (responseBody) {
-        const successMessage = responseBody.message;
-        console.warn(successMessage);
-        successCallback(successMessage);
-        // Registration successful, navigate to login page
-        this.router.navigate(['/login']);
-      } else {
-        const errorMessage = 'No message received';
-        console.error(errorMessage);
-        errorCallback(errorMessage);
-      }
-    });
+    //   this.http.post(signUpUrl, user, { observe: 'response' }).subscribe((result) => {
+    //   const responseBody = result.body as { message: string };
+    //   if (responseBody) {
+    //     const successMessage = responseBody.message;
+    //     console.warn(successMessage);
+    //     successCallback(successMessage);
+    //     this.router.navigate(['/login']);
+    //   } else {
+    //     const errorMessage = 'No message received';
+    //     console.error(errorMessage);
+    //     errorCallback(errorMessage);
+    //   }
+    // });
   }
 
-  //   http://  http://localhost/ionic/AttendanceManagementSystem/backend/employeeAPI.php
   userLogin(data:Login){
-
-  this.http.get<SignUp[]>(`https://demo101.websartech.com/AMS_APIS/backend/employeeAPI.php?email=${data.email}&password=${data.password}`,{observe:'response'}).
+  this.http.get<SignUp[]>(`${this.EmployeeAPIUrl}?email=${data.email}&password=${data.password}`,{observe:'response'}).
     subscribe((result:any)=>{
       if(result && result.body?.length){
-        
         const user = result.body[0];
-        // console.log("User logged in :",user);
         this.loggedInUser = user;
-        // console.log("User logged in :",this.loggedInUser);
         const userRole = user.role;
-
-
         localStorage.setItem('user',JSON.stringify(user));
         this.isUserLoggedIn.next(true);
         this.currentUser.next(user);
 
-        // Role-based navigation
-        if (userRole === " Super Admin ") {
+        if (userRole === "1") {
           this.router.navigate(['/dashboard']);
         }
-         else if (userRole === " Admin ") {
+         else if (userRole === "2") {
           this.router.navigate(['/dashboard']);
         }
-        else if (userRole === " Manager ") {
+        else if (userRole === "3") {
           this.router.navigate(['/dashboard']);
         }
-        else if (userRole === " Developer ") {
+        else if (userRole === "4") {
           this.router.navigate(['/dashboard']);
         }
-        else if (userRole === " Employee ") {
+        else if (userRole === "5") {
           this.router.navigate(['/dashboard']);
         }
         else {
@@ -100,7 +91,6 @@ export class UserService {
   
   // Function to retrieve the logged-in user
   getLoginUser(): any {
-    // console.log("getLoginUser", this.loggedInUser);
     return this.loggedInUser;
   }
 

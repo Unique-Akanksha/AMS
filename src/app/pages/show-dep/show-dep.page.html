@@ -13,7 +13,7 @@
     </ion-list>
 
     <!-- Admin-specific menu items -->
-    <ng-container *ngIf="loginUser === ' Super Admin '">
+    <ng-container *ngIf="loginUser === '1'">
       <ion-list>
         <!-- <ion-item routerLink="/show-dep">
           <ion-label>Department</ion-label>
@@ -35,7 +35,7 @@
     </ng-container>
 
     <!-- User-specific menu items -->
-    <ng-container *ngIf="loginUser === ' Employee '">
+    <ng-container *ngIf="loginUser === '2'">
       <ion-list>
         <ion-item routerLink="/user/orders">
           <ion-label>User Setting 1</ion-label>

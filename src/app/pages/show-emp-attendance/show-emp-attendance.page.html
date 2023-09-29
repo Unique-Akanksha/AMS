@@ -10,42 +10,16 @@
       <ion-item routerLink="/dashboard">
         <ion-label>Home</ion-label>
       </ion-item>
+      <ion-item routerLink="/profile-emp">
+        <ion-label>Profile</ion-label>
+      </ion-item>
+      <ion-item routerLink="/check-in">
+        <ion-label>Fill Attendance</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
+      </ion-item>
     </ion-list>
-
-    <!-- Admin-specific menu items -->
-    <ng-container *ngIf="loginUser === ' Super Admin '">
-      <ion-list>
-        <ion-item routerLink="/show-dep">
-          <ion-label>Department</ion-label>
-        </ion-item>
-        <ion-item routerLink="/show-project">
-          <ion-label>Project</ion-label>
-        </ion-item>
-        <!-- <ion-item routerLink="/show-emp">
-          <ion-label>Employee</ion-label>
-        </ion-item> -->
-        <ion-item routerLink="/show-attendance">
-          <ion-label>Attendance</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
-        </ion-item>
-        <!-- Add more admin-specific items here -->
-      </ion-list>
-    </ng-container>
-
-    <!-- User-specific menu items -->
-    <ng-container *ngIf="loginUser === ' Employee '">
-      <ion-list>
-        <!-- <ion-item routerLink="/user/orders">
-          <ion-label>User Setting 1</ion-label>
-        </ion-item>
-        <ion-item routerLink="/user/orders">
-          <ion-label>User Setting 2</ion-label>
-        </ion-item> -->
-        <!-- Add more user-specific items here -->
-      </ion-list>
-    </ng-container>
   </ion-content>
 </ion-menu>
 

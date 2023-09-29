@@ -15,14 +15,14 @@
   <ion-content class="ion-padding">
     <form [formGroup]="projectForm" (ngSubmit)="closeModal(true)">
       <ion-item>
-        <ion-input labelPlacement="stacked" label="Enter Project name" formControlName="name"  placeholder="Project name"></ion-input>
+        <ion-input labelPlacement="stacked" label="Enter Project name" formControlName="name" appAlphabetOnly placeholder="Project name"></ion-input>
       </ion-item>
       <div *ngIf="projectForm.controls['name'].touched && projectForm.controls['name'].invalid">
         <ion-text color="danger">Name is required.</ion-text>
       </div>
 
       <ion-item>
-        <ion-input labelPlacement="stacked" label="Enter Project Description" formControlName="description"  placeholder="Description"></ion-input>
+        <ion-input labelPlacement="stacked" label="Enter Project Description" formControlName="description" appAlphabetOnly placeholder="Description"></ion-input>
       </ion-item>
       <div *ngIf="projectForm.controls['description'].touched && projectForm.controls['description'].invalid">
         <ion-text color="danger">Description is required.</ion-text>
