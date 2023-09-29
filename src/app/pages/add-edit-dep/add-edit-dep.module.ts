@@ -8,6 +8,7 @@ import { AddEditDepPageRoutingModule } from './add-edit-dep-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddEditDepPage } from './add-edit-dep.page';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { AlphabetOnlyDirective } from 'src/app/alphabet-only.directive';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,6 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [AddEditDepPage]
+  declarations: [AddEditDepPage,AlphabetOnlyDirective]
 })
 export class AddEditDepPageModule {}

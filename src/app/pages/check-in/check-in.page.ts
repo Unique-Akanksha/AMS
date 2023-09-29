@@ -362,4 +362,9 @@ export class CheckInPage implements OnInit {
     toast.present();
   }
 
+  // Implement the logout function
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
 }

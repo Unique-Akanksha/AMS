@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-emp',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileEmpPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router  ) { }
   first_name : string ='';
   middle_name : string ='';
   last_name : string ='';
@@ -35,6 +36,12 @@ export class ProfileEmpPage implements OnInit {
        this.position = user.position;
        this.userPhoto = user.userPhoto;
      }
+  }
+
+  // Implement the logout function
+  logout() {
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
 }

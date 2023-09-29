@@ -1,23 +1,21 @@
-
-//  allow only alphabets in input
-
-
 import { Directive, HostListener, ElementRef } from '@angular/core';
 
 @Directive({
-    selector: '[appAlphabetOnly]'
+  selector: '[appAlphabetOnly]'
 })
 
 export class AlphabetOnlyDirective {
-    key:any;
-    @HostListener('keydown', ['$event']) onKeydown(event: KeyboardEvent) {
-        this.key = event.keyCode;
-        // console.log(this.key);
+  constructor(private el: ElementRef) {}
 
-        // if ((this.key >= 15 && this.key <= 64) || (this.key >= 123) || (this.key >= 96 && this.key <= 105)) {
+  @HostListener('keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    const inputElement = this.el.nativeElement as HTMLInputElement;
+    const inputValue = inputElement.value;
+    const key = event.key;
 
-         if ((this.key < 64 || this.key > 90) && ( this.key < 7 || this.key  > 9 )) {
-            event.preventDefault();
-        }
+    // Allow alphabetic characters and space
+    if (!(/[a-zA-Z\s]/.test(key))) {
+      event.preventDefault();
     }
+  }
 }
