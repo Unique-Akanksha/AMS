@@ -21,8 +21,7 @@ export class AddEditEmpPage implements OnInit {
   userRoleList: any[] = [];
   departments: any[] = [];
   imageUrl: string | undefined = ''; // Set a default image path
-   // Add a property to store the selected image as base64
-   selectedImageBase64: string | undefined = '';
+  
   
 
   constructor(
@@ -109,7 +108,7 @@ export class AddEditEmpPage implements OnInit {
         // Perform add or update logic here based on actionType
         if (this.actionType === 'update') {
           this.updateEmployee(employeeData);
-        } else {
+        } else {  
           this.addEmployee(employeeData);
         }
       }
@@ -119,10 +118,6 @@ export class AddEditEmpPage implements OnInit {
   }
 
   updateEmployee(dataToEdit: any) {
-    // Check if a new image was selected
-    if (this.selectedImageBase64) {
-       dataToEdit.userPhoto = this.selectedImageBase64;
-    }
 
     // Create an object with the data you want to update
     const updatedData = {
@@ -168,9 +163,7 @@ export class AddEditEmpPage implements OnInit {
   // Modify the addEmployee function to send the image to the server
   async addEmployee(formData: any) {
     console.log('formData: ', formData);
-    if (this.selectedImageBase64) {
-      formData.userPhoto = this.selectedImageBase64;
-    }
+    const imageUrl = await this.onImageSelected(event); // Make sure to pass the event parameter if needed
 
     this.employeeService.addEmployee(
       formData,
@@ -236,24 +229,24 @@ export class AddEditEmpPage implements OnInit {
 
 
 //take Photo
-async onImageSelected(event: any) {
-  const file = event.target.files[0];
+onImageSelected(event: any) {
+  const file = event?.target?.files?.[0]; // Use optional chaining to handle undefined values
   if (file) {
-    const imageUrl = URL.createObjectURL(file);
-    this.imageUrl = imageUrl;
-
-    // Save the selected image as base64
-    this.selectedImageBase64 = await this.readFileAsBase64(file);
+    this.employeeService.uploadImage(file).subscribe(
+      (response: any) => {
+        // Handle the response, which may contain the image URL
+        this.imageUrl = response?.imageUrl; // Use optional chaining for response
+      },
+      (error) => {
+        // Handle HTTP request errors here
+        console.error('Image upload error:', error);
+        // You can display an error message or take other actions as needed
+      }
+    );
   }
 }
 
-async readFileAsBase64(file: File): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
+
+
 
 }

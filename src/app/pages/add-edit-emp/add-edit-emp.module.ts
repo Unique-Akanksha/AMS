@@ -8,7 +8,6 @@ import { AddEditEmpPageRoutingModule } from './add-edit-emp-routing.module';
 
 import { AddEditEmpPage } from './add-edit-emp.page';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
-import { AlphabetOnlyDirective } from 'src/app/alphabet-only.directive';
 
 @NgModule({
   imports: [
@@ -19,6 +18,6 @@ import { AlphabetOnlyDirective } from 'src/app/alphabet-only.directive';
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [AddEditEmpPage,AlphabetOnlyDirective]
+  declarations: [AddEditEmpPage]
 })
 export class AddEditEmpPageModule {}
