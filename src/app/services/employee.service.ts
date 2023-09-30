@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,32 @@ export class EmployeeService {
     );
   }
 
+  // Add this function to upload an image
+  uploadImage(file: File): Observable<{ imageUrl?: string }> {
+    const formData: FormData = new FormData();
+    formData.append('image', file, file.name);
+  
+    const uploadUrl = this.apiURL + 'uploadImage.php'; // Replace with the actual image upload endpoint
+  
+    const headers = new HttpHeaders();
+    // Set any required headers for image upload, such as authorization headers
+  
+    return this.http.post(uploadUrl, formData, { headers }).pipe(
+      map((response: any) => {
+        // Return the image URL from the response
+        return {
+          imageUrl: response['imageUrl']
+        };
+      }),
+      catchError((error) => {
+        // Handle errors if the HTTP request fails
+        console.error('Image upload error:', error);
+        throw error; // Re-throw the error for further handling in the component
+      })
+    );
+  }
+  
+  
   
 }
 

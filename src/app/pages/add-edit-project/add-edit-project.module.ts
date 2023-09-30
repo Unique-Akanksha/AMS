@@ -8,7 +8,6 @@ import { AddEditProjectPageRoutingModule } from './add-edit-project-routing.modu
 
 import { AddEditProjectPage } from './add-edit-project.page';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
-import { AlphabetOnlyDirective } from 'src/app/alphabet-only.directive';
 
 
 @NgModule({
@@ -20,6 +19,6 @@ import { AlphabetOnlyDirective } from 'src/app/alphabet-only.directive';
     ReactiveFormsModule,
     SharedModule
   ],
-  declarations: [AddEditProjectPage,AlphabetOnlyDirective]
+  declarations: [AddEditProjectPage]
 })
 export class AddEditProjectPageModule {}
