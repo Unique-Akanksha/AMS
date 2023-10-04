@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>leaveRequests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <form [formGroup]="leaveRequestForm" (ngSubmit)="applyLeave()">
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Your name" formControlName="employee_id" placeholder="Your name"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['employee_id'].touched && leaveRequestForm.controls['employee_id'].invalid">
+      <ion-text color="danger">Name is required.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-select labelPlacement="stacked" label="Select Leave Type" formControlName="leave_type">
+        <ion-select-option value="Vacation">Vacation</ion-select-option>
+        <ion-select-option value="Sick Leave">Sick Leave</ion-select-option>
+        <ion-select-option value="Personal Leave">Personal Leave</ion-select-option>
+        <ion-select-option value="Unpaid Leave">Unpaid Leave</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['leave_type'].touched && leaveRequestForm.controls['leave_type'].invalid">
+      <ion-text color="danger">Please select a leave type.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Select Start Date" formControlName="start_date" placeholder="Start Date" type="date"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['start_date'].touched && leaveRequestForm.controls['start_date'].invalid">
+      <ion-text color="danger">Start Date is required.</ion-text>
+    </div>
+    
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Select End Date" formControlName="end_date" placeholder="End Date" type="date" [min]="leaveRequestForm.get('start_date')?.value"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['end_date'].touched && leaveRequestForm.controls['end_date'].invalid">
+      <ion-text color="danger">End Date is required.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Enter Reason" formControlName="reason" placeholder="Enter Reason"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['reason'].touched && leaveRequestForm.controls['reason'].invalid">
+      <ion-text color="danger">Reason is required.</ion-text>
+    </div>
+
+    <!-- <ion-item>
+      <ion-select labelPlacement="stacked" label="Select Status" formControlName="status">
+        <ion-select-option value="Approved">Approved</ion-select-option>
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Rejected">Rejected</ion-select-option>
+        <ion-select-option value="Cancelled">Cancelled</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['status'].touched && leaveRequestForm.controls['status'].invalid">
+      <ion-text color="danger">Please select a status.</ion-text>
+    </div> -->
+
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Created Date" formControlName="created_at" placeholder="Created Date" type="date"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['created_at'].touched && leaveRequestForm.controls['created_at'].invalid">
+      <ion-text color="danger">Created Date is required.</ion-text>
+    </div>
+ 
+    <ion-button type="Submit" type="submit" [disabled]="leaveRequestForm.invalid" expand="full">Submit</ion-button>
+  </form>
+</ion-content>

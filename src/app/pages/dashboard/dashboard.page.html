@@ -205,6 +205,31 @@
     </ion-card>
   </ion-col>
 
+  <ion-col>
+    <ion-card *ngIf="userRole === '1'" color="primary" routerLink="/admin-leave-history">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="2">
+            <mat-icon aria-hidden="false">
+              <mat-icon aria-hidden="true">event_note</mat-icon>
+            </mat-icon>
+          </ion-col>
+          <ion-col size="12" size-md="10">
+            <ion-card-title><h1 class="text-center">Leave History 
+        
+            </h1></ion-card-title>
+            <ion-card-subtitle><h3 class="text-center font_big">{{leaveCount}}</h3></ion-card-subtitle>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      
+    </ion-card-header>
+  
+    <!-- <ion-card-content> Card Content </ion-card-content> -->
+  </ion-card>
+</ion-col>
     </ion-row>
   </ion-grid>
 
@@ -294,7 +319,7 @@
 
 
     <ion-col>
-      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/#">
+      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/leave-requests">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -320,7 +345,7 @@
     </ion-col>
 
     <ion-col>
-      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/#">
+      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/leave-history">
       <ion-card-header>
         <ion-grid>
           <ion-row>

@@ -7,6 +7,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Subscription,timer} from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
 import { NavController, Platform } from '@ionic/angular';
+import { LeaveRequestsService } from 'src/app/services/leave-requests.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,8 @@ export class DashboardPage implements OnInit {
   projectCount:number=0;
   employeeCount:number=0;
   attendanceCount:number=0;
+  leaveCount:number=0;
+
   userRole = '';
   userRoleName = '';
 
@@ -27,7 +30,7 @@ export class DashboardPage implements OnInit {
   remainingSessionTime: number = 0;
   sessionTimeout: number = 600 * 60 * 1000; // 30 minutes in milliseconds
 
-  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService,private router: Router) {
+  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService, private leaveRequestService:LeaveRequestsService,private router: Router) {
 
   }
 
@@ -98,6 +101,10 @@ export class DashboardPage implements OnInit {
 
     this.attendanceService.getAttendanceCount().subscribe((count) => {
       this.attendanceCount = count;
+    });
+
+    this.leaveRequestService.getAllLeaveRequestsCount().subscribe((count) => {
+      this.leaveCount = count;
     });
   }
 
