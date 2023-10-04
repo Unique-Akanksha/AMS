@@ -42,13 +42,6 @@
 </div>
 
 
-
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Profile - {{ first_name }} {{ last_name }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -64,7 +57,10 @@
 
           <!-- Display user information -->
           <ion-item>
-            <!-- <img src="{{userPhoto}}" alt="images not loaded"> -->
+            <div>
+              <ion-img [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + userPhoto"></ion-img>
+            </div>
+            <!-- <ion-button (click)="downloadAndSaveImage()">Download and Save Image</ion-button> -->
           </ion-item>
           <ion-item>
             <ion-label>First Name</ion-label>

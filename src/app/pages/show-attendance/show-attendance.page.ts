@@ -92,9 +92,6 @@ export class ShowAttendancePage implements OnInit {
     modal.onDidDismiss().then((data) => {
       this.refreshAttendanceList();
     });
-    
-    
-
     return await modal.present();
   }
 

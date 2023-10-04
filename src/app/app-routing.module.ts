@@ -106,10 +106,27 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'leave-requests',
+    loadChildren: () => import('./pages/leave-requests/leave-requests.module').then( m => m.LeaveRequestsPageModule)
+  },
+  {
+    path: 'leave-history',
+    loadChildren: () => import('./pages/leave-history/leave-history.module').then( m => m.LeaveHistoryPageModule)
+  },
+  {
+    path: 'admin-leave-history',
+    loadChildren: () => import('./pages/admin-leave-history/admin-leave-history.module').then( m => m.AdminLeaveHistoryPageModule)
+  },
+  {
+    path: 'approve-requests',
+    loadChildren: () => import('./pages/approve-requests/approve-requests.module').then( m => m.ApproveRequestsPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found',
     pathMatch: 'full'
-  }
+  },
+ 
 ];
 
 @NgModule({

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { Plugins } from '@capacitor/core';
+const { Filesystem } = Plugins;
+import * as CapacitorCore from '@capacitor/core';
 
 
 @Component({
@@ -9,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class ProfileEmpPage implements OnInit {
 
-  constructor(private router: Router  ) { }
   first_name : string ='';
   middle_name : string ='';
   last_name : string ='';
@@ -20,6 +23,8 @@ export class ProfileEmpPage implements OnInit {
   position : string = '';
   userPhoto : string = '';
 
+  constructor(private router: Router, private employeeService: EmployeeService) { }
+  
  
   ngOnInit() {
      // code for get user role 
@@ -36,6 +41,7 @@ export class ProfileEmpPage implements OnInit {
        this.role = user.role;
        this.position = user.position;
        this.userPhoto = user.userPhoto;
+       console.log("Image path: ",this.userPhoto);
      }
   }
 
@@ -44,5 +50,26 @@ export class ProfileEmpPage implements OnInit {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
+
+
+//   async downloadAndSaveImage() {
+//     const filename = 'uploads/651ac74b29723_TrentBoult.jpg'; // Replace with the actual filename
+//     try {
+//         const imageBlob = await this.employeeService.getImageFromAPI(filename);
+//          // Define the path where you want to save the image in the assets directory
+//       const path = 'assets/img/image.jpg';
+
+//       // Write the image data to the assets directory
+//       await CapacitorCore.Filesystem.writeFile({
+//         path,
+//         data: imageBlob,
+//         directory: CapacitorCore.FilesystemDirectory.Assets,
+//     });
+
+//       console.log('Image downloaded and saved successfully');
+//     } catch (error) {
+//         console.error('Error downloading and saving image', error);
+//     }
+// }
 
 }

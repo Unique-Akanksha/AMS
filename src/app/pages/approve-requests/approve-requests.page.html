@@ -1,0 +1,78 @@
+<ion-content class="ion-padding">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="medium" (click)="closeModal(false)">Cancel</ion-button>
+      </ion-buttons>
+      <ion-title>{{ actionType === 'update' ? 'Approve Leave Request' : 'Add Leave Request' }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal(true)" [strong]="true" [disabled]="approveRequestForm.invalid">Confirm</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <form [formGroup]="approveRequestForm" (ngSubmit)="closeModal(true)">
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Your name" formControlName="employee_id" placeholder="Your name"></ion-input>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['employee_id'].touched && approveRequestForm.controls['employee_id'].invalid">
+        <ion-text color="danger">Name is required.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Leave Type" formControlName="leave_type">
+          <ion-select-option value="Vacation">Vacation</ion-select-option>
+          <ion-select-option value="Sick Leave">Sick Leave</ion-select-option>
+          <ion-select-option value="Personal Leave">Personal Leave</ion-select-option>
+          <ion-select-option value="Unpaid Leave">Unpaid Leave</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['leave_type'].touched && approveRequestForm.controls['leave_type'].invalid">
+        <ion-text color="danger">Please select a leave type.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Select Start Date" formControlName="start_date" placeholder="Start Date" type="date"></ion-input>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['start_date'].touched && approveRequestForm.controls['start_date'].invalid">
+        <ion-text color="danger">Start Date is required.</ion-text>
+      </div>
+      
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Select End Date" formControlName="end_date" placeholder="End Date" type="date" [min]="approveRequestForm.get('start_date')?.value"></ion-input>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['end_date'].touched && approveRequestForm.controls['end_date'].invalid">
+        <ion-text color="danger">End Date is required.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Reason" formControlName="reason" placeholder="Enter Reason"></ion-input>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['reason'].touched && approveRequestForm.controls['reason'].invalid">
+        <ion-text color="danger">Reason is required.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Status" formControlName="status">
+          <ion-select-option value="Requested">Requested</ion-select-option>
+          <ion-select-option value="Approved">Approved</ion-select-option>
+          <ion-select-option value="Pending">Pending</ion-select-option>
+          <ion-select-option value="Rejected">Rejected</ion-select-option>
+          <ion-select-option value="Cancelled">Cancelled</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['status'].touched && approveRequestForm.controls['status'].invalid">
+        <ion-text color="danger">Please select a status.</ion-text>
+      </div>
+  
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Created Date" formControlName="created_at" placeholder="Created Date" type="date"></ion-input>
+      </ion-item>
+      <div *ngIf="approveRequestForm.controls['created_at'].touched && approveRequestForm.controls['created_at'].invalid">
+        <ion-text color="danger">Created Date is required.</ion-text>
+      </div>
+    </form>
+  </ion-content>
+  

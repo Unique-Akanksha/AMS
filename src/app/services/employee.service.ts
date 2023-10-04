@@ -90,7 +90,17 @@ export class EmployeeService {
     );
   }
   
-  
+  // async getImageFromAPI(filename: string): Promise<Blob> {
+  //   const apiUrl = `${this.apiURL}/getImage.php?filename=${filename}`; // Replace with your PHP API URL
+
+  //   try {
+  //     const response = await this.http.get(apiUrl, { responseType: 'blob' }).toPromise();
+  //     return response as Blob;
+  //   } catch (error) {
+  //     console.error('Error fetching image from API', error);
+  //     throw error; // You can handle the error as needed in your component
+  //   }
+  // }
   
 }
 
