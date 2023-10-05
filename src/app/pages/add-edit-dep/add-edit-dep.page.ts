@@ -143,6 +143,9 @@ export class AddEditDepPage implements OnInit {
       }
     );
   }
-  
+
+  onPaste(event: ClipboardEvent): void {
+    event.preventDefault(); 
+  }
   
 }

@@ -7,7 +7,7 @@
 <ion-content class="ion-padding" [fullscreen]="true">
   <form [formGroup]="leaveRequestForm" (ngSubmit)="applyLeave()">
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Your name" formControlName="employee_id" placeholder="Your name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Your name" formControlName="employee_id" readonly="true" placeholder="Your name" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="leaveRequestForm.controls['employee_id'].touched && leaveRequestForm.controls['employee_id'].invalid">
       <ion-text color="danger">Name is required.</ion-text>
@@ -40,23 +40,11 @@
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Reason" formControlName="reason" placeholder="Enter Reason"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Reason" formControlName="reason" placeholder="Enter Reason" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="leaveRequestForm.controls['reason'].touched && leaveRequestForm.controls['reason'].invalid">
       <ion-text color="danger">Reason is required.</ion-text>
     </div>
-
-    <!-- <ion-item>
-      <ion-select labelPlacement="stacked" label="Select Status" formControlName="status">
-        <ion-select-option value="Approved">Approved</ion-select-option>
-        <ion-select-option value="Pending">Pending</ion-select-option>
-        <ion-select-option value="Rejected">Rejected</ion-select-option>
-        <ion-select-option value="Cancelled">Cancelled</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div *ngIf="leaveRequestForm.controls['status'].touched && leaveRequestForm.controls['status'].invalid">
-      <ion-text color="danger">Please select a status.</ion-text>
-    </div> -->
 
     <ion-item>
       <ion-input labelPlacement="stacked" label="Created Date" formControlName="created_at" placeholder="Created Date" type="date"></ion-input>

@@ -23,6 +23,7 @@ export class AddEditEmpPage implements OnInit {
   imageUrl: string | undefined = ''; // Set a default image path
   
   
+  
 
   constructor(
     private toastController: ToastController,
@@ -163,7 +164,7 @@ export class AddEditEmpPage implements OnInit {
   // Modify the addEmployee function to send the image to the server
   async addEmployee(formData: any) {
     console.log('formData: ', formData);
-    const imageUrl = await this.onImageSelected(event); // Make sure to pass the event parameter if needed
+    // const imageUrl = await this.onImageSelected(event); // Make sure to pass the event parameter if needed
 
     this.employeeService.addEmployee(
       formData,
@@ -244,9 +245,12 @@ onImageSelected(event: any) {
       }
     );
   }
+  
 }
 
-
+onPaste(event: ClipboardEvent): void {
+  event.preventDefault(); 
+}
 
 
 }

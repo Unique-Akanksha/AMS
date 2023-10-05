@@ -64,5 +64,10 @@ export class LeaveRequestsPage implements OnInit {
         console.log('Error: ' + error);
       }
     );
+    this.leaveRequestForm.reset();
+  }
+
+  onPaste(event: ClipboardEvent): void {
+    event.preventDefault(); 
   }
 }

@@ -16,14 +16,14 @@
     <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
     <ion-item>
       <input type="file" accept="image/*" (change)="onImageSelected($event)">
-      <ion-img [src]="imageUrl" *ngIf="imageUrl"></ion-img>
-
+      <ion-img [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + imageUrl" *ngIf="imageUrl"></ion-img>
+      
     </ion-item>
 
       
     <ion-item>
 
-      <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly placeholder="Your First Name"></ion-input>
+    <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly placeholder="Your First Name" (paste)="onPaste($event)"></ion-input>
 
     </ion-item>
     <div *ngIf="empForm.controls['first_name'].touched && empForm.controls['first_name'].invalid">
@@ -31,21 +31,21 @@
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" appAlphabetOnly placeholder="Your Middle Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" appAlphabetOnly placeholder="Your Middle Name" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['middle_name'].touched && empForm.controls['middle_name'].invalid">
       <ion-text color="danger">Middle Name is required.</ion-text>
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" appAlphabetOnly placeholder="Your Last Name"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" appAlphabetOnly placeholder="Your Last Name" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['last_name'].touched && empForm.controls['last_name'].invalid">
       <ion-text color="danger">Last Name is required.</ion-text>
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Email" formControlName="email" placeholder="Your Email"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Email" formControlName="email" placeholder="Your Email" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['email'].touched && empForm.controls['email'].invalid">
       <ion-text color="danger">
@@ -106,14 +106,14 @@
     </div>
 
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Password" formControlName="password" placeholder="Password" type="password"></ion-input>
+      <ion-input labelPlacement="stacked" label="Enter Password" formControlName="password" placeholder="Password" type="password" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['password'].touched && empForm.controls['password'].invalid">
       <ion-text color="danger">Password is required.</ion-text>
     </div>
     
     <ion-item>
-      <ion-input labelPlacement="stacked" label="Confirm Password" formControlName="confirmPassword" placeholder="Confirm Password" type="password"></ion-input>
+      <ion-input labelPlacement="stacked" label="Confirm Password" formControlName="confirmPassword" placeholder="Confirm Password" type="password" (paste)="onPaste($event)"></ion-input>
     </ion-item>
     <div *ngIf="empForm.controls['confirmPassword'].touched && empForm.controls['confirmPassword'].hasError('required')">
       <ion-text color="danger">Confirm Password is required.</ion-text>

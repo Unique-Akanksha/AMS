@@ -149,5 +149,8 @@ export class AddEditProjectPage implements OnInit {
     );
   }
   
+  onPaste(event: ClipboardEvent): void {
+    event.preventDefault(); 
+  }
 
 }
