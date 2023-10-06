@@ -21,9 +21,6 @@ export class AddEditEmpPage implements OnInit {
   userRoleList: any[] = [];
   departments: any[] = [];
   imageUrl: string | undefined = ''; // Set a default image path
-  
-  
-  
 
   constructor(
     private toastController: ToastController,
@@ -186,6 +183,7 @@ export class AddEditEmpPage implements OnInit {
         console.log('Error: ' + error);
       }
     );
+    this.empForm.reset();
   }
 
   emailValidator(control: FormControl) {

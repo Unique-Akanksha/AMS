@@ -6,7 +6,6 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Subscription,timer} from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
-import { NavController, Platform } from '@ionic/angular';
 import { LeaveRequestsService } from 'src/app/services/leave-requests.service';
 
 @Component({

@@ -1,0 +1,65 @@
+/* Default styles for ion-header, ion-content, ion-item, ion-text, and ion-button */
+ion-header {
+    background-color: #3880ff;
+}
+
+ion-toolbar {
+    --ion-color-base: #fff;
+}
+
+ion-content {
+    --ion-background-color: #f4f4f4;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Ensure the content takes the full height of ion-content */
+}
+
+
+
+ion-item {
+    --ion-background-color: #fff;
+    --ion-item-padding-start: 10px;
+    --ion-item-padding-end: 10px;
+}
+
+ion-text {
+    font-size: 14px;
+}
+
+ion-button {
+    --ion-text-color: #fff;
+    --ion-background-color: #3880ff;
+    --border-radius: 8px;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    ion-item {
+        --ion-item-padding-start: 5px; /* Reduce left padding for smaller screens */
+        --ion-item-padding-end: 5px; /* Reduce right padding for smaller screens */
+    }
+
+    ion-text {
+        font-size: 12px; /* Decrease font size for smaller screens */
+    }
+
+    ion-button {
+        margin-top: 12px; /* Decrease spacing for smaller screens */
+    }
+
+    /* Additional styles for smaller screens */
+    ion-header {
+        background-color: #3880ff; /* Keep header background color */
+    }
+
+    ion-toolbar {
+        --ion-color-base: #fff; /* Keep toolbar text and icon color */
+    }
+
+    ion-content {
+        --ion-background-color: #f4f4f4; /* Keep content background color */
+    }
+}

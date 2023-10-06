@@ -142,6 +142,7 @@ export class AddEditDepPage implements OnInit {
         console.log('Error: ' + error);
       }
     );
+    this.depForm.reset();
   }
 
   onPaste(event: ClipboardEvent): void {
