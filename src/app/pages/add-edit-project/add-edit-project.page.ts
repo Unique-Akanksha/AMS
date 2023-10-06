@@ -147,6 +147,7 @@ export class AddEditProjectPage implements OnInit {
         console.log('Error: ' + error);
       }
     );
+    this.projectForm.reset();
   }
   
   onPaste(event: ClipboardEvent): void {
