@@ -20,7 +20,9 @@ export class AddEditEmpPage implements OnInit {
   empForm!: FormGroup;
   userRoleList: any[] = [];
   departments: any[] = [];
-  imageUrl: string | undefined = ''; // Set a default image path
+  imageUrl: string | undefined = ''; 
+  tempImageUrl: string | undefined = ''; 
+  private file: File | undefined;
 
   constructor(
     private toastController: ToastController,
@@ -116,6 +118,7 @@ export class AddEditEmpPage implements OnInit {
   }
 
   updateEmployee(dataToEdit: any) {
+    console.log('userPhoto: ' + dataToEdit.userPhoto);
 
     // Create an object with the data you want to update
     const updatedData = {
@@ -133,6 +136,7 @@ export class AddEditEmpPage implements OnInit {
       id: this.dataToUpdate.employee_id
     };
 
+    console.log('emp userPhoto: ',updatedData.userPhoto);
 
     // Call the updateEmployee function from the service
     this.employeeService.updateEmployee(updatedData,
@@ -161,6 +165,7 @@ export class AddEditEmpPage implements OnInit {
   // Modify the addEmployee function to send the image to the server
   async addEmployee(formData: any) {
     console.log('formData: ', formData);
+    console.log('Photo: ',formData.Photo);
     // const imageUrl = await this.onImageSelected(event); // Make sure to pass the event parameter if needed
 
     this.employeeService.addEmployee(
@@ -228,27 +233,56 @@ export class AddEditEmpPage implements OnInit {
 
 
 //take Photo
-onImageSelected(event: any) {
-  const file = event?.target?.files?.[0]; // Use optional chaining to handle undefined values
-  if (file) {
-    this.employeeService.uploadImage(file).subscribe(
-      (response: any) => {
-        // Handle the response, which may contain the image URL
-        this.imageUrl = response?.imageUrl; // Use optional chaining for response
-      },
-      (error) => {
-        // Handle HTTP request errors here
-        console.error('Image upload error:', error);
-        // You can display an error message or take other actions as needed
-      }
-    );
-  }
+// onImageSelected(event: any) {
+//   const file = event?.target?.files?.[0]; // Use optional chaining to handle undefined values
+//   if (file) {
+//     this.employeeService.uploadImage(file).subscribe(
+//       (response: any) => {
+//         // Handle the response, which may contain the image URL
+//         this.imageUrl = response?.imageUrl; // Use optional chaining for response
+//       },
+//       (error) => {
+//         // Handle HTTP request errors here
+//         console.error('Image upload error:', error);
+//         // You can display an error message or take other actions as needed
+//       }
+//     );
+//   }
   
-}
+// }
 
 onPaste(event: ClipboardEvent): void {
   event.preventDefault(); 
 }
 
+onImageSelected(event: any) {
+  this.file = event.target.files[0];
+  if (this.file) {
+    this.tempImageUrl = URL.createObjectURL(this.file);
+    
+  }
+}
+
+openImageInput() {
+  const inputElement = document.getElementById('imageInput') as HTMLInputElement;
+  if (inputElement) {
+    inputElement.click();
+  }
+}
+
+uploadImage() {
+  console.log('uploading image');
+  const file = this.file;
+  if (file) {
+    this.employeeService.uploadImage(file).subscribe(
+      (response: any) => {
+        this.imageUrl = response?.imageUrl; 
+      },
+      (error) => {
+        console.error('Image upload error:', error);
+      }
+    );
+  }
+}
 
 }

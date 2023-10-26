@@ -19,6 +19,7 @@ export class ShowEmpPage implements OnInit {
   filterdata :string= "";
   displayedColumns: string[] = [
     'employee_id',
+    'userPhoto',
     'first_name',
     'middle_name',
     'last_name',

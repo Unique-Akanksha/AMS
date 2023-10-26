@@ -14,7 +14,7 @@ export class UserService {
   loggedInUser: any;
   apiURL = environment.apiURLserver;
   readonly roleAPIUrl = this.apiURL+"rolesAPI.php";
-  readonly EmployeeAPIUrl = this.apiURL+"employeeAPI.php";
+  readonly EmployeeAPIUrl = this.apiURL+"employeeAPI2.php";
   
 
   isUserLoggedIn = new BehaviorSubject<boolean>(false);

@@ -19,8 +19,6 @@ export class AddEditDepPage implements OnInit {
 
   constructor( private toastController: ToastController,private departmentService: DepartmentService, private fb: FormBuilder, private modalCtrl: ModalController) {
   
-  
-   
   }
 
   ngOnInit() {
