@@ -7,17 +7,29 @@
       </ion-buttons>
       <ion-title>{{ actionType === 'update' ? 'Update Employee' : 'Add Employee' }}</ion-title>
       <ion-buttons slot="end">
-        <ion-button (click)="closeModal(true)" [strong]="true" [disabled]="empForm.invalid">Confirm</ion-button>
+        <ion-button (click)="closeModal(true)" [strong]="true" [disabled]="!tempImageUrl || empForm.invalid">Confirm</ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   
   <ion-content class="ion-padding">
     <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
-    <ion-item>
+    <!-- <ion-item>
       <input type="file" accept="image/*" (change)="onImageSelected($event)">
       <ion-img [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + imageUrl" *ngIf="imageUrl"></ion-img>
       
+    </ion-item> -->
+
+    <ion-item>
+      <input type="file" accept="image/*" (change)="onImageSelected($event)" style="display: none" id="imageInput">
+      <ion-button expand="full" fill="clear" (click)="openImageInput()" color="primary">
+        Choose Team Image
+      </ion-button>
+      
+      <ion-button expand="full" color="primary"  (click)="uploadImage()" [disabled]="!tempImageUrl">
+        Upload Image
+      </ion-button>
+      <ion-img [src]="tempImageUrl" *ngIf="tempImageUrl"></ion-img>
     </ion-item>
 
       
