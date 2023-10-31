@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
-import { LeaveRequestsService } from 'src/app/services/leave-requests.service';
+import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
 
 @Component({
   selector: 'app-approve-requests',
@@ -13,7 +13,7 @@ export class ApproveRequestsPage implements OnInit {
   @Input() dataToUpdate: any; 
   approveRequestForm!: FormGroup;
 
-  constructor(private fb:FormBuilder, private leaveRequestService:LeaveRequestsService, private toastController: ToastController,private modalCtrl: ModalController) { }
+  constructor(private fb:FormBuilder, private leaveRequestService:LeaveService, private toastController: ToastController,private modalCtrl: ModalController) { }
 
   ngOnInit() {
 

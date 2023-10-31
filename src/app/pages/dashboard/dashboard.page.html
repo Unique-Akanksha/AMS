@@ -1,27 +1,19 @@
-<ion-menu contentId="main-content">
+<!-- <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-title>{{ userRoleName }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <!-- Common menu items for all users -->
-    <ion-list>
-      <!-- <ion-item routerLink="/dashboard">
-        <ion-label>Home</ion-label>
-      </ion-item> -->
-    </ion-list>
-
-    <!-- Admin-specific menu items -->
     <ng-container *ngIf="userRole === '1'">
       <ion-list>
-        <ion-item routerLink="/show-dep">
+        <ion-item routerLink="/show-department">
           <ion-label>Department</ion-label>
         </ion-item>
         <ion-item routerLink="/show-project">
           <ion-label>Project</ion-label>
         </ion-item>
-        <ion-item routerLink="/show-emp">
+        <ion-item routerLink="/show-employee">
           <ion-label>Employee</ion-label>
         </ion-item>
         <ion-item routerLink="/show-attendance">
@@ -31,11 +23,9 @@
           <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
         </ion-item>
         
-        <!-- Add more admin-specific items here -->
       </ion-list>
     </ng-container>
 
-    <!-- User-specific menu items -->
     <ng-container *ngIf="userRole === '5'">
       <ion-list>
         <ion-item routerLink="/profile-emp">
@@ -47,16 +37,15 @@
         <ion-item routerLink="/show-emp-attendance">
           <ion-label>Recent Attendance</ion-label>
         </ion-item>
-        <ion-item routerLink="#">
+        <ion-item routerLink="/add-edit-leave">
           <ion-label>Apply Leave</ion-label>
         </ion-item>
-        <ion-item routerLink="#">
+        <ion-item routerLink="/show-leave">
           <ion-label>Leave History</ion-label>
         </ion-item>
         <ion-item>
           <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
         </ion-item>
-        <!-- Add more user-specific items here -->
       </ion-list>
     </ng-container>
   </ion-content>
@@ -71,7 +60,6 @@
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-  <!-- <ion-content class="ion-padding">Tap the button in the toolbar to open the menu.</ion-content> -->
 </div>
 
 
@@ -81,14 +69,12 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{userRoleName}} Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
-  
-  <ion-item>
-    <div class="timer" slot="end">
-      Session: {{ formatTime(remainingSessionTime) }}
-    </div>
-    
-  </ion-item>
 </ion-header>
 
 <ion-content class="ion-padding">
@@ -100,7 +86,7 @@
     <ion-row>
 
       <ion-col>
-        <ion-card *ngIf="userRole === '1'"  color="success" routerLink="/show-dep">
+        <ion-card *ngIf="userRole === '1'" routerLink="/show-department">
           <ion-card-header>
             <ion-grid>
               <ion-row>
@@ -122,12 +108,11 @@
             
           </ion-card-header>
         
-          <!-- <ion-card-content> Card Content </ion-card-content> -->
         </ion-card>
       </ion-col>
 
       <ion-col>
-        <ion-card *ngIf="userRole === '1'" color="danger" routerLink="/show-project">
+        <ion-card *ngIf="userRole === '1'"  routerLink="/show-project">
         <ion-card-header>
           <ion-grid>
             <ion-row>
@@ -149,13 +134,12 @@
          
         </ion-card-header>
       
-        <!-- <ion-card-content> Card Content </ion-card-content> -->
       </ion-card>
     </ion-col>
 
 
     <ion-col>
-      <ion-card  *ngIf="userRole === '1'" color="warning" class="text-white" routerLink="/show-emp">
+      <ion-card  *ngIf="userRole === '1'"  class="text-white" routerLink="/show-employee">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -174,13 +158,12 @@
         </ion-grid>
       </ion-card-header>
     
-      <!-- <ion-card-content> Card Content </ion-card-content> -->
     </ion-card>
   </ion-col>
 
 
     <ion-col>
-      <ion-card *ngIf="userRole === '1'" color="primary" routerLink="/show-attendance">
+      <ion-card *ngIf="userRole === '1'"  routerLink="/show-attendance">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -201,18 +184,17 @@
         
       </ion-card-header>
     
-      <!-- <ion-card-content> Card Content </ion-card-content> -->
     </ion-card>
   </ion-col>
 
   <ion-col>
-    <ion-card *ngIf="userRole === '1'" color="primary" routerLink="/admin-leave-history">
+    <ion-card *ngIf="userRole === '1'"  routerLink="/admin-leave-history">
     <ion-card-header>
       <ion-grid>
         <ion-row>
           <ion-col size="12" size-md="2">
             <mat-icon aria-hidden="false">
-              <mat-icon aria-hidden="true">event_note</mat-icon>
+              <mat-icon class="icon1" aria-hidden="true">event_note</mat-icon>
             </mat-icon>
           </ion-col>
           <ion-col size="12" size-md="10">
@@ -227,7 +209,6 @@
       
     </ion-card-header>
   
-    <!-- <ion-card-content> Card Content </ion-card-content> -->
   </ion-card>
 </ion-col>
     </ion-row>
@@ -236,7 +217,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/profile-emp">
+        <ion-card *ngIf="userRole === '5'" routerLink="/profile-emp">
         <ion-card-header>
           <ion-grid>
             <ion-row>
@@ -257,14 +238,13 @@
           
         </ion-card-header>
       
-        <!-- <ion-card-content> Card Content </ion-card-content> -->
       </ion-card>
       </ion-col>
       
     
     
       <ion-col>
-        <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/check-in">
+        <ion-card *ngIf="userRole === '5'"  routerLink="/check-in">
         <ion-card-header>
           <ion-grid>
             <ion-row>
@@ -285,14 +265,13 @@
           
         </ion-card-header>
       
-        <!-- <ion-card-content> Card Content </ion-card-content> -->
       </ion-card>
     </ion-col>
     
     
     
     <ion-col>
-      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/show-emp-attendance">
+      <ion-card *ngIf="userRole === '5'"  routerLink="/show-emp-attendance">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -313,13 +292,12 @@
         
       </ion-card-header>
     
-      <!-- <ion-card-content> Card Content </ion-card-content> -->
     </ion-card>
     </ion-col>
 
 
     <ion-col>
-      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/leave-requests">
+      <ion-card *ngIf="userRole === '5'"  routerLink="/add-edit-leave">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -340,12 +318,11 @@
         
       </ion-card-header>
     
-      <!-- <ion-card-content> Card Content </ion-card-content> -->
     </ion-card>
     </ion-col>
 
     <ion-col>
-      <ion-card *ngIf="userRole === '5'" color="primary" routerLink="/leave-history">
+      <ion-card *ngIf="userRole === '5'"  routerLink="/show-leave">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -366,11 +343,153 @@
         
       </ion-card-header>
     
-      <!-- <ion-card-content> Card Content </ion-card-content> -->
     </ion-card>
     </ion-col>
 
     </ion-row>
   </ion-grid>
 
+</ion-content> -->
+
+
+
+
+
+
+
+
+
+<ion-content>
+  <ion-header>
+    <ion-toolbar >
+      <ion-buttons slot="start">
+        <ion-button>
+          <!-- <ion-icon name="menu"></ion-icon> -->
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-title class="ion-text-center">Dashboard</ion-title>
+  
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon name="notifications"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<!-- <ion-content> -->
+  <ion-content>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '1'" routerLink="/show-department">
+            <ion-card-content>
+              <ion-icon class="icon1" name="person"></ion-icon>
+              <p>Department</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '1'" routerLink="/show-project">
+            <ion-card-content>
+              <ion-icon name="checkmark-circle"class="icon1"></ion-icon>
+              <p>Project</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '1'" routerLink="/show-employee">
+            <ion-card-content>
+              <ion-icon name="time"class="icon1"></ion-icon>
+              <p>Employee</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '1'" routerLink="/show-attendance">
+            <ion-card-content>
+              <ion-icon name="calendar"class="icon1"></ion-icon>
+              <p>Attendance</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '1'" routerLink="/admin-leave-history">
+            <ion-card-content>
+              <ion-icon name="time"class="icon1"></ion-icon>
+              <p>Leave History</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '1'" routerLink="#">
+            <ion-card-content>
+              <ion-icon class="icon1" name="person"></ion-icon>
+              <p>Coming soon</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '5'" routerLink="/profile-emp">
+            <ion-card-content>
+              <ion-icon class="icon1" name="person"></ion-icon>
+              <p>Employee Profile</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '5'" routerLink="/check-in">
+            <ion-card-content>
+              <ion-icon name="checkmark-circle"class="icon1"></ion-icon>
+              <p>Fill Attendance</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '5'" routerLink="/show-emp-attendance">
+            <ion-card-content>
+              <ion-icon name="time"class="icon1"></ion-icon>
+              <p>Recent Attenace</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '5'" routerLink="/add-edit-leave">
+            <ion-card-content>
+              <ion-icon name="calendar"class="icon1"></ion-icon>
+              <p>Apply Leave</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '5'" routerLink="/show-leave">
+            <ion-card-content>
+              <ion-icon name="time"class="icon1"></ion-icon>
+              <p>Leave History</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" size-md="4" size-lg="2">
+          <ion-card *ngIf="userRole === '5'" routerLink="#">
+            <ion-card-content>
+              <ion-icon class="icon1" name="person"></ion-icon>
+              <p>Coming soon</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
 </ion-content>
+
+

@@ -1,0 +1,214 @@
+<!-- <ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item routerLink="/dashboard">
+        <ion-label>Home</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ng-container *ngIf="loginUser === '1'">
+      <ion-list>
+        <ion-item routerLink="/show-dep">
+          <ion-label>Department</ion-label>
+        </ion-item>
+        <ion-item routerLink="/show-emp">
+          <ion-label>Employee</ion-label>
+        </ion-item>
+        <ion-item routerLink="/show-attendance">
+          <ion-label>Attendance</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngIf="loginUser === '5'">
+      <ion-list>
+        <ion-item routerLink="/user/orders">
+          <ion-label>User Setting 1</ion-label>
+        </ion-item>
+        <ion-item routerLink="/user/orders">
+          <ion-label>User Setting 2</ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</div>
+
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Project Page</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" size-md="1" size-lg="1">
+          <ion-button expand="block" (click)="openModal('')" > Add </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="example-header">
+      <mat-form-field class="example-filter">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+<div class="for_scroll">
+
+  <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8" matSort>
+    <ng-container matColumnDef="project_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.project_id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="start_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="end_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.end_date}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef style="padding-left:60px"> Action </th>
+      <td mat-cell *matCellDef="let element" class="action-link">
+        <ion-button color="primary" (click)="openModal(element)">
+
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deleteClick(element)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+       
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching {{filterdata}}</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+  </ion-content>
+</div> -->
+
+
+
+
+<ion-content>
+  <ion-header>
+    <ion-toolbar >
+      <ion-buttons slot="start">
+        <ion-button>
+          <!-- <ion-icon name="menu"></ion-icon> -->
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-title class="ion-text-center">Show Projects</ion-title>
+  
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon name="notifications"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding" [fullscreen]="true"style="margin:0px auto;">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-button  (click)="openModal('')" >Add  </ion-button>
+    <div class="example-header"style="margin:0px auto;">
+      <!-- <mat-form-field class="example-filter"expand="full()">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+      </mat-form-field> -->
+      <ion-searchbar [debounce]="1000" (ionInput)="applyFilter($event)"style="width:96%;margin-top:1%;margin-right:3%;"></ion-searchbar>
+    </div>
+<!-- <div class="for_scroll"style="margin:0px auto;"> -->
+
+  <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8" matSort>
+    <ng-container matColumnDef="project_id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.project_id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+    <ng-container matColumnDef="start_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>start date</th>
+      <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="end_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>end date</th>
+      <td mat-cell *matCellDef="let element"> {{element.end_date}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef style="padding-left:60px"> Action </th>
+      <td mat-cell *matCellDef="let element" class="action-link">
+        <ion-button color="primary" (click)="openModal(element)">
+
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deleteClick(element)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+             
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching {{filterdata}}</td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <!-- </div> -->
+
+  <!-- </ion-content> -->
+</ion-content>

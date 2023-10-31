@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AttendanceService } from 'src/app/services/attendance.service';
-import { DepartmentService } from 'src/app/services/department.service';
-import { EmployeeService } from 'src/app/services/employee.service';
-import { ProjectService } from 'src/app/services/project.service';
+import { AttendanceService } from 'src/app/admin/attendance/data-access/attendance.service';
+import { DepartmentService } from 'src/app/admin/department/data-access/department.service';
+import { EmployeeService } from 'src/app/admin/employee/data-access/employee.service';
+import { ProjectService } from 'src/app/admin/project/data-access/project.service';
 import { Subscription,timer} from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
-import { LeaveRequestsService } from 'src/app/services/leave-requests.service';
+import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +29,7 @@ export class DashboardPage implements OnInit {
   remainingSessionTime: number = 0;
   sessionTimeout: number = 600 * 60 * 1000; // 30 minutes in milliseconds
 
-  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService, private leaveRequestService:LeaveRequestsService,private router: Router) {
+  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService, private leaveRequestService:LeaveService,private router: Router) {
 
   }
 

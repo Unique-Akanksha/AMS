@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Login, SignUp } from 'src/app/datatype';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from '../admin/employee/data-access/employee.service';
+
 
 
 @Injectable({

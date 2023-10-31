@@ -22,10 +22,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
   },
   {
-    path: 'reset-password',
-    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
     
@@ -36,55 +32,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'employee',
-    loadChildren: () => import('./pages/employee/employee.module').then( m => m.EmployeePageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'add-edit-dep',
-    loadChildren: () => import('./pages/add-edit-dep/add-edit-dep.module').then( m => m.AddEditDepPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'show-dep',
-    loadChildren: () => import('./pages/show-dep/show-dep.module').then( m => m.ShowDepPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'add-edit-emp',
-    loadChildren: () => import('./pages/add-edit-emp/add-edit-emp.module').then( m => m.AddEditEmpPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'show-emp',
-    loadChildren: () => import('./pages/show-emp/show-emp.module').then( m => m.ShowEmpPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'pages',
     loadChildren: () => import('./pages/pages.module').then( m => m.PagesPageModule),
     canActivate: [AuthGuard]
   },
-  {
-    path: 'show-project',
-    loadChildren: () => import('./pages/show-project/show-project.module').then( m => m.ShowProjectPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'add-edit-attendance',
-    loadChildren: () => import('./pages/add-edit-attendance/add-edit-attendance.module').then( m => m.AddEditAttendancePageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'show-attendance',
-    loadChildren: () => import('./pages/show-attendance/show-attendance.module').then( m => m.ShowAttendancePageModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'add-edit-project',
-    loadChildren: () => import('./pages/add-edit-project/add-edit-project.module').then( m => m.AddEditProjectPageModule),
-    canActivate: [AuthGuard]
-  },
+ 
   {
     path: 'check-in',
     loadChildren: () => import('./pages/check-in/check-in.module').then( m => m.CheckInPageModule),
@@ -106,14 +58,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'leave-requests',
-    loadChildren: () => import('./pages/leave-requests/leave-requests.module').then( m => m.LeaveRequestsPageModule)
-  },
-  {
-    path: 'leave-history',
-    loadChildren: () => import('./pages/leave-history/leave-history.module').then( m => m.LeaveHistoryPageModule)
-  },
-  {
     path: 'admin-leave-history',
     loadChildren: () => import('./pages/admin-leave-history/admin-leave-history.module').then( m => m.AdminLeaveHistoryPageModule)
   },
@@ -121,11 +65,55 @@ const routes: Routes = [
     path: 'approve-requests',
     loadChildren: () => import('./pages/approve-requests/approve-requests.module').then( m => m.ApproveRequestsPageModule)
   },
+  
+  {
+    path: 'add-edit-department',
+    loadChildren: () => import('./admin/department/feature/add-edit-department/add-edit-department.module').then( m => m.AddEditDepartmentPageModule)
+  },
+  {
+    path: 'show-department',
+    loadChildren: () => import('./admin/department/feature/show-department/show-department.module').then( m => m.ShowDepartmentPageModule)
+  },
+  {
+    path: 'add-edit-project',
+    loadChildren: () => import('./admin/project/feature/add-edit-project/add-edit-project.module').then( m => m.AddEditProjectPageModule)
+  },
+  {
+    path: 'show-project',
+    loadChildren: () => import('./admin/project/feature/show-project/show-project.module').then( m => m.ShowProjectPageModule)
+  },
+  {
+    path: 'add-edit-employee',
+    loadChildren: () => import('./admin/employee/feature/add-edit-employee/add-edit-employee.module').then( m => m.AddEditEmployeePageModule)
+  },
+  {
+    path: 'show-employee',
+    loadChildren: () => import('./admin/employee/feature/show-employee/show-employee.module').then( m => m.ShowEmployeePageModule)
+  },
+  {
+    path: 'add-edit-attendance',
+    loadChildren: () => import('./admin/attendance/feature/add-edit-attendance/add-edit-attendance.module').then( m => m.AddEditAttendancePageModule)
+  },
+  {
+    path: 'show-attendance',
+    loadChildren: () => import('./admin/attendance/feature/show-attendance/show-attendance.module').then( m => m.ShowAttendancePageModule)
+  },
+  {
+    path: 'add-edit-leave',
+    loadChildren: () => import('./admin/leave/feature/add-edit-leave/add-edit-leave.module').then( m => m.AddEditLeavePageModule)
+  },
+  {
+    path: 'show-leave',
+    loadChildren: () => import('./admin/leave/feature/show-leave/show-leave.module').then( m => m.ShowLeavePageModule)
+  },
   {
     path: '**',
     redirectTo: 'page-not-found',
     pathMatch: 'full'
   },
+
+  
+
  
 ];
 

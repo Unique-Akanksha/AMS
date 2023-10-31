@@ -1,3 +1,69 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu menuId="main-menu"contentId="main">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-content">
+        <!-- <img src="../assets/images/avatar.avif"alt="Not Found"> -->
+        <img [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + userPhoto">
+        <ion-label>
+          <h2>{{first_name}} {{last_name}}</h2>
+          <h3>{{department}}</h3>
+        </ion-label>
+      </div>
+      <div class="action-button">
+
+      </div>
+      <ion-list *ngIf="userRole === '5'" lines="none"class="menu-item">
+        <ion-item routerLink="/dashboard">
+          <ion-icon name="newspaper-outline"></ion-icon>Dashboard
+        </ion-item>
+        <ion-item routerLink="/profile-emp">
+          <ion-icon name="people-sharp"></ion-icon>Profile
+        </ion-item>
+        <ion-item routerLink="/check-in">
+          <ion-icon name="pencil-sharp"></ion-icon>Fill Attendance
+        </ion-item>
+        <ion-item routerLink="/show-emp-attendance">
+          <ion-icon name="pencil-sharp"></ion-icon>Recent Attendance
+        </ion-item>
+        <ion-item routerLink="/leave-requests">
+          <ion-icon name="push-sharp"></ion-icon>Apply Leave
+        </ion-item>
+        <ion-item routerLink="/leave-history">
+          <ion-icon name="beaker-sharp"></ion-icon>Leave History
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-button slot="end" expand="full" color="danger"(click)="logout()">Logout</ion-button></ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="userRole === '1'" lines="none"class="menu-item">
+        <ion-item routerLink="/dashboard">
+          <ion-icon name="newspaper-outline"></ion-icon>Dashboard
+        </ion-item>
+        <ion-item routerLink="/show-department">
+          <ion-icon name="people-sharp"></ion-icon>Department
+        </ion-item>
+        <ion-item routerLink="/show-project">
+          <ion-icon name="pencil-sharp"></ion-icon>Project
+        </ion-item>
+        <ion-item routerLink="/show-employee">
+          <ion-icon name="push-sharp"></ion-icon>Employee
+        </ion-item>
+        <ion-item routerLink="/show-attendance">
+          <ion-icon name="beaker-sharp"></ion-icon>Attendance
+        </ion-item>
+        <ion-item routerLink="/admin-leave-history">
+          <ion-icon name="beaker-sharp"></ion-icon>Admin Leave History
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-button slot="end" expand="full" color="danger"(click)="logout()">Logout</ion-button></ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
+<!-- <ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app> -->
