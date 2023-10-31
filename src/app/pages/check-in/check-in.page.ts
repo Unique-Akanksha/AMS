@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeService } from 'src/app/admin/employee/data-access/employee.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { ToastController } from '@ionic/angular';
-import { ProjectService } from 'src/app/services/project.service';
+import { ProjectService } from 'src/app/admin/project/data-access/project.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AttendanceService } from 'src/app/services/attendance.service';
+import { AttendanceService } from 'src/app/admin/attendance/data-access/attendance.service';
+
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 

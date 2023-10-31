@@ -1,0 +1,106 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Leave Request Page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <form [formGroup]="leaveRequestForm" (ngSubmit)="applyLeave()">
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Your name" formControlName="employee_id" readonly="true" placeholder="Your name" (paste)="onPaste($event)"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['employee_id'].touched && leaveRequestForm.controls['employee_id'].invalid">
+      <ion-text color="danger">Name is required.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-select labelPlacement="stacked" label="Select Leave Type" formControlName="leave_type">
+        <ion-select-option value="Vacation">Vacation</ion-select-option>
+        <ion-select-option value="Sick Leave">Sick Leave</ion-select-option>
+        <ion-select-option value="Personal Leave">Personal Leave</ion-select-option>
+        <ion-select-option value="Unpaid Leave">Unpaid Leave</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['leave_type'].touched && leaveRequestForm.controls['leave_type'].invalid">
+      <ion-text color="danger">Please select a leave type.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Select Start Date" formControlName="start_date" placeholder="Start Date" type="date"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['start_date'].touched && leaveRequestForm.controls['start_date'].invalid">
+      <ion-text color="danger">Start Date is required.</ion-text>
+    </div>
+    
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Select End Date" formControlName="end_date" placeholder="End Date" type="date" [min]="leaveRequestForm.get('start_date')?.value"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['end_date'].touched && leaveRequestForm.controls['end_date'].invalid">
+      <ion-text color="danger">End Date is required.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Enter Reason" formControlName="reason" placeholder="Enter Reason" (paste)="onPaste($event)"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['reason'].touched && leaveRequestForm.controls['reason'].invalid">
+      <ion-text color="danger">Reason is required.</ion-text>
+    </div>
+
+    <ion-item>
+      <ion-input labelPlacement="stacked" label="Created Date" formControlName="created_at" placeholder="Created Date" type="date"></ion-input>
+    </ion-item>
+    <div *ngIf="leaveRequestForm.controls['created_at'].touched && leaveRequestForm.controls['created_at'].invalid">
+      <ion-text color="danger">Created Date is required.</ion-text>
+    </div>
+ 
+    <ion-button type="Submit" type="submit" [disabled]="leaveRequestForm.invalid" expand="full">Submit</ion-button>
+  </form>
+</ion-content>   -->
+
+
+
+<ion-content>
+  <ion-header>
+    <ion-toolbar >
+      <ion-buttons slot="start">
+        <ion-button>
+          <!-- <ion-icon name="menu"></ion-icon> -->
+          <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-title class="ion-text-left"color="warning">Welcome {{loginEmployeeName}} !</ion-title>
+  
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon name="notifications"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+<div id="box">
+  <div id="text">
+    <h1 align="center"style="padding:3%;font-weight:bold;color:white;">Apply for Leave</h1>
+  </div>
+  <div id="form">
+    <form [formGroup]="leaveRequestForm" (ngSubmit)="applyLeave()">
+      <ion-input type="text"fill="outline"label="Emmployee Name"  placeholder="Enter Employee Name"label-placement="floating"formControlName="employee_id"></ion-input>
+        <ion-select labelPlacement="stacked" label="Select Leave Type"fill="outline" placeholder="Select Leave Type"formControlName="leave_type">
+          <ion-select-option value="Vacation">Vacation</ion-select-option>
+          <ion-select-option value="Sick Leave">Sick Leave</ion-select-option>
+          <ion-select-option value="Personal Leave">Personal Leave</ion-select-option>
+          <ion-select-option value="Unpaid Leave">Unpaid Leave</ion-select-option>
+        </ion-select>
+        <ion-input type="date"slot="start"fill="outline"label="Select Leave Start Date" label-placement="floating"formControlName="start_date"></ion-input>
+        <ion-input type="date"fill="outline"label="Select Leave End Date"label-placement="floating"formControlName="end_date"></ion-input>
+        <ion-textarea label="Reason" labelPlacement="floating" fill="outline" placeholder="Enter Leave Reason"formControlName="reason"></ion-textarea>
+        <ion-input type="date"fill="outline"label="Leave Created Date" label-placement="floating"formControlName="created_at"></ion-input>
+        <ion-button expand="full"type="submit"style="margin:5%;margin:0px auto;width:90%;color:white;">
+          <ion-icon name="key"slot="start"style="color:white;"></ion-icon> Apply Leave
+        </ion-button>
+    </form>
+  </div>
+</div>
+</ion-content>
+  </ion-content>

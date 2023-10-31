@@ -1,0 +1,47 @@
+
+
+/* Default table styles */
+ion-header {
+    ion-toolbar {
+      --background: #1abc9c;
+      --color: #fff;
+  
+      ion-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+  
+      ion-button {
+        --icon-color: #fff;
+      }
+    }
+  }
+  .custom-ion-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .custom-ion-table th,
+    .custom-ion-table td {
+      padding: 8px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    
+    .custom-ion-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    
+    /* Responsive styles for screens narrower than 768px */
+    @media screen and (max-width: 768px) {
+      .custom-ion-table {
+        font-size: 14px; /* Reduce font size */
+      }
+      
+      .custom-ion-table th,
+      .custom-ion-table td {
+        padding: 6px; /* Adjust padding for smaller screens */
+      }
+    }
+    

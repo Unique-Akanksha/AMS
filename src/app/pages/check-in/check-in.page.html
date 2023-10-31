@@ -1,11 +1,10 @@
-<ion-menu contentId="main-content">
+<!-- <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <!-- Common menu items for all users -->
     <ion-list>
       <ion-item routerLink="/dashboard">
         <ion-label>Home</ion-label>
@@ -38,7 +37,6 @@
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
-  <!-- <ion-content class="ion-padding">Tap the button in the toolbar to open the menu.</ion-content> -->
 </div>
 
 
@@ -139,4 +137,134 @@
     </ion-row>
   </ion-grid>
 </form>
+</ion-content> -->
+
+
+
+
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-button>
+        <!-- <ion-icon name="menu"></ion-icon> -->
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Fill Attenance</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<!-- Command -->
+<!-- End Command -->
+  <div id="container">
+    <!-- <ion-content [fullscreen]="true"> -->
+      <form [formGroup]="attendanceForm"  (ngSubmit)="checkOut()">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="12" size-lg="12">
+            <h2 class="y_color text-center"> <b id="elementId2"> Welcome {{userName}} {{lastName}}</b></h2>
+            <h5 class=" text-center"> <b>{{department}}</b></h5>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col size="12" size-md="12" size-lg="12">
+            <h1 class="text-center"><b>{{ currentTime | date: 'hh:mm a' }}</b></h1>
+            <h3 class="text-center"><b>{{ currentDate | date: 'EEEE, MMM d' }}</b></h3>
+          </ion-col>
+        </ion-row>
+    
+    
+        <ion-row>
+          <ion-col size="12" size-md="12" size-lg="12">
+            <div class="btn_center">
+    
+              <div class="icon-wrapper"> <ion-button color="light" *ngIf="showButton" (click)="checkIn()"><i
+                    class="fa fa-hand-pointer-o custom-icon">
+                    <h5> <b>Punch IN </b></h5><span class="fix-editor">&nbsp;</span>
+                  </i></ion-button>
+              </div>
+    
+              <div id="elementId" class="icon-wrapper"> <ion-button color="light" *ngIf="!showButton"
+                  (click)="checkOut()"><i class="fa fa-hand-pointer-o custom-icon">
+                    <h5> <b>Punch Out </b></h5><span class="fix-editor">&nbsp;</span>
+                  </i></ion-button>
+              </div>
+    
+              <div id="Thanks_img" class="Thanks_img">
+                <img (click)="checkOut()" src="../../../assets/images/Logout.png" alt="">
+              </div>
+    
+            </div>
+          </ion-col>
+        </ion-row>
+    
+        <ion-row>
+          <ion-col size="12" size-md="12" size-lg="12">
+            <h3 class="text-center text-secondary pt-2"> <ion-icon name="location"></ion-icon>
+              <div *ngIf="coordinatesMessage" class="message">
+                <br>
+                {{ coordinatesMessage }}
+              </div>
+            </h3>
+          </ion-col>
+        </ion-row>
+    
+        
+        <ion-row class="ion-justify-content-center">
+          <!-- <ion-col size="4" size-md="4" size-lg="4"> -->
+            <ion-select fill="outline"labelPlacement="stacked" label="Select Project" formControlName="project" placeholder="Select a project">
+              <ion-select-option *ngFor="let project of ProjectList">
+                {{ project.name }}
+              </ion-select-option>
+            </ion-select>
+            <!-- <div *ngIf="attendanceForm.controls['project'].touched && attendanceForm.controls['project'].invalid">
+              <ion-text color="danger">Please select a project.</ion-text>
+            </div> -->
+          <!-- </ion-col> -->
+        </ion-row>
+        
+        
+    
+        <ion-row>
+          <ion-col size="4" size-md="4" size-lg="4">
+            <h3 class="text-center text-secondary pt-2 "> <img src="../../../assets/icon/time4.png"alt=""></h3>
+            <h3 class="text-center"> <b>{{checkInTime}}</b></h3>
+            <h3 class="text-center">Cheak In </h3>
+          </ion-col>
+    
+          <ion-col size="4" size-md="4" size-lg="4">
+            <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""></h3>
+            <h3 class="text-center "> <b>{{checkOutTime}}</b></h3>
+            <h3 class="text-center">Cheak Out</h3>
+          </ion-col>
+    
+          <ion-col size="4" size-md="4" size-lg="4">
+            <h3 class="text-center text-secondary pt-2"> <img src="../../../assets/icon/time4.png" alt=""></h3>
+            <h3 class="text-center "> <b>{{totalHrsTime}}</b></h3>
+            <h3 class="text-center">Total Hrs</h3>
+          </ion-col>
+    
+        </ion-row>
+      </ion-grid>
+    </form>
+    <!-- </ion-content> -->
+  </div>
 </ion-content>
+
+
+

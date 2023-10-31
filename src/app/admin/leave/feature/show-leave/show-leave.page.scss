@@ -1,0 +1,15 @@
+ion-header {
+    ion-toolbar {
+      --background: #1abc9c;
+      --color: #fff;
+  
+      ion-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+  
+      ion-button {
+        --icon-color: #fff;
+      }
+    }
+  }

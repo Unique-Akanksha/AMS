@@ -1,0 +1,134 @@
+// /* Default styles for ion-header, ion-content, ion-item, ion-text, and ion-button */
+// ion-header {
+//     background-color: #3880ff;
+// }
+
+// ion-toolbar {
+//     --ion-color-base: #fff;
+// }
+
+// ion-content {
+//     --ion-background-color: #f4f4f4;
+//     display: flex;
+//     justify-content: center; /* Center horizontally */
+//     align-items: center; /* Center vertically */
+//     height: 100%; /* Ensure the content takes the full height of ion-content */
+// }
+
+
+
+// ion-item {
+//     --ion-background-color: #fff;
+//     --ion-item-padding-start: 10px;
+//     --ion-item-padding-end: 10px;
+// }
+
+// ion-text {
+//     font-size: 14px;
+// }
+
+// ion-button {
+//     --ion-text-color: #fff;
+//     --ion-background-color: #3880ff;
+//     --border-radius: 8px;
+//     font-weight: bold;
+//     margin-top: 16px;
+// }
+
+// /* Media query for smaller screens */
+// @media screen and (max-width: 768px) {
+//     ion-item {
+//         --ion-item-padding-start: 5px; /* Reduce left padding for smaller screens */
+//         --ion-item-padding-end: 5px; /* Reduce right padding for smaller screens */
+//     }
+
+//     ion-text {
+//         font-size: 12px; /* Decrease font size for smaller screens */
+//     }
+
+//     ion-button {
+//         margin-top: 12px; /* Decrease spacing for smaller screens */
+//     }
+
+//     /* Additional styles for smaller screens */
+//     ion-header {
+//         background-color: #3880ff; /* Keep header background color */
+//     }
+
+//     ion-toolbar {
+//         --ion-color-base: #fff; /* Keep toolbar text and icon color */
+//     }
+
+//     ion-content {
+//         --ion-background-color: #f4f4f4; /* Keep content background color */
+//     }
+// }
+
+
+
+ion-header {
+    ion-toolbar {
+      --background: #1abc9c;
+      --color: #fff;
+  
+      ion-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+  
+      ion-button {
+        --icon-color: #fff;
+      }
+    }
+  }
+  #box{
+    min-height: 350px;
+    width: 600px;
+    margin: 0px auto;
+    margin-top: 30px;
+    // border:1px solid;
+    box-shadow: 0 0 10px 0 rgba(26, 188, 156, 0.8);
+  }
+  #text{
+    // height: 50px;
+    background-color: #1abc9c;
+  }
+  ion-input{
+    width:90%;
+    margin: 5%;
+  }
+  ion-select{
+    width:90%;
+    margin: 5%;
+  }
+  ion-textarea{
+    width:90%;
+    margin: 5%;
+  }
+  #form{
+    margin-bottom:5%;
+    padding-bottom: 5%;
+  }
+  @media (max-width:576px){
+    #box{
+      // height: 300px;
+      width:350px;
+      margin-top:25px;
+    }
+  }
+  @media (max-width:370px){
+    #box{
+      margin-top:22px;
+      // min-height: 290px;
+      width:310px;
+      margin-top:20px;
+    }
+  }
+  @media (max-width:280px){
+    #box{
+      margin-top:18px;
+      // min-height: 290px;
+      width:240px;
+      margin-top:18px;
+    }
+  }

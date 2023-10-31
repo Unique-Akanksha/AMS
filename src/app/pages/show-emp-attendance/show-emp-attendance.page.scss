@@ -1,0 +1,39 @@
+ion-header {
+    ion-toolbar {
+      --background: #1abc9c;
+      --color: #fff;
+  
+      ion-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+  
+      ion-button {
+        --icon-color: #fff;
+      }
+    }
+  }
+  .a:hover{
+    color:#1abc9c;
+  }
+  @media (max-width:576px){
+    ion-header {
+    ion-title{
+      font-size: 1.3rem;
+    }
+  }
+  }
+  @media (max-width:370px){
+    ion-header {
+      ion-title{
+        font-size: 1.2rem;
+      }
+    }
+  }
+  @media (max-width:280px){
+    ion-header {
+      ion-title{
+        font-size: 0.6rem;
+      }
+    }
+  }

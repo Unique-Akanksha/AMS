@@ -1,68 +1,129 @@
-/* Apply fixed height to ion-card elements */
-ion-card {
-  height: 150px; /* Adjust the height as needed */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-}
+// /* Apply fixed height to ion-card elements */
+// ion-card {
+//   height: 150px; /* Adjust the height as needed */
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   padding: 10px;
+// }
 
-/* Styles for ion-card-title */
-ion-card-title {
+// /* Styles for ion-card-title */
+// ion-card-title {
+//   font-size: 20px;
+//   font-weight: bold;
+//   margin-bottom: 10px;
+// }
+
+// /* Styles for ion-card-subtitle */
+// ion-card-subtitle {
+//   font-size: 16px;
+// }
+
+// /* Media query for screens smaller than 768px (e.g., smartphones) */
+// @media (max-width: 768px) {
+//   ion-card-title {
+//     font-size: 16px;
+//   }
+//   ion-card-subtitle {
+//     font-size: 14px;
+//   }
+//   ion-card h1 {
+//     font-size: 20px; /* Adjust h1 font size for smaller screens */
+//   }
+//   ion-card h3 {
+//     font-size: 18px; /* Adjust h3 font size for smaller screens */
+//   }
+// }
+
+// /* Media query for screens between 768px and 1024px (e.g., tablets) */
+// @media (min-width: 769px) and (max-width: 1024px) {
+//   ion-card-title {
+//     font-size: 18px;
+//   }
+//   ion-card-subtitle {
+//     font-size: 16px;
+//   }
+//   ion-card h1 {
+//     font-size: 24px; /* Increase h1 font size for medium-sized screens */
+//   }
+//   ion-card h3 {
+//     font-size: 22px; /* Increase h3 font size for medium-sized screens */
+//   }
+// }
+
+// /* Media query for screens larger than 1024px (e.g., desktops) */
+// @media (min-width: 1025px) {
+//   ion-card-title {
+//     font-size: 24px;
+//   }
+//   ion-card-subtitle {
+//     font-size: 20px;
+//   }
+//   ion-card h1 {
+//     font-size: 30px; /* Increase h1 font size for larger screens */
+//   }
+//   ion-card h3 {
+//     font-size: 26px; /* Increase h3 font size for larger screens */
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ion-header {
+  ion-toolbar {
+    --background: #1abc9c;
+    --color: #fff;
+
+    ion-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    ion-button {
+      --icon-color: #fff;
+    }
+  }
+}
+ion-card{
+  text-align: center;
+  padding-top: 8%;
+  color:#1abc9c;
+  box-shadow: 0 0 10px 0 rgba(26, 188, 156, 0.8);
+  height:200px;
+  // width:90%;
+  // border:4px solid;
+  // border-radius: 50%;
+  margin-top: 20px;
+}
+.icon1{
+  font-size: 5em;
+}
+p{
   font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
 }
-
-/* Styles for ion-card-subtitle */
-ion-card-subtitle {
-  font-size: 16px;
-}
-
-/* Media query for screens smaller than 768px (e.g., smartphones) */
-@media (max-width: 768px) {
-  ion-card-title {
-    font-size: 16px;
+@media (max-width:280px){
+  ion-card{
+    height: 120px;
+    // width: 100%;
+    // margin-top:100px;
   }
-  ion-card-subtitle {
-    font-size: 14px;
+  .icon1{
+    font-size: 2em;
   }
-  ion-card h1 {
-    font-size: 20px; /* Adjust h1 font size for smaller screens */
-  }
-  ion-card h3 {
-    font-size: 18px; /* Adjust h3 font size for smaller screens */
-  }
-}
-
-/* Media query for screens between 768px and 1024px (e.g., tablets) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  ion-card-title {
-    font-size: 18px;
-  }
-  ion-card-subtitle {
-    font-size: 16px;
-  }
-  ion-card h1 {
-    font-size: 24px; /* Increase h1 font size for medium-sized screens */
-  }
-  ion-card h3 {
-    font-size: 22px; /* Increase h3 font size for medium-sized screens */
-  }
-}
-
-/* Media query for screens larger than 1024px (e.g., desktops) */
-@media (min-width: 1025px) {
-  ion-card-title {
-    font-size: 24px;
-  }
-  ion-card-subtitle {
-    font-size: 20px;
-  }
-  ion-card h1 {
-    font-size: 30px; /* Increase h1 font size for larger screens */
-  }
-  ion-card h3 {
-    font-size: 26px; /* Increase h3 font size for larger screens */
+  p{
+    font-size: 12px;
   }
 }

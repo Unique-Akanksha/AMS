@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { EmployeeService } from 'src/app/admin/employee/data-access/employee.service';
 import { Plugins } from '@capacitor/core';
 const { Filesystem } = Plugins;
 import * as CapacitorCore from '@capacitor/core';

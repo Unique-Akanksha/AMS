@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { LeaveRequestsService } from 'src/app/services/leave-requests.service';
+import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
 import { ApproveRequestsPage } from '../approve-requests/approve-requests.page';
 
 @Component({
@@ -31,7 +31,7 @@ export class AdminLeaveHistoryPage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private leaveRequestService: LeaveRequestsService, private modalCtrl:ModalController,private router: Router) { }
+  constructor(private leaveRequestService: LeaveService, private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
      // code for get user role 
