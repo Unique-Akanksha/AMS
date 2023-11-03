@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AttendanceService } from 'src/app/admin/attendance/data-access/attendance.service';
 import { AddEditAttendancePage } from 'src/app/admin/attendance/feature/add-edit-attendance/add-edit-attendance.page';
 import { MatPaginator } from '@angular/material/paginator';
@@ -23,7 +23,7 @@ export class ShowAttendancePage implements OnInit {
    
   filterdata :string= "";
   displayedColumns: string[] = [
-    'attendanceID',
+    // 'attendanceID',
     'employeeName',
     'employeeDept',
     'currentTime',
@@ -39,7 +39,7 @@ export class ShowAttendancePage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private attendanceService:AttendanceService,private modalCtrl:ModalController,private router: Router) { }
+  constructor(private toastController: ToastController,private attendanceService:AttendanceService,private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
     // code for get user role 
@@ -95,13 +95,58 @@ export class ShowAttendancePage implements OnInit {
     return await modal.present();
   }
 
+  // deleteClick(item: any) {
+  //   if (confirm("Are you sure??")) {
+  //     this.attendanceService.deleteAttendance(item.attendanceID).subscribe(data => {
+  //       this.refreshAttendanceList();
+  //     })
+  //   }
+  // }
+
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
-      this.attendanceService.deleteAttendance(item.attendanceID).subscribe(data => {
-        this.refreshAttendanceList();
-      })
+      this.attendanceService.deleteAttendance(item.attendanceID, 
+        (message: string) => {
+          console.log("Response: ", message);
+  
+          if (message === "Attendance deleted successfully") {
+            this.showSuccessToast("Attendance deleted successfully");
+          } else {
+            this.showErrorToast("An error occurred");
+          }
+  
+          this.refreshAttendanceList();
+        },
+        (error: any) => {
+          console.error("Error: ", error);
+          this.showErrorToast("An error occurred");
+        }
+      );
     }
   }
+
+  showSuccessToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'success'
+    }).then((toast) => {
+      toast.present();
+    });
+  }
+  
+  showErrorToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger'
+    }).then((toast) => {
+      toast.present();
+    });
+  }
+  
 
   // Implement the logout function
   logout() {

@@ -42,10 +42,31 @@ export class ProjectService {
     );
   }
 
-  deleteProject(val:any){
+  // deleteProject(val:any){
+  //   const url = this.ProjectAPIUrl;
+  //   const data = { id: val };
+  //   return this.http.delete(url, { body: data });
+  // }
+
+  deleteProject(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.ProjectAPIUrl;
     const data = { id: val };
-    return this.http.delete(url, { body: data });
+  
+    this.http.delete(url, { body: data }).subscribe(
+      (response) => {
+        const responseBody = response as { message: string };
+        if (responseBody) {
+          const errorMessage = responseBody.message;
+          successCallback(errorMessage);
+        } else {
+          errorCallback('No message received');
+        }
+      },
+      (error) => {
+        // Handle HTTP error here
+        errorCallback(error);
+      }
+    );
   }
 
   updateProject(data: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {

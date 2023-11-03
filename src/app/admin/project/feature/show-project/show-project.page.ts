@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectService } from 'src/app/admin/project/data-access/project.service';
 import { AddEditProjectPage } from 'src/app/admin/project/feature/add-edit-project/add-edit-project.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,7 +21,7 @@ export class ShowProjectPage implements OnInit {
    
   filterdata :string= "";
   displayedColumns: string[] = [
-    'project_id',
+    // 'project_id',
     'name',
     'description',
     'start_date',
@@ -32,7 +32,7 @@ export class ShowProjectPage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   
-  constructor(private projectService:ProjectService,private modalCtrl:ModalController,private router: Router) { }
+  constructor(private toastController: ToastController,private projectService:ProjectService,private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
     // code for get user role 
@@ -90,12 +90,56 @@ export class ShowProjectPage implements OnInit {
     return await modal.present();
   }
 
+  // deleteClick(item: any) {
+  //   if (confirm("Are you sure??")) {
+  //     this.projectService.deleteProject(item.project_id).subscribe(data => {
+  //       this.refreshProjectList();
+  //     })
+  //   }
+  // }
+
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
-      this.projectService.deleteProject(item.project_id).subscribe(data => {
-        this.refreshProjectList();
-      })
+      this.projectService.deleteProject(item.project_id, 
+        (message: string) => {
+          console.log("Response: ", message);
+  
+          if (message === "Project deleted successfully.") {
+            this.showSuccessToast("Project deleted successfully.");
+          } else {
+            this.showErrorToast("An error occurred");
+          }
+  
+          this.refreshProjectList();
+        },
+        (error: any) => {
+          console.error("Error: ", error);
+          this.showErrorToast("An error occurred");
+        }
+      );
     }
+  }
+  
+  showSuccessToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'success'
+    }).then((toast) => {
+      toast.present();
+    });
+  }
+  
+  showErrorToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger'
+    }).then((toast) => {
+      toast.present();
+    });
   }
 
    // Implement the logout function

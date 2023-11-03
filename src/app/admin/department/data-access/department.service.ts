@@ -32,10 +32,31 @@ export class DepartmentService {
     );
   }
 
-  deleteDepartment(val:any){
+  // deleteDepartment(val:any){
+  //   const url = this.DepartmentAPIUrl;
+  //   const data = { id: val };
+  //   return this.http.delete(url, { body: data });
+  // }
+
+  deleteDepartment(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.DepartmentAPIUrl;
     const data = { id: val };
-    return this.http.delete(url, { body: data });
+  
+    this.http.delete(url, { body: data }).subscribe(
+      (response) => {
+        const responseBody = response as { message: string };
+        if (responseBody) {
+          const errorMessage = responseBody.message;
+          successCallback(errorMessage);
+        } else {
+          errorCallback('No message received');
+        }
+      },
+      (error) => {
+        // Handle HTTP error here
+        errorCallback(error);
+      }
+    );
   }
 
   addDepartment(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {

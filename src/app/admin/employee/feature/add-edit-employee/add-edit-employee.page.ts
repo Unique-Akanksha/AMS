@@ -13,15 +13,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddEditEmployeePage implements OnInit {
 
-  @Input() actionType: string = ''; // Input property to receive the action type ('add' or 'update')
-  @Input() dataToUpdate: any; // Input property to receive data to update
-  @Input() empdata: any; // Input property to receive dept data
+  @Input() actionType: string = ''; 
+  @Input() dataToUpdate: any; 
   empForm!: FormGroup;
   userRoleList: any[] = [];
   departments: any[] = [];
   imageUrl: string | undefined = ''; 
   tempImageUrl: string | undefined = ''; 
   private file: File | undefined;
+  employeeData: any = { userPhoto: '' };
 
   constructor(
     private toastController: ToastController,
@@ -55,7 +55,6 @@ export class AddEditEmployeePage implements OnInit {
     });
 
     if (this.actionType === 'update' && this.dataToUpdate) {
-      // Initialize form with data to update
       this.empForm.patchValue({
         first_name: this.dataToUpdate.first_name,
         middle_name: this.dataToUpdate.middle_name,
@@ -69,7 +68,6 @@ export class AddEditEmployeePage implements OnInit {
         role: this.dataToUpdate.role,
       });
     } else {
-      // Initialize form with default values for add mode
       this.empForm.patchValue({
         first_name: '',
         middle_name: '',
@@ -95,31 +93,92 @@ export class AddEditEmployeePage implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
+  // async closeModal(confirm: boolean) {
+  //   if (confirm) {
+  //     console.log("confirm button clicked");
+  //     // this.uploadImage();
+  //     if (this.empForm.valid) {
+  //       // this.employeeData = this.empForm.value;  
+  //       this.employeeData = { ...this.employeeData, ...this.empForm.value };
+  //       this.uploadImage(); 
+        
+        
+  //       console.log('Employee Data',this.employeeData);
+  //       console.log('first_name : ' + this.employeeData.first_name);
+  //       console.log('middle_name : ' + this.employeeData.middle_name);
+  //       console.log('last_name : ' + this.employeeData.last_name);
+  //       console.log('email : ' + this.employeeData.email);
+  //       console.log('hire_date : ' + this.employeeData.hire_date);
+  //       console.log('department : ' + this.employeeData.department);
+  //       console.log('position : ' + this.employeeData.position);
+  //       console.log('password : ' + this.employeeData.password);
+  //       console.log('confirmPassword : ' + this.employeeData.confirmPassword);
+  //       console.log('userPhoto : ' + this.employeeData.userPhoto);
+  //       console.log('role : ' + this.employeeData.role);
+    
+        
+  //       if (this.actionType === 'update') {
+  //         this.updateEmployee(this.employeeData);          
+  //       } else {  
+  //         this.addEmployee(this.employeeData);
+  //       }
+        
+  //     }
+  //   }
+  //   this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data': { ...{ id: this.dataToUpdate.employee_id }, ...this.empForm.value } });
+  // }
+
   async closeModal(confirm: boolean) {
     if (confirm) {
-      // Check if the form is valid
+      console.log("confirm button clicked");
       if (this.empForm.valid) {
-        const employeeData = this.empForm.value;
-
-        // Add the image path to the employeeData object
-        employeeData.userPhoto = this.imageUrl;
-        
-        // Perform add or update logic here based on actionType
-        if (this.actionType === 'update') {
-          this.updateEmployee(employeeData);
-        } else {  
-          this.addEmployee(employeeData);
+        this.employeeData = { ...this.employeeData, ...this.empForm.value };
+        try {
+          if (this.file) {
+            this.employeeData.userPhoto = await this.uploadImage(this.file);
+          }
+          console.log('Employee Data', this.employeeData);
+  
+          if (this.actionType === 'update') {
+            this.updateEmployee(this.employeeData);
+          } else {
+            this.addEmployee(this.employeeData);
+          }
+  
+          this.modalCtrl.dismiss({ role: 'confirm', data: { ...{ id: this.dataToUpdate.employee_id }, ...this.empForm.value } });
+        } catch (error) {
+          console.error('Image upload error:', error);
         }
       }
+    } else {
+      this.modalCtrl.dismiss(null, 'cancel');
     }
-    // Close the modal and pass data back to the parent component
-    this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data': { ...{ id: this.dataToUpdate.employee_id }, ...this.empForm.value } });
   }
+  
+  
+  async uploadImage(file: File | undefined): Promise<string | undefined> {
+    console.log('uploading image');
+    if (file) {
+      try {
+        const response = await this.employeeService.uploadImage(file).toPromise();
+        const parsedResponse = JSON.parse(response || '{}');
+        const imageUrl = parsedResponse.imageUrl || ''; // Provide a default value if imageUrl is undefined
+        // Store the image URL in your table or any desired location
+        // For example, you can call another service method to save it to a database
+  
+        return imageUrl;
+      } catch (error) {
+        throw error;
+      }
+    }
+    return undefined; // Return undefined if 'file' is not defined
+  }
+  
+  
+  
+    
 
   updateEmployee(dataToEdit: any) {
-    console.log('userPhoto: ' + dataToEdit.userPhoto);
-
-    // Create an object with the data you want to update
     const updatedData = {
       first_name: dataToEdit.first_name,
       middle_name: dataToEdit.middle_name,
@@ -135,23 +194,24 @@ export class AddEditEmployeePage implements OnInit {
       id: this.dataToUpdate.employee_id
     };
 
-    console.log('emp userPhoto: ',updatedData.userPhoto);
-
-    // Call the updateEmployee function from the service
     this.employeeService.updateEmployee(updatedData,
       async (message) => {
-        console.log('Response: ', message);
-        console.log('Message:', message);
         if (message === "employee already exists") {
           const toast = await this.toastController.create({
-            message: 'Employee already exists',
+            message: 'employee already exists',
             duration: 3000,
             position: 'bottom',
             color: 'danger',
           });
           toast.present();
         } else {
-          console.log('Response in else part : ', message);
+          const toast = await this.toastController.create({
+            message: 'Employee updated successfully',
+            duration: 3000,
+            position: 'bottom',
+            color: 'success',
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
       },
@@ -161,12 +221,9 @@ export class AddEditEmployeePage implements OnInit {
     );
   }
 
-  // Modify the addEmployee function to send the image to the server
   async addEmployee(formData: any) {
-    console.log('formData: ', formData);
-    console.log('Photo: ',formData.Photo);
-    // const imageUrl = await this.onImageSelected(event); // Make sure to pass the event parameter if needed
-
+    // console.log('formData: ', formData);
+    // console.log('Photo: ',formData.Photo);
     this.employeeService.addEmployee(
       formData,
       async (message) => {
@@ -180,6 +237,13 @@ export class AddEditEmployeePage implements OnInit {
           });
           toast.present();
         } else {
+          const toast = await this.toastController.create({
+            message: 'employee inserted successfully',
+            duration: 3000,
+            position: 'bottom',
+            color: 'success',
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
       },
@@ -187,6 +251,7 @@ export class AddEditEmployeePage implements OnInit {
         console.log('Error: ' + error);
       }
     );
+    
     this.empForm.reset();
   }
 
@@ -231,24 +296,6 @@ export class AddEditEmployeePage implements OnInit {
   }   
 
 
-//take Photo
-// onImageSelected(event: any) {
-//   const file = event?.target?.files?.[0]; // Use optional chaining to handle undefined values
-//   if (file) {
-//     this.employeeService.uploadImage(file).subscribe(
-//       (response: any) => {
-//         // Handle the response, which may contain the image URL
-//         this.imageUrl = response?.imageUrl; // Use optional chaining for response
-//       },
-//       (error) => {
-//         // Handle HTTP request errors here
-//         console.error('Image upload error:', error);
-//         // You can display an error message or take other actions as needed
-//       }
-//     );
-//   }
-  
-// }
 
 onPaste(event: ClipboardEvent): void {
   event.preventDefault(); 
@@ -258,7 +305,6 @@ onImageSelected(event: any) {
   this.file = event.target.files[0];
   if (this.file) {
     this.tempImageUrl = URL.createObjectURL(this.file);
-    
   }
 }
 
@@ -269,19 +315,20 @@ openImageInput() {
   }
 }
 
-uploadImage() {
-  console.log('uploading image');
-  const file = this.file;
-  if (file) {
-    this.employeeService.uploadImage(file).subscribe(
-      (response: any) => {
-        this.imageUrl = response?.imageUrl; 
-      },
-      (error) => {
-        console.error('Image upload error:', error);
-      }
-    );
-  }
-}
+// uploadImage() {
+//   console.log('uploading image');
+//   const file = this.file;
+//   if (file) {
+//     this.employeeService.uploadImage(file).subscribe(
+//       (response: any) => {
+//         this.imageUrl = response?.imageUrl;
+//         this.employeeData.userPhoto = this.imageUrl;
+//       },
+//       (error) => {
+//         console.error('Image upload error:', error);
+//       }
+//     );
+//   }
+// }
 
 }

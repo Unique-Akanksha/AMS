@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
 import { ApproveRequestsPage } from '../approve-requests/approve-requests.page';
 
@@ -17,7 +17,7 @@ export class AdminLeaveHistoryPage implements OnInit {
   dataSource: any;
   filterdata :string= "";
   displayedColumns: string[] = [
-    'leaveRequestID',
+    // 'leaveRequestID',
     'employee_id',
     'leave_type',
     'start_date',
@@ -31,7 +31,7 @@ export class AdminLeaveHistoryPage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private leaveRequestService: LeaveService, private modalCtrl:ModalController,private router: Router) { }
+  constructor(private toastController: ToastController,private leaveRequestService: LeaveService, private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
      // code for get user role 
@@ -89,12 +89,56 @@ export class AdminLeaveHistoryPage implements OnInit {
   }
 
 
+  // deleteClick(item: any) {
+  //   if (confirm("Are you sure??")) {
+  //     this.leaveRequestService.deleteLeaveRequest(item.leaveRequestID).subscribe(data => {
+  //       this.refreshLeaveRequestsList();
+  //     })
+  //   }
+  // }
+
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
-      this.leaveRequestService.deleteLeaveRequest(item.leaveRequestID).subscribe(data => {
-        this.refreshLeaveRequestsList();
-      })
+      this.leaveRequestService.deleteLeaveRequest(item.leaveRequestID, 
+        (message: string) => {
+          console.log("Response: ", message);
+  
+          if (message === "LeaveRequest deleted successfully") {
+            this.showSuccessToast("LeaveRequest deleted successfully");
+          } else {
+            this.showErrorToast("An error occurred");
+          }
+  
+          this.refreshLeaveRequestsList();
+        },
+        (error: any) => {
+          console.error("Error: ", error);
+          this.showErrorToast("An error occurred");
+        }
+      );
     }
+  }
+  
+  showSuccessToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'success'
+    }).then((toast) => {
+      toast.present();
+    });
+  }
+  
+  showErrorToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger'
+    }).then((toast) => {
+      toast.present();
+    });
   }
 
   // Implement the logout function

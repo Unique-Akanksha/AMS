@@ -34,10 +34,31 @@ export class LeaveService {
     );
   }
 
-  deleteLeaveRequest(val:any){
+  // deleteLeaveRequest(val:any){
+  //   const url = this.LeaveRequestsAPIUrl;
+  //   const data = { id: val };
+  //   return this.http.delete(url, { body: data });
+  // }
+
+  deleteLeaveRequest(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.LeaveRequestsAPIUrl;
     const data = { id: val };
-    return this.http.delete(url, { body: data });
+  
+    this.http.delete(url, { body: data }).subscribe(
+      (response) => {
+        const responseBody = response as { message: string };
+        if (responseBody) {
+          const errorMessage = responseBody.message;
+          successCallback(errorMessage);
+        } else {
+          errorCallback('No message received');
+        }
+      },
+      (error) => {
+        // Handle HTTP error here
+        errorCallback(error);
+      }
+    );
   }
 
   createLeaveRequest(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {

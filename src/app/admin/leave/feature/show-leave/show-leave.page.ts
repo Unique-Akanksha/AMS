@@ -16,7 +16,7 @@ export class ShowLeavePage implements OnInit {
   dataSource: any;
   filterdata: string = "";
   displayedColumns: string[] = [
-    'leaveRequestID',
+    // 'leaveRequestID',
     'employee_id',
     'leave_type',
     'start_date',
