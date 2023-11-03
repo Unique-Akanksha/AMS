@@ -140,7 +140,7 @@
 
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="ion-text-center">
      Admin Leave History
     </ion-title>
     <ion-buttons slot="start">
@@ -163,7 +163,7 @@
       <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
       </ion-refresher>
-      <div class="example-header">
+      <!-- <div class="example-header">
         <mat-form-field class="example-filter">
           <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
         </mat-form-field>
@@ -228,7 +228,77 @@
         </table>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   
-      </div>
+      </div> -->
+
+      <ion-card>
+        <ion-card-content>
+          <div class="example-header">
+            <ion-searchbar [debounce]="1000" (ionInput)="applyFilter($event)"style="width:96%;margin-top:1%;margin-left:3%;margin-right:3%;"></ion-searchbar>
+  
+          </div>
+          <div class="for_scroll">
+            <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8" matSort>
+              <!-- <ng-container matColumnDef="leaveRequestID">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> LeaveRequestID </th>
+                <td mat-cell *matCellDef="let element"> {{element.leaveRequestID}} </td>
+              </ng-container> -->
+              <ng-container matColumnDef="employee_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> EmployeeId </th>
+                <td mat-cell *matCellDef="let element"> {{element.employee_id}} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="leave_type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Leave Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.leave_type}} </td>
+              </ng-container>
+              <ng-container matColumnDef="start_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
+              </ng-container>
+              <ng-container matColumnDef="end_date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.end_date}} </td>
+              </ng-container>
+              <ng-container matColumnDef="reason">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Reason</th>
+                <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+              <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Created At</th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+              </ng-container>
+              <ng-container matColumnDef="checkInTime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>CheckIn Time</th>
+                <td mat-cell *matCellDef="let element"> {{element.checkInTime}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef style="padding-left:60px"> Action </th>
+                <td mat-cell *matCellDef="let element" class="action-link">
+                  <ion-button color="primary" (click)="openModal(element)">
+      
+                    <ion-icon name="create"></ion-icon>
+                  </ion-button>
+                  <ion-button color="danger" (click)="deleteClick(element)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching {{filterdata}}</td>
+              </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      
     </ion-content>
   </div>
 </ion-content>

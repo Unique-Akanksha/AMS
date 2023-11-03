@@ -50,10 +50,31 @@ export class AttendanceService {
     );
   }
   
-  deleteAttendance(val:any){
+  // deleteAttendance(val:any){
+  //   const url = this.AttendanceAPIUrl;
+  //   const data = { id: val };
+  //   return this.http.delete(url, { body: data });
+  // }
+
+  deleteAttendance(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.AttendanceAPIUrl;
     const data = { id: val };
-    return this.http.delete(url, { body: data });
+  
+    this.http.delete(url, { body: data }).subscribe(
+      (response) => {
+        const responseBody = response as { message: string };
+        if (responseBody) {
+          const errorMessage = responseBody.message;
+          successCallback(errorMessage);
+        } else {
+          errorCallback('No message received');
+        }
+      },
+      (error) => {
+        // Handle HTTP error here
+        errorCallback(error);
+      }
+    );
   }
 
   updateAttendance(data: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {

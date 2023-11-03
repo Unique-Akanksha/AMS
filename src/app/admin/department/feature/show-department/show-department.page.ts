@@ -1,6 +1,6 @@
 import { Component, OnInit, Input,ViewChild } from '@angular/core';
 import { DepartmentService } from 'src/app/admin/department/data-access/department.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AddEditDepartmentPage } from 'src/app/admin/department/feature/add-edit-department/add-edit-department.page';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -23,7 +23,7 @@ export class ShowDepartmentPage implements OnInit {
    
   filterdata :string= "";
   displayedColumns: string[] = [
-    'department_id',
+    // 'department_id',
     'name',
     'description',
     'action',
@@ -32,7 +32,7 @@ export class ShowDepartmentPage implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private departmentService: DepartmentService, private modalCtrl: ModalController,private router: Router) { }
+  constructor(private toastController: ToastController,private departmentService: DepartmentService, private modalCtrl: ModalController,private router: Router) { }
 
   ngOnInit() {
     // code for get user role 
@@ -91,12 +91,57 @@ export class ShowDepartmentPage implements OnInit {
     return await modal.present();
   }
 
+  // deleteClick(item: any) {
+  //   if (confirm("Are you sure??")) {
+  //     this.departmentService.deleteDepartment(item.department_id).subscribe(() => {
+  //       this.refreshDepList();
+  //     });
+  //   }
+  // }
+
+
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
-      this.departmentService.deleteDepartment(item.department_id).subscribe(() => {
-        this.refreshDepList();
-      });
+      this.departmentService.deleteDepartment(item.department_id, 
+        (message: string) => {
+          console.log("Response: ", message);
+  
+          if (message === "Department deleted successfully") {
+            this.showSuccessToast("Department deleted successfully");
+          } else {
+            this.showErrorToast("An error occurred");
+          }
+  
+          this.refreshDepList();
+        },
+        (error: any) => {
+          console.error("Error: ", error);
+          this.showErrorToast("An error occurred");
+        }
+      );
     }
+  }
+  
+  showSuccessToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'success'
+    }).then((toast) => {
+      toast.present();
+    });
+  }
+  
+  showErrorToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger'
+    }).then((toast) => {
+      toast.present();
+    });
   }
 
   // Implement the logout function

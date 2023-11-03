@@ -116,10 +116,10 @@ export class AddEditAttendancePage implements OnInit {
           toast.present();
         } else {
           const toast = await this.toastController.create({
-            message: 'Attendance already exists',
+            message: 'Attendance updated successfully',
             duration: 3000,
             position: 'bottom',
-            color: 'danger',
+            color: 'success',
           });
           toast.present();
           this.modalCtrl.dismiss();

@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { AddEditEmployeePage } from 'src/app/admin/employee/feature/add-edit-employee/add-edit-employee.page';
 import { EmployeeService } from 'src/app/admin/employee/data-access/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-show-employee',
@@ -13,13 +14,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./show-employee.page.scss'],
 })
 export class ShowEmployeePage implements OnInit {
+  public students$!: Observable<any[]>;
+  searchKey = '';
 
   loginUser = '';
   dataSource: any;
    
   filterdata :string= "";
   displayedColumns: string[] = [
-    'employee_id',
+    // 'employee_id',
     'userPhoto',
     'first_name',
     'middle_name',
@@ -39,7 +42,8 @@ export class ShowEmployeePage implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private modalCtrl: ModalController,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -98,14 +102,59 @@ export class ShowEmployeePage implements OnInit {
     return await modal.present();
   }
 
+  // deleteClick(item: any) {
+  //   if (confirm('Are you sure??')) {
+  //     this.employeeService
+  //       .deleteEmployee(item.employee_id)
+  //       .subscribe((data) => {
+  //         this.refreshEmpList();
+  //       });
+  //   }
+  // }
+
+
   deleteClick(item: any) {
-    if (confirm('Are you sure??')) {
-      this.employeeService
-        .deleteEmployee(item.employee_id)
-        .subscribe((data) => {
+    if (confirm("Are you sure??")) {
+      this.employeeService.deleteEmployee(item.employee_id, 
+        (message: string) => {
+          console.log("Response: ", message);
+  
+          if (message === "Employee deleted successfully.") {
+            this.showSuccessToast("Employee deleted successfully.");
+          } else {
+            this.showErrorToast("An error occurred");
+          }
+  
           this.refreshEmpList();
-        });
+        },
+        (error: any) => {
+          console.error("Error: ", error);
+          this.showErrorToast("An error occurred");
+        }
+      );
     }
+  }
+  
+  showSuccessToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'success'
+    }).then((toast) => {
+      toast.present();
+    });
+  }
+  
+  showErrorToast(message: string) {
+    this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger'
+    }).then((toast) => {
+      toast.present();
+    });
   }
 
   // Implement the logout function

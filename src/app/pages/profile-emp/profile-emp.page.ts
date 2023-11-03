@@ -38,10 +38,20 @@ export class ProfileEmpPage implements OnInit {
        this.email = user.email;
        this.hire_date = user.hire_date;
        this.department = user.department;
-       this.role = user.role;
        this.position = user.position;
        this.userPhoto = user.userPhoto;
        console.log("Image path: ",this.userPhoto);
+
+       if(user.role === '1'){
+        this.role = 'Super Admin';
+       }
+       else if(user.role === '5'){
+        this.role = 'Employee'
+       }
+       else if(user.role === '2'){}
+       else if(user.role === '2'){}
+       else if(user.role === '2'){}
+       else if(user.role === '2'){}
      }
   }
 

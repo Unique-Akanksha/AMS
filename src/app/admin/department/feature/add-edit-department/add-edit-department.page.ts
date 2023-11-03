@@ -95,8 +95,6 @@ export class AddEditDepartmentPage implements OnInit {
     // Call the updateDepartment function from the service
     this.departmentService.updateDepartment(updatedData,
       async (message) => {
-        console.log('Response: ', message);
-        console.log('Message:', message);
         if (message === "Department already exists") {
           const toast = await this.toastController.create({
             message: 'Department already exists',
@@ -106,7 +104,13 @@ export class AddEditDepartmentPage implements OnInit {
           });
           toast.present();
         } else {
-          console.log('Response in else part : ', message);
+          const toast = await this.toastController.create({
+            message: 'Department updated successfully',
+            duration: 3000,
+            position: 'bottom',
+            color: 'success',
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
 
@@ -122,16 +126,22 @@ export class AddEditDepartmentPage implements OnInit {
     this.departmentService.addDepartment(
       formData,
       async (message) => {
-        console.log("Response: ", message);
         if (message === "Department already exists") {
           const toast = await this.toastController.create({
             message: 'Department already exists',
-            duration: 3000, // Duration in milliseconds (3 seconds in this case)
-            position: 'bottom', // You can change the position (top, middle, bottom)
-            color: 'danger', // You can specify a color (success, warning, danger, etc.)
+            duration: 3000, 
+            position: 'bottom',
+            color: 'danger', 
           });
           toast.present();
         } else {
+          const toast = await this.toastController.create({
+            message: 'Department inserted successfully',
+            duration: 3000, 
+            position: 'bottom',
+            color: 'success', 
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
       },

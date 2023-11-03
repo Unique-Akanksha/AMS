@@ -99,7 +99,13 @@ export class AddEditProjectPage implements OnInit {
           });
           toast.present();
         } else {
-          console.log('Response in else part : ', message);
+          const toast = await this.toastController.create({
+            message: 'Project updated successfully',
+            duration: 3000,
+            position: 'bottom',
+            color: 'success',
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
 
@@ -135,12 +141,19 @@ export class AddEditProjectPage implements OnInit {
         if (message === "Project already exists") {
           const toast = await this.toastController.create({
             message: 'Project already exists',
-            duration: 3000, // Duration in milliseconds (3 seconds in this case)
-            position: 'bottom', // You can change the position (top, middle, bottom)
-            color: 'danger', // You can specify a color (success, warning, danger, etc.)
+            duration: 3000, 
+            position: 'bottom', 
+            color: 'danger', 
           });
           toast.present();
         } else {
+          const toast = await this.toastController.create({
+            message: 'Project created successfully',
+            duration: 3000, 
+            position: 'bottom', 
+            color: 'success', 
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
       },
