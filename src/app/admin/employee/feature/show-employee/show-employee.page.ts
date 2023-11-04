@@ -6,7 +6,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/shared/ui/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-show-employee',
@@ -14,9 +16,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./show-employee.page.scss'],
 })
 export class ShowEmployeePage implements OnInit {
-  public students$!: Observable<any[]>;
-  searchKey = '';
-
+  employees$: Observable<any[]>;
+  searchKey!: string;
+  
   loginUser = '';
   dataSource: any;
    
@@ -43,8 +45,33 @@ export class ShowEmployeePage implements OnInit {
     private employeeService: EmployeeService,
     private modalCtrl: ModalController,
     private router: Router,
-    private toastController: ToastController
-  ) {}
+    private toastController: ToastController,
+    private _dialog: MatDialog
+  ) {
+    const staticEmployees: any[] = [
+      {
+        id: 1,
+        name: 'Rahul',
+        role: 'Super Admin',
+        email: 'rahul@test.com',
+        contact: '9876543210',
+        gender: 'Male', 
+        dob: '1995-01-01', 
+        imageUrl: 'assets/images/rahul.jpg' 
+      },
+      {
+        id: 2,
+        name: 'Vishal',
+        role: 'Employee',
+        email: 'vishal@test.com',
+        contact: '9876543210',
+        gender: 'Male', 
+        dob: '1995-01-01', 
+        imageUrl: 'assets/images/vishal.jpg' 
+      },
+    ];
+    this.employees$ = of(staticEmployees);
+  }
 
   ngOnInit() {
     // code for get user role 
@@ -54,6 +81,9 @@ export class ShowEmployeePage implements OnInit {
       const user = JSON.parse(userJson);
       const userRole = user.role;
       this.loginUser = userRole;
+      if(userRole === '1'){
+
+      }
     }
     
     this.refreshEmpList();
@@ -69,22 +99,23 @@ export class ShowEmployeePage implements OnInit {
 
   refreshEmpList() {
     this.employeeService.getEmpList().subscribe((data) => {
+      this.employees$ = of(data); 
       this.dataSource = new MatTableDataSource<any>(data);
       this.dataSource.sort = this.sort!;
       this.dataSource.paginator = this.paginator!;
     });
   }
   
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue);
-    this.filterdata = filterValue;
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  //   console.log(filterValue);
+  //   this.filterdata = filterValue;
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
 
   async openModal(dataToUpdate: any) {
     let actionType = dataToUpdate ? 'update' : 'add';
@@ -93,6 +124,7 @@ export class ShowEmployeePage implements OnInit {
       componentProps: {
         actionType: actionType,
         dataToUpdate: dataToUpdate,
+        
       },
     });
 
@@ -101,17 +133,6 @@ export class ShowEmployeePage implements OnInit {
     });
     return await modal.present();
   }
-
-  // deleteClick(item: any) {
-  //   if (confirm('Are you sure??')) {
-  //     this.employeeService
-  //       .deleteEmployee(item.employee_id)
-  //       .subscribe((data) => {
-  //         this.refreshEmpList();
-  //       });
-  //   }
-  // }
-
 
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
@@ -157,10 +178,27 @@ export class ShowEmployeePage implements OnInit {
     });
   }
 
-  // Implement the logout function
-  logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.searchKey = filterValue;
   }
+
+  // public deleteStudent(savedStudent: any): void {
+  //   this._dialog.open(DeleteDialogComponent, { data: { type: "Employee", name: savedStudent.name } }).afterClosed().subscribe(result => {
+  //     if (result === "cancel" || result === undefined) {
+  //       console.log("canceling delete operation!");
+  //     } else {
+  //       console.log("deleted successfully!!");
+  //     }
+  //   });
+  // }
+
+  public viewEmployee(savedStudent: any): void {
+   
+  }
+
+  // public editStudent(savedStudent: any): void {
+    
+  // }
 
 }

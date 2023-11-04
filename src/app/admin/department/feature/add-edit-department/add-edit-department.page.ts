@@ -11,9 +11,9 @@ import { ToastController } from '@ionic/angular';
 })
 export class AddEditDepartmentPage implements OnInit {
 
-  @Input() actionType: string = ''; // Input property to receive the action type ('add' or 'update')
-  @Input() dataToUpdate: any; // Input property to receive data to update
-  @Input() deptdata: any; // Input property to receive dept data
+  @Input() actionType: string = ''; 
+  @Input() dataToUpdate: any; 
+  @Input() deptdata: any; 
   depForm!: FormGroup;
 
   constructor( private toastController: ToastController,private departmentService: DepartmentService, private fb: FormBuilder, private modalCtrl: ModalController) {
@@ -28,13 +28,11 @@ export class AddEditDepartmentPage implements OnInit {
     });
 
     if (this.actionType === 'update' && this.dataToUpdate) {
-      // Initialize form with data to update
       this.depForm.patchValue({
         name: this.dataToUpdate.name,
         description: this.dataToUpdate.description,
       });
     } else {
-      // Initialize form with default values for add mode
       this.depForm.patchValue({
         name: '',
         description: '',
@@ -44,55 +42,30 @@ export class AddEditDepartmentPage implements OnInit {
 
   closeModal(confirm: boolean) {
     if (confirm) {
-      // Check if the form is valid
       if (this.depForm.valid) {
         const departmentData = this.depForm.value;
 
-        // Perform add or update logic here based on actionType
         if (this.actionType === 'update') {
-          console.log("In update mode");
-          // Update existing record with departmentData
           this.updateDepartment(departmentData);
         } else {
-          console.log("In add mode");
-          // Add new record with departmentData
           this.addDepartment(departmentData);
         }
       }
     }
 
-    // Close the modal and pass data back to the parent component
     this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', data: { ...{id:this.dataToUpdate.department_id}, ...this.depForm.value} });
 
   }
 
-  // updateDepartment(dataToEdit: any) {
-  //   console.log("update function : ", dataToEdit);
-  //   const dataToSet = {
-  //     name: dataToEdit.name, // Set the name from your data
-  //     description: dataToEdit.description, // Set the description from your data
-  //   };
-  //   this.depForm.patchValue(dataToSet);
-  //   console.log("id for call service : ",this.dataToUpdate.department_id);
-  //   dataToEdit.id = this.dataToUpdate.department_id;
-  //   this.departmentService.updateDepartment(dataToEdit).subscribe((result) => {
-  //     if (result) {
-  //       console.log("result", result);
-  //     }
-  //   });
-  // }
-
   async updateDepartment(dataToEdit: any) {
     console.log("update function: ", dataToEdit);
 
-    // Create an object with the data you want to update
     const updatedData = {
       name: dataToEdit.name,
       description: dataToEdit.description,
-      id: this.dataToUpdate.department_id // Include the department ID for the update
+      id: this.dataToUpdate.department_id 
     };
 
-    // Call the updateDepartment function from the service
     this.departmentService.updateDepartment(updatedData,
       async (message) => {
         if (message === "Department already exists") {

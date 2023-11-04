@@ -21,7 +21,7 @@ export class ShowEmpAttendancePage implements OnInit {
   dataSource: any;
   filterdata: string = "";
   displayedColumns: string[] = [
-    'attendanceID',
+    // 'attendanceID',
     'employeeName',
     'employeeDept',
     'currentTime',

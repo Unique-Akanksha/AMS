@@ -37,11 +37,9 @@ export class ShowLeavePage implements OnInit {
   constructor(private router:Router,private leaveRequestService:LeaveService,private userService:UserService) { }
 
   ngOnInit() {
-    // get login user info from user service
     this.loggedInUser = this.userService.getLoginUser();
     this.employeeID = this.loggedInUser?.employee_id;
 
-     // code for get user role 
      const userJson = localStorage.getItem('user');
 
      if (userJson) {
@@ -71,12 +69,5 @@ export class ShowLeavePage implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-   // Implement the logout function
-  logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
-
 
 }

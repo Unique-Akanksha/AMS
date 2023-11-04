@@ -35,7 +35,6 @@ export class ShowProjectPage implements OnInit {
   constructor(private toastController: ToastController,private projectService:ProjectService,private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
-    // code for get user role 
     const userJson = localStorage.getItem('user');
 
     if (userJson){
@@ -90,14 +89,6 @@ export class ShowProjectPage implements OnInit {
     return await modal.present();
   }
 
-  // deleteClick(item: any) {
-  //   if (confirm("Are you sure??")) {
-  //     this.projectService.deleteProject(item.project_id).subscribe(data => {
-  //       this.refreshProjectList();
-  //     })
-  //   }
-  // }
-
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
       this.projectService.deleteProject(item.project_id, 
@@ -141,11 +132,4 @@ export class ShowProjectPage implements OnInit {
       toast.present();
     });
   }
-
-   // Implement the logout function
-   logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
-
 }

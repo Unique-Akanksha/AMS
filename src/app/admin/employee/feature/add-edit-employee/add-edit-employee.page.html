@@ -7,133 +7,135 @@
       </ion-buttons>
       <ion-title>{{ actionType === 'update' ? 'Update Employee' : 'Add Employee' }}</ion-title>
       <ion-buttons slot="end">
-        <ion-button (click)="closeModal(true)" [strong]="true" [disabled]="!tempImageUrl || empForm.invalid">Confirm</ion-button>
+        <ion-button (click)="closeModal(true)" [strong]="true"
+          [disabled]="!tempImageUrl || empForm.invalid">Confirm</ion-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content class="ion-padding">
     <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
-    <!-- <ion-item>
-      <input type="file" accept="image/*" (change)="onImageSelected($event)">
-      <ion-img [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + imageUrl" *ngIf="imageUrl"></ion-img>
-      
-    </ion-item> -->
+      <ion-item>
+        <input type="file" accept="image/*" (change)="onImageSelected($event)" style="display: none" id="imageInput">
+        <ion-button expand="full" fill="clear" (click)="openImageInput()" color="primary">
+          Choose Team Image
+        </ion-button>
 
-    <ion-item>
-      <input type="file" accept="image/*" (change)="onImageSelected($event)" style="display: none" id="imageInput">
-      <ion-button expand="full" fill="clear" (click)="openImageInput()" color="primary">
-        Choose Team Image
-      </ion-button>
-      
-      <!-- <ion-button expand="full" color="primary"  (click)="uploadImage()" [disabled]="!tempImageUrl">
-        Upload Image
-      </ion-button> -->
-      <ion-img [src]="tempImageUrl" *ngIf="tempImageUrl"></ion-img>
-    </ion-item>
+        <ion-img [src]="tempImageUrl" *ngIf="tempImageUrl"></ion-img>
+      </ion-item>
 
-      
-    <ion-item>
 
-    <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly placeholder="Your First Name" (paste)="onPaste($event)"></ion-input>
+      <ion-item>
 
-    </ion-item>
-    <div *ngIf="empForm.controls['first_name'].touched && empForm.controls['first_name'].invalid">
-      <ion-text color="danger">First Name is required.</ion-text>
-    </div>
+        <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" appAlphabetOnly
+          placeholder="Your First Name" (paste)="onPaste($event)"></ion-input>
 
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" appAlphabetOnly placeholder="Your Middle Name" (paste)="onPaste($event)"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['middle_name'].touched && empForm.controls['middle_name'].invalid">
-      <ion-text color="danger">Middle Name is required.</ion-text>
-    </div>
+      </ion-item>
+      <div *ngIf="empForm.controls['first_name'].touched && empForm.controls['first_name'].invalid">
+        <ion-text color="danger">First Name is required.</ion-text>
+      </div>
 
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" appAlphabetOnly placeholder="Your Last Name" (paste)="onPaste($event)"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['last_name'].touched && empForm.controls['last_name'].invalid">
-      <ion-text color="danger">Last Name is required.</ion-text>
-    </div>
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" appAlphabetOnly
+          placeholder="Your Middle Name" (paste)="onPaste($event)"></ion-input>
+      </ion-item>
+      <div *ngIf="empForm.controls['middle_name'].touched && empForm.controls['middle_name'].invalid">
+        <ion-text color="danger">Middle Name is required.</ion-text>
+      </div>
 
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Email" formControlName="email" placeholder="Your Email" (paste)="onPaste($event)"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['email'].touched && empForm.controls['email'].invalid">
-      <ion-text color="danger">
-        <ng-container *ngIf="empForm.controls['email'].hasError('required')">
-          Email is required.
-        </ng-container>
-        <ng-container *ngIf="empForm.controls['email'].hasError('email') && !empForm.controls['email'].hasError('required')">
-          Invalid email format.
-        </ng-container>
-        <ng-container *ngIf="empForm.controls['email'].hasError('startsWithNumber')">
-          Email cannot start with a number.
-        </ng-container>
-        <ng-container *ngIf="empForm.controls['email'].hasError('containsInvalidSymbols')">
-          Email cannot contain symbols other than "@" and ".".
-        </ng-container>
-      </ion-text>
-    </div>
-    
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" appAlphabetOnly
+          placeholder="Your Last Name" (paste)="onPaste($event)"></ion-input>
+      </ion-item>
+      <div *ngIf="empForm.controls['last_name'].touched && empForm.controls['last_name'].invalid">
+        <ion-text color="danger">Last Name is required.</ion-text>
+      </div>
 
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Hire Date" formControlName="hire_date" placeholder="Hire Date" type="date"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['hire_date'].touched && empForm.controls['hire_date'].invalid">
-      <ion-text color="danger">Hire Date is required.</ion-text>
-    </div>
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Email" formControlName="email" placeholder="Your Email"
+          (paste)="onPaste($event)"></ion-input>
+      </ion-item>
+      <div *ngIf="empForm.controls['email'].touched && empForm.controls['email'].invalid">
+        <ion-text color="danger">
+          <ng-container *ngIf="empForm.controls['email'].hasError('required')">
+            Email is required.
+          </ng-container>
+          <ng-container
+            *ngIf="empForm.controls['email'].hasError('email') && !empForm.controls['email'].hasError('required')">
+            Invalid email format.
+          </ng-container>
+          <ng-container *ngIf="empForm.controls['email'].hasError('startsWithNumber')">
+            Email cannot start with a number.
+          </ng-container>
+          <ng-container *ngIf="empForm.controls['email'].hasError('containsInvalidSymbols')">
+            Email cannot contain symbols other than "@" and ".".
+          </ng-container>
+        </ion-text>
+      </div>
 
-    <ion-item>
-      <ion-select labelPlacement="stacked" label="Select Role" formControlName="role" placeholder="Select a role">
-        <ion-select-option *ngFor="let role of userRoleList" [value]="role.role_id">
-          {{ role.name}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div *ngIf="empForm.controls['role'].touched && empForm.controls['role'].invalid">
-      <ion-text color="danger">Please select a role.</ion-text>
-    </div>
 
-    <ion-item>
-      <ion-select labelPlacement="stacked" label="Select Department" formControlName="department" placeholder="Select a department">
-        <ion-select-option *ngFor="let department of departments">
-          {{ department.name }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div *ngIf="empForm.controls['department'].touched && empForm.controls['department'].invalid">
-      <ion-text color="danger">Please select a department.</ion-text>
-    </div>
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Hire Date" formControlName="hire_date" placeholder="Hire Date"
+          type="date"></ion-input>
+      </ion-item>
+      <div *ngIf="empForm.controls['hire_date'].touched && empForm.controls['hire_date'].invalid">
+        <ion-text color="danger">Hire Date is required.</ion-text>
+      </div>
 
-    <ion-item>
-      <ion-select labelPlacement="stacked" label="Select Position" formControlName="position">
-        <ion-select-option value="Manager">Manager</ion-select-option>
-        <ion-select-option value="Engineer">Engineer</ion-select-option>
-        <ion-select-option value="Designer">Designer</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <div *ngIf="empForm.controls['position'].touched && empForm.controls['position'].invalid">
-      <ion-text color="danger">Please select a position.</ion-text>
-    </div>
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Role" formControlName="role" placeholder="Select a role">
+          <ion-select-option *ngFor="let role of userRoleList" [value]="role.role_id">
+            {{ role.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="empForm.controls['role'].touched && empForm.controls['role'].invalid">
+        <ion-text color="danger">Please select a role.</ion-text>
+      </div>
 
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Enter Password" formControlName="password" placeholder="Password" type="password" (paste)="onPaste($event)"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['password'].touched && empForm.controls['password'].invalid">
-      <ion-text color="danger">Password is required.</ion-text>
-    </div>
-    
-    <ion-item>
-      <ion-input labelPlacement="stacked" label="Confirm Password" formControlName="confirmPassword" placeholder="Confirm Password" type="password" (paste)="onPaste($event)"></ion-input>
-    </ion-item>
-    <div *ngIf="empForm.controls['confirmPassword'].touched && empForm.controls['confirmPassword'].hasError('required')">
-      <ion-text color="danger">Confirm Password is required.</ion-text>
-    </div>
-    <div *ngIf="empForm.get('confirmPassword')?.touched && empForm.get('confirmPassword')?.hasError('passwordMismatch')">
-      <ion-text color="danger">Passwords do not match.</ion-text>
-    </div>
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Department" formControlName="department"
+          placeholder="Select a department">
+          <ion-select-option *ngFor="let department of departments">
+            {{ department.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="empForm.controls['department'].touched && empForm.controls['department'].invalid">
+        <ion-text color="danger">Please select a department.</ion-text>
+      </div>
+
+      <ion-item>
+        <ion-select labelPlacement="stacked" label="Select Position" formControlName="position">
+          <ion-select-option value="Manager">Manager</ion-select-option>
+          <ion-select-option value="Engineer">Engineer</ion-select-option>
+          <ion-select-option value="Designer">Designer</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div *ngIf="empForm.controls['position'].touched && empForm.controls['position'].invalid">
+        <ion-text color="danger">Please select a position.</ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Password" formControlName="password" placeholder="Password"
+          type="password" (paste)="onPaste($event)"></ion-input>
+      </ion-item>
+      <div *ngIf="empForm.controls['password'].touched && empForm.controls['password'].invalid">
+        <ion-text color="danger">Password is required.</ion-text>
+      </div>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Confirm Password" formControlName="confirmPassword"
+          placeholder="Confirm Password" type="password" (paste)="onPaste($event)"></ion-input>
+      </ion-item>
+      <div
+        *ngIf="empForm.controls['confirmPassword'].touched && empForm.controls['confirmPassword'].hasError('required')">
+        <ion-text color="danger">Confirm Password is required.</ion-text>
+      </div>
+      <div
+        *ngIf="empForm.get('confirmPassword')?.touched && empForm.get('confirmPassword')?.hasError('passwordMismatch')">
+        <ion-text color="danger">Passwords do not match.</ion-text>
+      </div>
 
     </form>
   </ion-content>
-  

@@ -8,8 +8,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 
-
-
 @Component({
   selector: 'app-show-attendance',
   templateUrl: './show-attendance.page.html',
@@ -42,7 +40,6 @@ export class ShowAttendancePage implements OnInit {
   constructor(private toastController: ToastController,private attendanceService:AttendanceService,private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
-    // code for get user role 
     const userJson = localStorage.getItem('user');
 
     if (userJson){
@@ -95,14 +92,6 @@ export class ShowAttendancePage implements OnInit {
     return await modal.present();
   }
 
-  // deleteClick(item: any) {
-  //   if (confirm("Are you sure??")) {
-  //     this.attendanceService.deleteAttendance(item.attendanceID).subscribe(data => {
-  //       this.refreshAttendanceList();
-  //     })
-  //   }
-  // }
-
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
       this.attendanceService.deleteAttendance(item.attendanceID, 
@@ -146,12 +135,4 @@ export class ShowAttendancePage implements OnInit {
       toast.present();
     });
   }
-  
-
-  // Implement the logout function
-  logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
-
 }

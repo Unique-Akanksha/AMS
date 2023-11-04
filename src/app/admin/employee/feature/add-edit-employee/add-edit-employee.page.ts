@@ -93,41 +93,6 @@ export class AddEditEmployeePage implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  // async closeModal(confirm: boolean) {
-  //   if (confirm) {
-  //     console.log("confirm button clicked");
-  //     // this.uploadImage();
-  //     if (this.empForm.valid) {
-  //       // this.employeeData = this.empForm.value;  
-  //       this.employeeData = { ...this.employeeData, ...this.empForm.value };
-  //       this.uploadImage(); 
-        
-        
-  //       console.log('Employee Data',this.employeeData);
-  //       console.log('first_name : ' + this.employeeData.first_name);
-  //       console.log('middle_name : ' + this.employeeData.middle_name);
-  //       console.log('last_name : ' + this.employeeData.last_name);
-  //       console.log('email : ' + this.employeeData.email);
-  //       console.log('hire_date : ' + this.employeeData.hire_date);
-  //       console.log('department : ' + this.employeeData.department);
-  //       console.log('position : ' + this.employeeData.position);
-  //       console.log('password : ' + this.employeeData.password);
-  //       console.log('confirmPassword : ' + this.employeeData.confirmPassword);
-  //       console.log('userPhoto : ' + this.employeeData.userPhoto);
-  //       console.log('role : ' + this.employeeData.role);
-    
-        
-  //       if (this.actionType === 'update') {
-  //         this.updateEmployee(this.employeeData);          
-  //       } else {  
-  //         this.addEmployee(this.employeeData);
-  //       }
-        
-  //     }
-  //   }
-  //   this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data': { ...{ id: this.dataToUpdate.employee_id }, ...this.empForm.value } });
-  // }
-
   async closeModal(confirm: boolean) {
     if (confirm) {
       console.log("confirm button clicked");
@@ -162,16 +127,13 @@ export class AddEditEmployeePage implements OnInit {
       try {
         const response = await this.employeeService.uploadImage(file).toPromise();
         const parsedResponse = JSON.parse(response || '{}');
-        const imageUrl = parsedResponse.imageUrl || ''; // Provide a default value if imageUrl is undefined
-        // Store the image URL in your table or any desired location
-        // For example, you can call another service method to save it to a database
-  
+        const imageUrl = parsedResponse.imageUrl || '';   
         return imageUrl;
       } catch (error) {
         throw error;
       }
     }
-    return undefined; // Return undefined if 'file' is not defined
+    return undefined; 
   }
   
   
@@ -222,8 +184,6 @@ export class AddEditEmployeePage implements OnInit {
   }
 
   async addEmployee(formData: any) {
-    // console.log('formData: ', formData);
-    // console.log('Photo: ',formData.Photo);
     this.employeeService.addEmployee(
       formData,
       async (message) => {
@@ -314,21 +274,5 @@ openImageInput() {
     inputElement.click();
   }
 }
-
-// uploadImage() {
-//   console.log('uploading image');
-//   const file = this.file;
-//   if (file) {
-//     this.employeeService.uploadImage(file).subscribe(
-//       (response: any) => {
-//         this.imageUrl = response?.imageUrl;
-//         this.employeeData.userPhoto = this.imageUrl;
-//       },
-//       (error) => {
-//         console.error('Image upload error:', error);
-//       }
-//     );
-//   }
-// }
 
 }

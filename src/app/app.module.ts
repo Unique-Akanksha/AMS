@@ -15,7 +15,6 @@ import { MatPaginatorModule } from '@angular/material/paginator'; // Import the 
 import { MatFormFieldModule } from '@angular/material/form-field'; // Import the MatFormFieldModule
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [MatTableModule,MatSortModule,MatPaginatorModule,MatFormFieldModule,BrowserModule,BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule,ModalModule.forRoot()],

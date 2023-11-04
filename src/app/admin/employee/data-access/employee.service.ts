@@ -33,23 +33,15 @@ export class EmployeeService {
     return this.http.get<any[]>(this.EmployeeAPIUrl);
   }
 
-  // Implement a function to get the department count.
   getEmployeeCount(): Observable<number> {
     const endpoint = `${this.EmployeeAPIUrl}`;
 
     return this.http.get<any[]>(endpoint).pipe(
       map((employees:any) => {
-        // You can calculate the count based on the array's length.
         return employees.length;
       })
     );
   }
-
-  // deleteEmployee(val:any){
-  //   const url = this.EmployeeAPIUrl;
-  //   const data = { id: val };
-  //   return this.http.delete(url, { body: data });
-  // }
 
   deleteEmployee(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.EmployeeAPIUrl;
@@ -66,7 +58,6 @@ export class EmployeeService {
         }
       },
       (error) => {
-        // Handle HTTP error here
         errorCallback(error);
       }
     );
@@ -86,50 +77,22 @@ export class EmployeeService {
     );
   }
 
-  // Add this function to upload an image
-  // uploadImage(file: File): Observable<{ imageUrl?: string }> {
-  //   const formData: FormData = new FormData();
-  //   formData.append('image', file, file.name);
-  
-  //   const uploadUrl = this.apiURL + 'uploadImage.php'; // Replace with the actual image upload endpoint
-  
-  //   const headers = new HttpHeaders();
-  //   // Set any required headers for image upload, such as authorization headers
-  
-  //   return this.http.post(uploadUrl, formData, { headers }).pipe(
-  //     map((response: any) => {
-  //       // Return the image URL from the response
-  //       return {
-  //         imageUrl: response['imageUrl']
-  //       };
-  //     }),
-  //     catchError((error) => {
-  //       // Handle errors if the HTTP request fails
-  //       console.error('Image upload error:', error);
-  //       throw error; // Re-throw the error for further handling in the component
-  //     })
-  //   );
-  // }
-
 
   uploadImage(file: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('image', file, file.name);
 
-    const uploadUrl = this.apiURL + 'uploadImage.php'; // Replace with the actual image upload endpoint
+    const uploadUrl = this.apiURL + 'uploadImage.php'; 
 
     const headers = new HttpHeaders();
-    // Set any required headers for image upload, such as authorization headers
 
     return this.http.post(uploadUrl, formData, { headers, responseType: 'text' }).pipe(
       map((imageUrl: string) => {
-        // Return the image URL from the response
         return imageUrl;
       }),
       catchError((error) => {
-        // Handle errors if the HTTP request fails
         console.error('Image upload error:', error);
-        throw error; // Re-throw the error for further handling in the component
+        throw error; 
       })
     );
   }
