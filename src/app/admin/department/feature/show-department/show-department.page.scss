@@ -78,3 +78,15 @@ ion-header {
     }
   }
   
+
+/* Use the custom-modal class to define the modal size */
+.custom-modal {
+  width: 80% !important; /* Set the desired width */
+  max-width: 80%; /* Set the maximum width if needed */
+  height: 80vh !important; /* Set the desired height */
+  max-height: 80vh; /* Set the maximum height if needed */
+}
+
+
+  
+  

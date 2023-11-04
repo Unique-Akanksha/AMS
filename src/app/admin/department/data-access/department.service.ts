@@ -21,7 +21,6 @@ export class DepartmentService {
     return this.http.get<any[]>(this.DepartmentAPIUrl,val);
   }
 
-  // Implement a function to get the department count.
   getDepartmentCount(): Observable<number> {
     const endpoint = `${this.DepartmentAPIUrl}`;
 
@@ -31,12 +30,6 @@ export class DepartmentService {
       })
     );
   }
-
-  // deleteDepartment(val:any){
-  //   const url = this.DepartmentAPIUrl;
-  //   const data = { id: val };
-  //   return this.http.delete(url, { body: data });
-  // }
 
   deleteDepartment(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.DepartmentAPIUrl;
@@ -53,7 +46,6 @@ export class DepartmentService {
         }
       },
       (error) => {
-        // Handle HTTP error here
         errorCallback(error);
       }
     );

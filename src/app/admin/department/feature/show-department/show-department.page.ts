@@ -81,8 +81,10 @@ export class ShowDepartmentPage implements OnInit {
       component: AddEditDepartmentPage,
       componentProps: {
         actionType: actionType,
-        dataToUpdate: dataToUpdate
+        dataToUpdate: dataToUpdate,
+        cssClass: 'custom-modal',
       },
+
     });
 
     modal.onDidDismiss().then((data) => {

@@ -12,9 +12,8 @@ import { DepartmentService } from 'src/app/admin/department/data-access/departme
   styleUrls: ['./add-edit-attendance.page.scss'],
 })
 export class AddEditAttendancePage implements OnInit {
-  @Input() actionType: string = ''; // Input property to receive the action type ('add' or 'update')
-  @Input() dataToUpdate: any; // Input property to receive data to update
-  @Input() attendancedata: any; // Input property to receive dept data
+  @Input() actionType: string = '';
+  @Input() dataToUpdate: any; 
   attendanceForm!: FormGroup;
   employees: any[] = [];
   departments: any[] = [];
@@ -32,12 +31,10 @@ export class AddEditAttendancePage implements OnInit {
 
     this.departmentService.getDepList().subscribe((departments) => {
       this.departments = departments;
-      // console.log("departments list :",this.departments);
     });
 
     this.employeeService.getEmpList().subscribe((employees) => {
       this.employees = employees;
-      // console.log("emp list :",this.employees);
     });
 
     this.attendanceForm = this.fb.group({
@@ -56,7 +53,6 @@ export class AddEditAttendancePage implements OnInit {
     });
 
     if (this.actionType === 'update' && this.dataToUpdate) {
-      // Initialize form with data to update
       this.attendanceForm.patchValue({
         employeeName: this.dataToUpdate.employeeName,
         employeeDept: this.dataToUpdate.employeeDept,
@@ -74,11 +70,9 @@ export class AddEditAttendancePage implements OnInit {
 
   closeModal(confirm: boolean) {
     if (confirm) {
-      // Check if the form is valid
       if (this.attendanceForm.valid) {
         const attendanceData = this.attendanceForm.value;
 
-        // Perform add or update logic here based on actionType
         if (this.actionType === 'update') {
           console.log("In update mode");
           this.updateAttendance(attendanceData);
@@ -86,22 +80,18 @@ export class AddEditAttendancePage implements OnInit {
       }
     }
 
-    // Close the modal and pass data back to the parent component
     this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data':{...{id:this.dataToUpdate.attendanceID},...this.attendanceForm.value}});
   }
 
   updateAttendance(dataToEdit: any) {  
-    // Calculate total hours using the provided function
     const totalHours = this.calculateTotalHours(dataToEdit.checkInTime, dataToEdit.checkOutTime);
 
-    // Create an object with the data you want to update
     const updatedData = {
-      checkOutTime: dataToEdit.checkOutTime, // Corrected to use dataToEdit.checkOutTime
+      checkOutTime: dataToEdit.checkOutTime, 
       totalHrsTime: totalHours,
-      id: this.dataToUpdate.attendanceID // Include the attendance ID for the update
+      id: this.dataToUpdate.attendanceID 
     };
   
-    // Call the updateDepartment function from the service
     this.attendanceService.updateAttendance(updatedData,
       async (message) => {
         console.log('Response: ', message);

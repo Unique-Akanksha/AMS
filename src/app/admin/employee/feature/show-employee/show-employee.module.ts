@@ -13,7 +13,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
+import { FilterModule } from 'src/app/shared/pipes/filter/filter.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +28,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatInputModule,
     MatPaginatorModule,
     MatSortModule,
+    FilterModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   declarations: [ShowEmployeePage]
 })

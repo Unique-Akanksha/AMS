@@ -117,7 +117,7 @@ ion-select{
     width:80%;
   }
 }
-@media (max-width:280px){
+@media (max-width:568px){
   ion-select{
     width:80%;
   }
@@ -129,7 +129,9 @@ h3{
   line-height: 10px;
 }
 .y_color{
-    color: orange;
+    // color: orange;
+    color: #1abc9c;
+    margin-bottom: 0px;
 }
 
 .btn_center {
@@ -156,8 +158,9 @@ h3{
 
   .custom-icon {
     font-size:45px;
-    background:orange;
-    padding:30px;
+    // background:orange;
+    background: #1abc9c;;
+    padding:25px;
     -webkit-border-radius:1100%;
     -moz-border-radius:100%;
     -o-border-radius:100%;
@@ -209,3 +212,6 @@ h3{
   display: none;
 }
 
+.for_m_t10{
+  margin-top: 10px;
+}

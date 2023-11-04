@@ -34,12 +34,6 @@ export class LeaveService {
     );
   }
 
-  // deleteLeaveRequest(val:any){
-  //   const url = this.LeaveRequestsAPIUrl;
-  //   const data = { id: val };
-  //   return this.http.delete(url, { body: data });
-  // }
-
   deleteLeaveRequest(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.LeaveRequestsAPIUrl;
     const data = { id: val };
@@ -55,7 +49,6 @@ export class LeaveService {
         }
       },
       (error) => {
-        // Handle HTTP error here
         errorCallback(error);
       }
     );

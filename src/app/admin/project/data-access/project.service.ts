@@ -32,7 +32,6 @@ export class ProjectService {
     return this.http.get<any[]>(this.ProjectAPIUrl);
   }
 
-  // Implement a function to get the department count.
   getProjectCount(): Observable<number> {
     const endpoint = `${this.ProjectAPIUrl}`;
     return this.http.get<any[]>(endpoint).pipe(
@@ -41,12 +40,6 @@ export class ProjectService {
       })
     );
   }
-
-  // deleteProject(val:any){
-  //   const url = this.ProjectAPIUrl;
-  //   const data = { id: val };
-  //   return this.http.delete(url, { body: data });
-  // }
 
   deleteProject(val: any, successCallback: (message: string) => void, errorCallback: (error: any) => void): void {
     const url = this.ProjectAPIUrl;
@@ -63,7 +56,6 @@ export class ProjectService {
         }
       },
       (error) => {
-        // Handle HTTP error here
         errorCallback(error);
       }
     );
