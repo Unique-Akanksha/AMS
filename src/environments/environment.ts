@@ -1,17 +1,21 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+
 
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'YOUR_API_KEY',
-    authDomain: 'YOUR_AUTH_DOMAIN',
-    projectId: 'YOUR_PROJECT_ID',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    appId: 'YOUR_APP_ID'
+    apiKey: "AIzaSyCdooyQlX3mujR0bTb8FPSmgD7EVZu0WJQ",
+    authDomain: "websar-ams.firebaseapp.com",
+    projectId: "websar-ams",
+    storageBucket: "websar-ams.appspot.com",
+    messagingSenderId: "237343548956",
+    appId: "1:237343548956:web:9967db542c630a5b10a1d9",
+    measurementId: "G-QQ34YX0DXJ"
   },
+ 
+
+  
   // apiURLserver:'http://localhost/ionic/AttendanceManagementSystem/backend/',
   apiURLserver:'https://demo101.websartech.com/AMS_APIS/backend/',
 };

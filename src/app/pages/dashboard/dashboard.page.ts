@@ -7,6 +7,11 @@ import { ProjectService } from 'src/app/admin/project/data-access/project.servic
 import { Subscription,timer} from 'rxjs';
 import { SessionService } from 'src/app/services/session.service';
 import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
+import { Plugins } from '@capacitor/core';
+import { PushNotification, PushNotifications } from '@capacitor/push-notifications';
+import { PushNotificationService } from 'src/app/services/push-notification.service';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -30,8 +35,8 @@ export class DashboardPage implements OnInit {
   remainingSessionTime: number = 0;
   sessionTimeout: number = 600 * 60 * 1000; // 30 minutes in milliseconds
 
-  constructor(private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService, private leaveRequestService:LeaveService,private router: Router) {
-
+  constructor(private notificationService: PushNotificationService,private sessionService: SessionService,private departmentService:DepartmentService, private projectService:ProjectService,private employeeService:EmployeeService,private attendanceService:AttendanceService, private leaveRequestService:LeaveService,private router: Router) {
+    this.addListeners();
   }
 
   ngOnInit() {
@@ -146,5 +151,56 @@ export class DashboardPage implements OnInit {
   padZero(num: number): string {
     return num < 10 ? `0${num}` : num.toString();
   }
+
+  addListeners = async () => {
+    await PushNotifications.addListener('registration', (token) => {
+      console.info('Registration token: ', token.value);
+    });
+
+    await PushNotifications.addListener('registrationError', (err) => {
+      console.error('Registration error: ', err.error);
+    });
+
+    await PushNotifications.addListener('pushNotificationReceived', (notification) => {
+      console.log('Push notification received: ', notification);
+      // Handle received push notifications here
+    });
+
+    await PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
+      console.log('Push notification action performed', notification.actionId, notification.inputValue);
+      // Handle user actions on push notifications here
+    });
+  };
+
+
+  registerPushNotifications = async () => {
+    let permStatus = await PushNotifications.checkPermissions();
+    
+    console.log('Permission status:', permStatus);
+    
+    if (permStatus.receive === 'prompt') {
+      permStatus = await PushNotifications.requestPermissions();
+    }
+    
+    if (permStatus.receive !== 'granted') {
+      console.error('User denied permissions!');
+      return;
+    }
+    
+    await PushNotifications.register();
+  }
+  
+
+
+  getDeliveredNotifications = async () => {
+    try {
+      const notificationList = await PushNotifications.getDeliveredNotifications();
+      console.log('delivered notifications', notificationList);
+    } catch (error) {
+      console.error('Error while getting delivered notifications:', error);
+    }
+  }
+  
+
 
 }
