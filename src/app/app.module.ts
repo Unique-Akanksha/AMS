@@ -13,11 +13,13 @@ import { MatTableModule } from '@angular/material/table'; // Import the MatTable
 import { MatSortModule } from '@angular/material/sort'; // Import the MatSortModule
 import { MatPaginatorModule } from '@angular/material/paginator'; // Import the MatPaginatorModule
 import { MatFormFieldModule } from '@angular/material/form-field'; // Import the MatFormFieldModule
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [MatTableModule,MatSortModule,MatPaginatorModule,MatFormFieldModule,BrowserModule,BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule,ModalModule.forRoot()],
+  imports: [MatTableModule, AngularFireModule.initializeApp(environment.firebaseConfig),MatSortModule,MatPaginatorModule,MatFormFieldModule,BrowserModule,BrowserAnimationsModule,IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,ReactiveFormsModule,ModalModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },],
 
   bootstrap: [AppComponent],

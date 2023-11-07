@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "237343548956",
+    "firebase_url": "https://websar-ams-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "websar-ams",
+    "storage_bucket": "websar-ams.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237343548956:android:0ac4eb16219d80d910a1d9",
+        "android_client_info": {
+          "package_name": "Websar.AMS"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237343548956-70vpm7aroadr9v3qmdo8gmp634gpnn2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNWbgbtEKthJeT8w1C2aNAlL60-VFe_4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237343548956-70vpm7aroadr9v3qmdo8gmp634gpnn2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

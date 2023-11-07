@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Login } from 'src/app/datatype';
+import { Login } from 'src/app/shared/data-access/login';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SessionService } from 'src/app/services/session.service';
 

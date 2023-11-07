@@ -15,6 +15,7 @@
 
   <ion-content class="ion-padding">
     <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
+      
       <ion-item>
         <input type="file" accept="image/*" (change)="onImageSelected($event)" style="display: none" id="imageInput">
         <ion-button expand="full" fill="clear" (click)="openImageInput()" color="primary">

@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CommonDataTableModule } from 'src/app/shared/shared/common-data-table/common-data-table.module';
+import { CommonDataTableModule } from 'src/app/shared/components/common-data-table/common-data-table.module';
 
 @NgModule({
   imports: [
