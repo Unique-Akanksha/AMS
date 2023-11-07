@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { UserService } from 'src/app/dashboard/services/user/user.service';
-import { SignUp } from 'src/app/datatype';
+import { SignUp } from 'src/app/shared/data-access/signup';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 

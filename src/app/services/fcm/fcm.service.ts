@@ -24,7 +24,7 @@ export class FcmService {
   initPush() {
     if(Capacitor.getPlatform() !== 'web') {
       this.registerPush();
-      // this.getDeliveredNotifications();
+      this.getDeliveredNotifications();
     }
   }
 

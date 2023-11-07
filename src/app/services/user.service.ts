@@ -1,7 +1,8 @@
 import { Injectable} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Login, SignUp } from 'src/app/datatype';
+import { Login } from '../shared/data-access/login';
+import { SignUp } from '../shared/data-access/signup';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EmployeeService } from '../admin/employee/data-access/employee.service';

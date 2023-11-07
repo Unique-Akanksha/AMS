@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'Websar-AMS',
-  appName: 'Websar-AMS',
+  appId: 'Websar.AMS',
+  appName: 'Websar.AMS',
   webDir: 'www',
   server: {
     androidScheme: 'https'
