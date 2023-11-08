@@ -13,7 +13,7 @@
       <div class="action-button">
 
       </div>
-      <ion-list *ngIf="userRole === '5'" lines="none"class="menu-item">
+      <ion-list  *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" lines="none"class="menu-item">
         <ion-item routerLink="/dashboard">
           <ion-icon name="newspaper-outline"></ion-icon>Dashboard
         </ion-item>

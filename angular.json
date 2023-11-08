@@ -35,6 +35,7 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/theme/variables.scss",
               "src/global.scss"
+              
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           },

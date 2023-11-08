@@ -16,6 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'; // Import the
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
+import { ChartComponent } from './shared/components/chart/chart.component';
+
 
 @NgModule({
   declarations: [AppComponent],

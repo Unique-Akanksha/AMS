@@ -28,7 +28,6 @@ export class ApproveRequestsPage implements OnInit {
     });
 
     if (this.actionType === 'update' && this.dataToUpdate) {
-      // Initialize form with data to update
       this.approveRequestForm.patchValue({
         employee_id: this.dataToUpdate.employee_id,
         leave_type: this.dataToUpdate.leave_type,
@@ -43,55 +42,46 @@ export class ApproveRequestsPage implements OnInit {
 
   closeModal(confirm: boolean) {
     if (confirm) {
-      // Check if the form is valid
       if (this.approveRequestForm.valid) {
         const approveRequestData = this.approveRequestForm.value;
 
-        // Perform add or update logic here based on actionType
         if (this.actionType === 'update') {
-          console.log("In update mode");
           this.updateLeaveRequest(approveRequestData);
         }
       }
     }
 
-    // Close the modal and pass data back to the parent component
     this.modalCtrl.dismiss({ role: confirm ? 'confirm' : 'cancel', 'data':{...{id:this.dataToUpdate.leaveRequestID},...this.approveRequestForm.value}});
   }
 
 
   updateLeaveRequest(dataToEdit: any){
-    // Create an object with the data you want to update
     const updatedData = {
       employee_id: dataToEdit.employee_id,
-      // leave_type: dataToEdit.leave_type,
       start_date: dataToEdit.start_date,
       end_date: dataToEdit.end_date,
-      // reason: dataToEdit.reason,
       status: dataToEdit.status,
-      // created_at: dataToEdit.created_at,
-      id: this.dataToUpdate.leaveRequestID // Include the attendance ID for the update
+      id: this.dataToUpdate.leaveRequestID
     };
-
-    console.log("datatoedit :",dataToEdit);
-    console.log("Update data: ",updatedData);
-  
-    // Call the updateDepartment function from the service
     
     this.leaveRequestService.updateLeaveRequest(updatedData,
       async (message:any) => {
-        console.log('Response: ', message);
-        console.log('Message:', message);
-        if (message === "Attendance already exists") {
+        if (message === "LeaveRequest already exists") {
           const toast = await this.toastController.create({
-            message: 'Attendance already exists',
+            message: 'LeaveRequest already exists',
             duration: 3000,
             position: 'bottom',
             color: 'danger',
           });
           toast.present();
         } else {
-          console.log('Response in else part : ', message);
+          const toast = await this.toastController.create({
+            message: 'LeaveRequest updated successfully',
+            duration: 3000,
+            position: 'bottom',
+            color: 'Success',
+          });
+          toast.present();
           this.modalCtrl.dismiss();
         }
       },
