@@ -17,7 +17,6 @@ export class AdminLeaveHistoryPage implements OnInit {
   dataSource: any;
   filterdata :string= "";
   displayedColumns: string[] = [
-    // 'leaveRequestID',
     'employee_id',
     'leave_type',
     'start_date',
@@ -34,7 +33,6 @@ export class AdminLeaveHistoryPage implements OnInit {
   constructor(private toastController: ToastController,private leaveRequestService: LeaveService, private modalCtrl:ModalController,private router: Router) { }
 
   ngOnInit() {
-     // code for get user role 
      const userJson = localStorage.getItem('user');
 
      if (userJson){
@@ -88,15 +86,6 @@ export class AdminLeaveHistoryPage implements OnInit {
     }
   }
 
-
-  // deleteClick(item: any) {
-  //   if (confirm("Are you sure??")) {
-  //     this.leaveRequestService.deleteLeaveRequest(item.leaveRequestID).subscribe(data => {
-  //       this.refreshLeaveRequestsList();
-  //     })
-  //   }
-  // }
-
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
       this.leaveRequestService.deleteLeaveRequest(item.leaveRequestID, 
@@ -140,11 +129,4 @@ export class AdminLeaveHistoryPage implements OnInit {
       toast.present();
     });
   }
-
-  // Implement the logout function
-  logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
-
 }

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/shared/ui/delete-dialog/delete-dialog.component';
+import { DetailsEmployeePage } from '../details-employee/details-employee.page';
 
 @Component({
   selector: 'app-show-employee',
@@ -24,7 +25,6 @@ export class ShowEmployeePage implements OnInit {
    
   filterdata :string= "";
   displayedColumns: string[] = [
-    // 'employee_id',
     'userPhoto',
     'first_name',
     'middle_name',
@@ -49,32 +49,11 @@ export class ShowEmployeePage implements OnInit {
     private _dialog: MatDialog
   ) {
     const staticEmployees: any[] = [
-      {
-        id: 1,
-        name: 'Rahul',
-        role: 'Super Admin',
-        email: 'rahul@test.com',
-        contact: '9876543210',
-        gender: 'Male', 
-        dob: '1995-01-01', 
-        imageUrl: 'assets/images/rahul.jpg' 
-      },
-      {
-        id: 2,
-        name: 'Vishal',
-        role: 'Employee',
-        email: 'vishal@test.com',
-        contact: '9876543210',
-        gender: 'Male', 
-        dob: '1995-01-01', 
-        imageUrl: 'assets/images/vishal.jpg' 
-      },
     ];
     this.employees$ = of(staticEmployees);
   }
 
   ngOnInit() {
-    // code for get user role 
     const userJson = localStorage.getItem('user');
 
     if (userJson){
@@ -105,34 +84,42 @@ export class ShowEmployeePage implements OnInit {
       this.dataSource.paginator = this.paginator!;
     });
   }
+
+  async openModal(actionType: 'add' | 'update' | 'view', dataToUpdate: any) {
+    let modalComponent;
   
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  //   console.log(filterValue);
-  //   this.filterdata = filterValue;
-
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
-  async openModal(dataToUpdate: any) {
-    let actionType = dataToUpdate ? 'update' : 'add';
+    switch (actionType) {
+      case 'add':
+        modalComponent = AddEditEmployeePage;
+        break;
+      case 'update':
+        modalComponent = AddEditEmployeePage; 
+        break;
+      case 'view':
+        modalComponent = DetailsEmployeePage;
+        break;
+      default:
+        return;
+    }
+  
     const modal = await this.modalCtrl.create({
-      component: AddEditEmployeePage,
+      component: modalComponent,
       componentProps: {
         actionType: actionType,
-        dataToUpdate: dataToUpdate,
-        
+        dataToUpdate: dataToUpdate, 
       },
     });
-
-    modal.onDidDismiss().then((data) => {
-      this.refreshEmpList();
+  
+    modal.onDidDismiss().then(() => {
+      if (actionType !== 'view') {
+        this.refreshEmpList(); 
+      }
     });
+  
     return await modal.present();
   }
+    
+  
 
   deleteClick(item: any) {
     if (confirm("Are you sure??")) {
@@ -183,22 +170,6 @@ export class ShowEmployeePage implements OnInit {
     this.searchKey = filterValue;
   }
 
-  // public deleteStudent(savedStudent: any): void {
-  //   this._dialog.open(DeleteDialogComponent, { data: { type: "Employee", name: savedStudent.name } }).afterClosed().subscribe(result => {
-  //     if (result === "cancel" || result === undefined) {
-  //       console.log("canceling delete operation!");
-  //     } else {
-  //       console.log("deleted successfully!!");
-  //     }
-  //   });
-  // }
-
-  public viewEmployee(savedStudent: any): void {
-   
-  }
-
-  // public editStudent(savedStudent: any): void {
-    
-  // }
+  
 
 }

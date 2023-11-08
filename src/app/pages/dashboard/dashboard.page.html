@@ -1,375 +1,14 @@
-<!-- <ion-menu contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>{{ userRoleName }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <ng-container *ngIf="userRole === '1'">
-      <ion-list>
-        <ion-item routerLink="/show-department">
-          <ion-label>Department</ion-label>
-        </ion-item>
-        <ion-item routerLink="/show-project">
-          <ion-label>Project</ion-label>
-        </ion-item>
-        <ion-item routerLink="/show-employee">
-          <ion-label>Employee</ion-label>
-        </ion-item>
-        <ion-item routerLink="/show-attendance">
-          <ion-label>Attendance</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
-        </ion-item>
-        
-      </ion-list>
-    </ng-container>
-
-    <ng-container *ngIf="userRole === '5'">
-      <ion-list>
-        <ion-item routerLink="/profile-emp">
-          <ion-label>Profile</ion-label>
-        </ion-item>
-        <ion-item routerLink="/check-in">
-          <ion-label>Fill Attendance</ion-label>
-        </ion-item>
-        <ion-item routerLink="/show-emp-attendance">
-          <ion-label>Recent Attendance</ion-label>
-        </ion-item>
-        <ion-item routerLink="/add-edit-leave">
-          <ion-label>Apply Leave</ion-label>
-        </ion-item>
-        <ion-item routerLink="/show-leave">
-          <ion-label>Leave History</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label><ion-button slot="end" expand="full" color="danger" (click)="logout()">Logout</ion-button></ion-label>
-        </ion-item>
-      </ion-list>
-    </ng-container>
-  </ion-content>
-</ion-menu>
-
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</div>
-
-
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{userRoleName}} Dashboard</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="notifications"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-  <ion-grid>
-    <ion-row>
-
-      <ion-col>
-        <ion-card *ngIf="userRole === '1'" routerLink="/show-department">
-          <ion-card-header>
-            <ion-grid>
-              <ion-row>
-                <ion-col size="12" size-md="2">
-                  <mat-icon aria-hidden="false">
-                    <mat-icon aria-hidden="true">business</mat-icon>
-                  </mat-icon>
-                </ion-col>
-                <ion-col size="12" size-md="10">
-                  <ion-card-title><h2 class="text-center">Department
-              
-                  </h2></ion-card-title>
-                  <ion-card-subtitle><h1 class="text-center font_big">{{departmentCount}}</h1></ion-card-subtitle>
-    
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            
-            
-          </ion-card-header>
-        
-        </ion-card>
-      </ion-col>
-
-      <ion-col>
-        <ion-card *ngIf="userRole === '1'"  routerLink="/show-project">
-        <ion-card-header>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12" size-md="2">
-                <mat-icon aria-hidden="false">
-                  <mat-icon aria-hidden="true">assignment</mat-icon>
-                </mat-icon>
-              </ion-col>
-              <ion-col size="12" size-md="10">
-                <ion-card-title><h1 class="text-center">Project
-            
-                </h1></ion-card-title>
-                <ion-card-subtitle><h3 class="text-center font_big">{{projectCount}}</h3></ion-card-subtitle>
-    
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          
-         
-        </ion-card-header>
-      
-      </ion-card>
-    </ion-col>
-
-
-    <ion-col>
-      <ion-card  *ngIf="userRole === '1'"  class="text-white" routerLink="/show-employee">
-      <ion-card-header>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="2">
-              <mat-icon aria-hidden="false">
-                <mat-icon aria-hidden="true">person</mat-icon>
-              </mat-icon>
-            </ion-col>
-            <ion-col size="12" size-md="10">
-              <ion-card-title><h1 class="text-center">Employee 
-          
-              </h1></ion-card-title>
-              <ion-card-subtitle><h3 class="text-center font_big">{{employeeCount}}</h3></ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-    
-    </ion-card>
-  </ion-col>
-
-
-    <ion-col>
-      <ion-card *ngIf="userRole === '1'"  routerLink="/show-attendance">
-      <ion-card-header>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="2">
-              <mat-icon aria-hidden="false">
-                <mat-icon aria-hidden="true">event_note</mat-icon>
-              </mat-icon>
-            </ion-col>
-            <ion-col size="12" size-md="10">
-              <ion-card-title><h1 class="text-center">Attendance 
-          
-              </h1></ion-card-title>
-              <ion-card-subtitle><h3 class="text-center font_big">{{attendanceCount}}</h3></ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
-      </ion-card-header>
-    
-    </ion-card>
-  </ion-col>
-
-  <ion-col>
-    <ion-card *ngIf="userRole === '1'"  routerLink="/admin-leave-history">
-    <ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-md="2">
-            <mat-icon aria-hidden="false">
-              <mat-icon class="icon1" aria-hidden="true">event_note</mat-icon>
-            </mat-icon>
-          </ion-col>
-          <ion-col size="12" size-md="10">
-            <ion-card-title><h1 class="text-center">Leave History 
-        
-            </h1></ion-card-title>
-            <ion-card-subtitle><h3 class="text-center font_big">{{leaveCount}}</h3></ion-card-subtitle>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      
-      
-    </ion-card-header>
-  
-  </ion-card>
-</ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-card *ngIf="userRole === '5'" routerLink="/profile-emp">
-        <ion-card-header>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12" size-md="2">
-                <mat-icon aria-hidden="false">
-                  <mat-icon aria-hidden="true">event_note</mat-icon>
-                </mat-icon>
-              </ion-col>
-              <ion-col size="12" size-md="10">
-                <ion-card-title><h1 class="text-center">Employee
-            
-                </h1></ion-card-title>
-                <ion-card-subtitle><h3 class="text-center font_big"><h1>Profile</h1></h3></ion-card-subtitle>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          
-          
-        </ion-card-header>
-      
-      </ion-card>
-      </ion-col>
-      
-    
-    
-      <ion-col>
-        <ion-card *ngIf="userRole === '5'"  routerLink="/check-in">
-        <ion-card-header>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12" size-md="2">
-                <mat-icon aria-hidden="false">
-                  <mat-icon aria-hidden="true">event_note</mat-icon>
-                </mat-icon>
-              </ion-col>
-              <ion-col size="12" size-md="10">
-                <ion-card-title><h1 class="text-center">Fill 
-            
-                </h1></ion-card-title>
-                <ion-card-subtitle><h3 class="text-center font_big"><h1>Attendance</h1></h3></ion-card-subtitle>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          
-          
-        </ion-card-header>
-      
-      </ion-card>
-    </ion-col>
-    
-    
-    
-    <ion-col>
-      <ion-card *ngIf="userRole === '5'"  routerLink="/show-emp-attendance">
-      <ion-card-header>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="2">
-              <mat-icon aria-hidden="false">
-                <mat-icon aria-hidden="true">event_note</mat-icon>
-              </mat-icon>
-            </ion-col>
-            <ion-col size="12" size-md="10">
-              <ion-card-title><h1 class="text-center">Recent 
-          
-              </h1></ion-card-title>
-              <ion-card-subtitle><h3 class="text-center font_big"><h1>Attendance</h1></h3></ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
-      </ion-card-header>
-    
-    </ion-card>
-    </ion-col>
-
-
-    <ion-col>
-      <ion-card *ngIf="userRole === '5'"  routerLink="/add-edit-leave">
-      <ion-card-header>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="2">
-              <mat-icon aria-hidden="false">
-                <mat-icon aria-hidden="true">event_note</mat-icon>
-              </mat-icon>
-            </ion-col>
-            <ion-col size="12" size-md="10">
-              <ion-card-title><h1 class="text-center">Apply
-          
-              </h1></ion-card-title>
-              <ion-card-subtitle><h3 class="text-center font_big"><h1>Leave</h1></h3></ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
-      </ion-card-header>
-    
-    </ion-card>
-    </ion-col>
-
-    <ion-col>
-      <ion-card *ngIf="userRole === '5'"  routerLink="/show-leave">
-      <ion-card-header>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="2">
-              <mat-icon aria-hidden="false">
-                <mat-icon aria-hidden="true">event_note</mat-icon>
-              </mat-icon>
-            </ion-col>
-            <ion-col size="12" size-md="10">
-              <ion-card-title><h1 class="text-center">Leave 
-          
-              </h1></ion-card-title>
-              <ion-card-subtitle><h3 class="text-center font_big"><h1>History</h1></h3></ion-card-subtitle>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        
-        
-      </ion-card-header>
-    
-    </ion-card>
-    </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
-</ion-content> -->
-
-
-
-
-
-
-
-
 
 <ion-content>
   <ion-header>
     <ion-toolbar >
       <ion-buttons slot="start">
         <ion-button>
-          <!-- <ion-icon name="menu"></ion-icon> -->
           <ion-menu-button menu="main-menu"></ion-menu-button>
         </ion-button>
       </ion-buttons>
   
-      <ion-title class="ion-text-center">Dashboard</ion-title>
+      <ion-title class="ion-text-center">{{userRoleName}} Dashboard</ion-title>
   
       <ion-buttons slot="end">
         <!-- <ion-button (click)="registerPushNotifications()">Notification Registration</ion-button> -->
@@ -379,7 +18,6 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-<!-- <ion-content> -->
   <ion-content>
 
 
@@ -440,7 +78,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5'" routerLink="/profile-emp">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/profile-emp">
             <ion-card-content>
               <ion-icon class="icon1" name="person"></ion-icon>
               <p>Employee Profile</p>
@@ -448,7 +86,7 @@
           </ion-card>
         </ion-col>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5'" routerLink="/check-in">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/check-in">
             <ion-card-content>
               <ion-icon name="checkmark-circle"class="icon1"></ion-icon>
               <p>Fill Attendance</p>
@@ -456,7 +94,7 @@
           </ion-card>
         </ion-col>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5'" routerLink="/show-emp-attendance">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/show-emp-attendance">
             <ion-card-content>
               <ion-icon name="time"class="icon1"></ion-icon>
               <p>Recent Attenace</p>
@@ -464,7 +102,7 @@
           </ion-card>
         </ion-col>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5'" routerLink="/add-edit-leave">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/add-edit-leave">
             <ion-card-content>
               <ion-icon name="calendar"class="icon1"></ion-icon>
               <p>Apply Leave</p>
@@ -472,7 +110,7 @@
           </ion-card>
         </ion-col>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5'" routerLink="/show-leave">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/show-leave">
             <ion-card-content>
               <ion-icon name="time"class="icon1"></ion-icon>
               <p>Leave History</p>
@@ -480,17 +118,20 @@
           </ion-card>
         </ion-col>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5'" routerLink="#">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="#">
             <ion-card-content>
               <ion-icon class="icon1" name="person"></ion-icon>
               <p>Coming soon</p>
             </ion-card-content>
           </ion-card>
+
         </ion-col>
+       
       </ion-row>
+    
     </ion-grid>
-
-
+    
 </ion-content>
+
 
 

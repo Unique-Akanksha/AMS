@@ -105,7 +105,11 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'page-not-found',
     pathMatch: 'full'
+  },  {
+    path: 'details-employee',
+    loadChildren: () => import('./admin/employee/feature/details-employee/details-employee.module').then( m => m.DetailsEmployeePageModule)
   },
+
 
   
 
