@@ -66,7 +66,9 @@ export class AddEditEmployeePage implements OnInit {
         password: this.dataToUpdate.password,
         confirmPassword: this.dataToUpdate.password,
         role: this.dataToUpdate.role,
+        userPhoto: this.dataToUpdate.userPhoto, 
       });
+      this.tempImageUrl = this.dataToUpdate.userPhoto;
     } else {
       this.empForm.patchValue({
         first_name: '',

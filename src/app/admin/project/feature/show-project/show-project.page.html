@@ -9,7 +9,7 @@
         </ion-button>
       </ion-buttons>
   
-      <ion-title class="ion-text-center">Show Projects</ion-title>
+      <ion-title class="ion-text-center">All Projects</ion-title>
   
       <ion-buttons slot="end">
         <ion-button>
@@ -23,7 +23,7 @@
     <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-button  (click)="openModal('')" >Add  </ion-button>
+    <ion-button  (click)="openModal('')" ><mat-icon>add</mat-icon>  </ion-button>
 
   <ion-card>
     <ion-card-content>
@@ -33,10 +33,6 @@
       </div>
       <div class="for_scroll">
         <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8" matSort>
-          <!-- <ng-container matColumnDef="project_id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.project_id}} </td>
-          </ng-container> -->
       
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>

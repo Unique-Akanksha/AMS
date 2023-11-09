@@ -81,6 +81,11 @@ export class ShowProjectPage implements OnInit {
         actionType: actionType,
         dataToUpdate: dataToUpdate
       },
+      cssClass: 'my-custom-modal my-custom-modal-css', // Use both classes
+      backdropDismiss: false,
+      animated: true,
+      keyboardClose: true,
+      showBackdrop: true,
     });
 
     modal.onDidDismiss().then((data) => {

@@ -22,7 +22,7 @@
           Choose Team Image
         </ion-button>
 
-        <ion-img [src]="tempImageUrl" *ngIf="tempImageUrl"></ion-img>
+        <ion-img class="custom-image" [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + tempImageUrl"  *ngIf="tempImageUrl"></ion-img>
       </ion-item>
 
 
@@ -69,7 +69,7 @@
             Email cannot start with a number.
           </ng-container>
           <ng-container *ngIf="empForm.controls['email'].hasError('containsInvalidSymbols')">
-            Email cannot contain symbols other than "@" and ".".
+            Email cannot contain symbols other than "Ampersand symbol and ".".
           </ng-container>
         </ion-text>
       </div>

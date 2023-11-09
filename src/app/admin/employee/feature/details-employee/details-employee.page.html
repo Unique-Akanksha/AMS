@@ -1,4 +1,14 @@
 <ion-content>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="medium" (click)="closeModal(false)">Cancel</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  
   <div id="outer">
     <div id="box">
       <div id="header">
@@ -6,6 +16,9 @@
       </div>
       <div id="details">
         <ion-list>
+          <ion-item>
+            <ion-img class="custom-image" [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + tempImageUrl"  *ngIf="tempImageUrl"></ion-img>
+          </ion-item>
           <ion-item>
             <ion-label><b>Employee Name :</b> {{dataToUpdate.first_name}} {{dataToUpdate.middle_name}} {{dataToUpdate.last_name}}</ion-label>
           </ion-item>
@@ -22,9 +35,6 @@
             <ion-label><b>Position :</b> {{dataToUpdate.position}}</ion-label>
           </ion-item>
           </ion-list>
-          <ion-button color="danger"expand="full"style="color:white;" (click)="cancel()">
-            <ion-icon name="exit"slot="start"style="color:white;"></ion-icon> Exit
-          </ion-button>
       </div>
     </div>
     </div>

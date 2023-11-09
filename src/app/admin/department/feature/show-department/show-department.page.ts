@@ -82,8 +82,12 @@ export class ShowDepartmentPage implements OnInit {
       componentProps: {
         actionType: actionType,
         dataToUpdate: dataToUpdate,
-        cssClass: 'custom-modal',
       },
+      cssClass: 'my-custom-modal my-custom-modal-css', // Use both classes
+      backdropDismiss: false,
+      animated: true,
+      keyboardClose: true,
+      showBackdrop: true,
 
     });
 
