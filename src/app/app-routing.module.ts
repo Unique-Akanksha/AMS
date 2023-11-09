@@ -43,8 +43,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'details-employee',
+    loadChildren: () => import('./admin/employee/feature/details-employee/details-employee.module').then( m => m.DetailsEmployeePageModule)
+  },
+  {
     path: 'show-emp-attendance',
-    loadChildren: () => import('./pages/show-emp-attendance/show-emp-attendance.module').then( m => m.ShowEmpAttendancePageModule),
+    loadChildren: () => import('./admin/attendance/feature/show-emp-attendance/show-emp-attendance.module').then( m => m.ShowEmpAttendancePageModule),
     canActivate: [AuthGuard]
   },
   {
@@ -54,8 +58,9 @@ const routes: Routes = [
   },
   {
     path: 'admin-leave-history',
-    loadChildren: () => import('./pages/admin-leave-history/admin-leave-history.module').then( m => m.AdminLeaveHistoryPageModule)
+    loadChildren: () => import('./admin/leave/feature/admin-leave-history/admin-leave-history.module').then( m => m.AdminLeaveHistoryPageModule)
   },
+
   {
     path: 'approve-requests',
     loadChildren: () => import('./pages/approve-requests/approve-requests.module').then( m => m.ApproveRequestsPageModule)
@@ -105,10 +110,9 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'page-not-found',
     pathMatch: 'full'
-  },  {
-    path: 'details-employee',
-    loadChildren: () => import('./admin/employee/feature/details-employee/details-employee.module').then( m => m.DetailsEmployeePageModule)
   },
+ 
+  
 
 
   

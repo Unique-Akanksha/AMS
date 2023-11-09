@@ -2,7 +2,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title class="ion-text-center">
-      Show Attendance
+      All Attendance
     </ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
@@ -32,10 +32,7 @@
           
           <div class="for_scroll">
             <table mat-table [dataSource]="dataSource" class="my-table mat-elevation-z8" matSort>
-              <!-- <ng-container matColumnDef="attendanceID">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> AttendanceId </th>
-                <td mat-cell *matCellDef="let element"> {{element.attendanceID}} </td>
-              </ng-container> -->
+
       
               <ng-container matColumnDef="employeeName">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee Name </th>

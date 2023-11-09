@@ -7,7 +7,7 @@
         </ion-button>
       </ion-buttons>
 
-      <ion-title class="ion-text-center">Show Employees</ion-title>
+      <ion-title class="ion-text-center">List Of Employees</ion-title>
 
       <ion-buttons slot="end">
         <ion-button>
@@ -23,14 +23,14 @@
     <ion-grid>
       <ion-row>
         <ion-col size="3" size-md="1" size-lg="1">
-          <ion-button expand="block" (click)="openModal('add','')"> Add </ion-button>
+          <ion-button  (click)="openModal('add','')"> <mat-icon>add</mat-icon> </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <div class="container mt-3 p-3 bg-white">
+    <!-- <div class="container mt-3 p-3 bg-white">
       <p class="fs-4 fw-bold">List Of Employees</p>
-    </div>
+    </div> -->
     <div class="container mt-3 pt-3 px-3 d-flex flex-column bg-white">
       <mat-form-field>
         <mat-label>Filter Employee</mat-label>

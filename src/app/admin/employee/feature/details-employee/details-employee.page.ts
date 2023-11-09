@@ -12,6 +12,7 @@ export class DetailsEmployeePage implements OnInit {
   dataToUpdate: any;
   isReadonly=true;
   EmpForm!:FormGroup;
+  tempImageUrl: string | undefined = ''; 
   constructor(private modalCtrl:ModalController) { }
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
@@ -26,7 +27,13 @@ export class DetailsEmployeePage implements OnInit {
       hire_date:this.dataToUpdate.hire_date,
       department:this.dataToUpdate.department,
       position:this.dataToUpdate.position,
+      userPhoto: this.dataToUpdate.userPhoto, 
     });
+    this.tempImageUrl = this.dataToUpdate.userPhoto;
+  }
+
+  async closeModal(confirm: boolean){
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 
 }

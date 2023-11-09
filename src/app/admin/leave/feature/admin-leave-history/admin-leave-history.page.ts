@@ -5,7 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
-import { ApproveRequestsPage } from '../approve-requests/approve-requests.page';
+import { ApproveRequestsPage } from 'src/app/pages/approve-requests/approve-requests.page';
+
 
 @Component({
   selector: 'app-admin-leave-history',
@@ -67,6 +68,11 @@ export class AdminLeaveHistoryPage implements OnInit {
         actionType: actionType,
         dataToUpdate: dataToUpdate
       },
+      cssClass: 'my-custom-modal my-custom-modal-css', // Use both classes
+      backdropDismiss: false,
+      animated: true,
+      keyboardClose: true,
+      showBackdrop: true,
     });
 
     modal.onDidDismiss().then((data) => {
