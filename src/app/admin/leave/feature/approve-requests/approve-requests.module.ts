@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CheckInPageRoutingModule } from './check-in-routing.module';
+import { ApproveRequestsPageRoutingModule } from './approve-requests-routing.module';
 
-import { CheckInPage } from './check-in.page';
+import { ApproveRequestsPage } from './approve-requests.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    CheckInPageRoutingModule
+    ApproveRequestsPageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [CheckInPage]
+  declarations: [ApproveRequestsPage]
 })
-export class CheckInPageModule {}
+export class ApproveRequestsPageModule {}

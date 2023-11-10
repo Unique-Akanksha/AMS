@@ -1,33 +1,203 @@
-#container {
-  text-align: center;
+// // Global styles
+// ion-header {
+//   ion-toolbar {
+//     --background: #1abc9c;
+//     --color: #fff;
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
+//     ion-title {
+//       font-size: 1.5rem;
+//       font-weight: bold;
+//     }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
+//     ion-button {
+//       --icon-color: #fff;
+//     }
+//   }
+// }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+// ion-card {
+//   text-align: center;
+//   padding-top: 8%;
+//   color: #1abc9c;
+//   box-shadow: 0 0 10px 0 rgba(26, 188, 156, 0.8);
+//   height: 200px;
+//   margin-top: 20px;
 
-  color: #8c8c8c;
+//   .icon1 {
+//     font-size: 5em;
+//   }
 
-  margin: 0;
-}
+//   p {
+//     font-size: 20px;
+//   }
+// }
 
-#container a {
-  text-decoration: none;
-}
+// .chartCard {
+//   max-width: 600px;
+//   margin: auto;
+//   height: 400px;
 
-.custom-fab-button {
-  width: 70px; 
-  height: 70px; 
-  font-size: 12px; 
-}
+//   ion-card-header {
+//     text-align: center;
+//     font-weight: bold;
+//     font-size: 19px;
+//   }
+
+//   ion-card-content {
+//     height: 300px;
+
+//     div {
+//       position: relative;
+//       height: 100%;
+
+//       canvas#leave_type {
+//         width: 100% !important; // Ensure the chart canvas takes up the full width
+//         height: 100%;
+//         display: block; // Make sure the canvas is treated as a block element
+//       }
+//     }
+//   }
+
+//   @media (max-width: 576px) {
+//     ion-icon {
+//       height: 80%;
+//     }
+
+//     #dep {
+//       height: 100%;
+//     }
+//   }
+
+//   @media (max-width: 370px) {
+//     ion-icon {
+//       height: 75%;
+//     }
+
+//     #dep {
+//       height: 500px;
+//     }
+//   }
+
+//   @media (max-width: 280px) {
+//     ion-icon {
+//       height: 70%;
+//     }
+
+//     #dep {
+//       height: 100%;
+//     }
+//   }
+// }
+
+
+
+/* Global styles */
+
+ion-header ion-toolbar {
+    --background: #1abc9c;
+    --color: #fff;
+  }
+  
+  ion-header ion-toolbar ion-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  ion-header ion-toolbar ion-button {
+    --icon-color: #fff;
+  }
+  
+  ion-card {
+    text-align: center;
+    padding-top: 8%;
+    color: #1abc9c;
+    box-shadow: 0 0 10px 0 rgba(26, 188, 156, 0.8);
+    height: 200px;
+    margin-top: 20px;
+  }
+  
+  ion-card .icon1 {
+    font-size: 5em;
+  }
+  
+  ion-card p {
+    font-size: 20px;
+  }
+  
+  .chartCard {
+    max-width: 600px;
+    margin: auto;
+    height: 400px;
+  }
+  
+  .chartCard ion-card-header {
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+  }
+  
+  .chartCard ion-card-content {
+    height: 300px;
+  }
+  
+  .chartCard ion-card-content div {
+    position: relative;
+    height: 100%;
+  }
+  
+  .chartCard ion-card-content canvas#leave_type {
+    width: 100% !important;
+    height: 100%;
+    display: block;
+  }
+  
+  /* Media Queries for Responsive Design */
+  
+  @media only screen and (max-width: 767px) {
+    ion-icon {
+      height: 80%;
+    }
+  
+    #dep {
+      height: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 576px) {
+    ion-icon {
+      height: 75%;
+    }
+  
+    #dep {
+      height: 500px;
+    }
+  }
+  
+  @media only screen and (max-width: 479px) {
+    ion-icon {
+      height: 70%;
+    }
+  
+    #dep {
+      height: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .chartCard {
+      height: auto;
+    }
+  
+    .chartCard ion-card-content {
+      height: auto;
+    }
+  
+    .chartCard ion-card-content div {
+      height: auto;
+    }
+  
+    .chartCard ion-card-content canvas#leave_type {
+      height: 100%;
+    }
+  }
+  

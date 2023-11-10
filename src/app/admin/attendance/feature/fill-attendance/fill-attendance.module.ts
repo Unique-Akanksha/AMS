@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ApproveRequestsPageRoutingModule } from './approve-requests-routing.module';
+import { FillAttendancePageRoutingModule } from './fill-attendance-routing.module';
 
-import { ApproveRequestsPage } from './approve-requests.page';
+import { FillAttendancePage } from './fill-attendance.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    ApproveRequestsPageRoutingModule
+    FillAttendancePageRoutingModule,
+    ReactiveFormsModule
   ],
-  declarations: [ApproveRequestsPage]
+  declarations: [FillAttendancePage]
 })
-export class ApproveRequestsPageModule {}
+export class FillAttendancePageModule {}

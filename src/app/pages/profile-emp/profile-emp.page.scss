@@ -119,6 +119,103 @@
 
 
 
+// ion-header {
+//   ion-toolbar {
+//     --background: #1abc9c;
+//     --color: #fff;
+
+//     ion-title {
+//       font-size: 1.5rem;
+//       font-weight: bold;
+//     }
+
+//     ion-button {
+//       --icon-color: #fff;
+//     }
+//   }
+// }
+// ion-card{
+//   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+// }
+// img{
+//   border-radius: 50%;
+//   margin-top: 10px;
+//   width: 100px;
+//   height: 100px;
+//   // padding:3%;
+//   // border: 1px solid;
+// }
+// .center{
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+//   // width: 50%;
+// }
+// ion-list{
+//   padding:20px;
+// }
+// @media (max-width:576px){
+//  body{
+//   font-size: 20px;
+//     }
+//   }
+// @media (max-width:370px){
+//   body{
+//     font-size: 18px;
+//       }
+// }
+// @media (max-width:280px){
+//   body{
+//     font-size: 10px;
+//       }
+// }
+// ion-lab{
+//   font-weight: bolder;
+// }
+// p{
+//   text-align: center;
+// }
+// .center-container {
+//     display: flex;
+//     height:100px;
+//     width: 100px;
+//     border-radius: 50%;
+//     margin: 0 auto; 
+//     justify-content: center; /* Center horizontally */
+//     align-items: center; /* Center vertically */
+    
+//   }
+//   .text-center{
+//     position:absolute;
+//     top:120px;
+//     // font-size/: 30px;
+//     font-weight: bold;
+//     text-align: center;
+//   }
+//   .custom-box {
+//     background-color:#009ad2;  /* Background color */
+//     height: 220px;
+//     width: 100%;
+//     color:white;
+//     // border: 1px solid #ccc; /* Border style */
+//     // border-radius: 10px; /* Rounded corners */
+//     // padding: 20px; /* Padding inside the box */
+//     // margin: 10px; /* Margin around the box */
+//     display: flex;
+//     justify-content: center; /* Horizontally center the image */
+//     align-items: center; /* Verti
+//   }
+//   .centered-image {
+//     // display: flex;
+//     // justify-content: center; /* Horizontally center the image */
+//     // align-items: center; /* Vertically center the image */
+//   }
+//   .a:hover{
+//     background-color: red;
+//   }
+  
+
+
 ion-header {
   ion-toolbar {
     --background: #1abc9c;
@@ -134,89 +231,77 @@ ion-header {
     }
   }
 }
-ion-card{
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+#image{
+  height:300px;
+  width:100%;
+  display: inline-block;
+  margin: 0px auto;
+  padding:5%;
 }
-img{
-  border-radius: 50%;
-  margin-top: 10px;
-  width: 100px;
-  height: 100px;
-  // padding:3%;
-  // border: 1px solid;
+h1,h3{
+  padding-left:25%;
 }
-.center{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  // width: 50%;
+#ion-card{
+  padding:5%;
+  background-color: #1abc9c;
+  color:white;
 }
-ion-list{
-  padding:20px;
+ion-card-header{
+  background: #1abc9c;
 }
-@media (max-width:576px){
- body{
-  font-size: 20px;
-    }
-  }
-@media (max-width:370px){
-  body{
-    font-size: 18px;
-      }
+b,p{
+  padding-left: 20px;
 }
 @media (max-width:280px){
-  body{
-    font-size: 10px;
-      }
+ #image{
+  height:250px;
+ }
+ ion-card{
+  font-size:12px;
+ }
+ #ion-card{
+  font-size:12px;
+ }
 }
-ion-lab{
-  font-weight: bolder;
+@media (max-width:576px){
+  #image{
+    height:350px;
+   }
 }
-p{
-  text-align: center;
+ @media (max-width:370px){
+  #image{
+    height:280px;
+   }
+ }
+
+ @media (min-width: 992px) {
+  /* Styles for desktop screens (width greater than or equal to 992px) */
+  #image {
+    height: 400px; /* Adjust the height for desktop */
+  }
+  ion-card {
+    font-size: 16px; /* Adjust the font size for desktop */
+  }
+  #ion-card {
+    font-size: 16px; /* Adjust the font size for desktop */
+  }
 }
-.center-container {
-    display: flex;
-    height:100px;
-    width: 100px;
-    border-radius: 50%;
-    margin: 0 auto; 
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    
+
+@media (min-width: 2560px) {
+  /* Styles for 4K screens (width greater than or equal to 2560px) */
+  #image {
+    height: 500px; /* Adjust the height for 4K screens */
   }
-  .text-center{
-    position:absolute;
-    top:120px;
-    // font-size/: 30px;
-    font-weight: bold;
-    text-align: center;
+  ion-card {
+    font-size: 20px; /* Adjust the font size for 4K screens */
   }
-  .custom-box {
-    background-color:#009ad2;  /* Background color */
-    height: 220px;
-    width: 100%;
-    color:white;
-    // border: 1px solid #ccc; /* Border style */
-    // border-radius: 10px; /* Rounded corners */
-    // padding: 20px; /* Padding inside the box */
-    // margin: 10px; /* Margin around the box */
-    display: flex;
-    justify-content: center; /* Horizontally center the image */
-    align-items: center; /* Verti
+  #ion-card {
+    font-size: 20px; /* Adjust the font size for 4K screens */
   }
-  .centered-image {
-    // display: flex;
-    // justify-content: center; /* Horizontally center the image */
-    // align-items: center; /* Vertically center the image */
-  }
-  .a:hover{
-    background-color: red;
-  }
-  
+}
 
 
-
+ 
 
 
 

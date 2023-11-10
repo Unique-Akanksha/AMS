@@ -12,11 +12,12 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-check-in',
-  templateUrl: './check-in.page.html',
-  styleUrls: ['./check-in.page.scss'],
+  selector: 'app-fill-attendance',
+  templateUrl: './fill-attendance.page.html',
+  styleUrls: ['./fill-attendance.page.scss'],
 })
-export class CheckInPage implements OnInit {
+export class FillAttendancePage implements OnInit {
+
   loggedInUser: any;
   ProjectList: any[] = [];
   attendanceForm!: FormGroup;
@@ -368,4 +369,5 @@ export class CheckInPage implements OnInit {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
+
 }

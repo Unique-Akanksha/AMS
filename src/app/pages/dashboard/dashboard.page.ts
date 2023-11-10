@@ -10,7 +10,7 @@ import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
 import { Plugins } from '@capacitor/core';
 import { PushNotification, PushNotifications } from '@capacitor/push-notifications';
 import { PushNotificationService } from 'src/app/services/push-notification.service';
-
+import Chart from 'chart.js/auto';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class DashboardPage implements OnInit {
 
   userRole = '';
   userRoleName = '';
-  
+  chart: any;
 
 
   private sessionSubscription!: Subscription;
@@ -40,6 +40,8 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
+    this.initializeChart();
+    
     // code for get user role 
     const userJson = localStorage.getItem('user');
 
@@ -82,6 +84,8 @@ export class DashboardPage implements OnInit {
     }
   });
   }
+
+  
 
   handleRefresh(event: any) {
     setTimeout(() => {
@@ -202,5 +206,179 @@ export class DashboardPage implements OnInit {
   }
   
 
+  initializeChart() {
+    this.chart = new Chart('dep', {
+      type: 'bar',
+      data:  {
+        labels:  ['Backend', 'HR', 'Frontend', 'Finance'],
+        datasets: [{
+          label: 'Number of Employee',
+          data: [65, 59, 80, 81, 56, 55, 40],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      
+    });
+
+    this.chart = new Chart('gender', {
+      type: 'pie',
+      data: {
+        labels: [
+          'Male',
+          'Female',
+        ],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [300, 50],
+          // hoverBackgroundColor: ['lightcoral', 'lightblue', 'lightgreen', 'lightyellow', 'lightsalmon'],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+          ],
+          // hoverOffset: 4;
+        }]
+      }
+    });
+    
+    this.chart = new Chart('project', {
+      type: 'bar',
+      data:  {
+        labels:  ['Attendance Management','Car Management'],
+        datasets: [{
+          label: 'Start Date',
+          data: [14, 18, 30, 40],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
+        },
+        {
+          // labels:  ['05-01-23', '15-03-23', '19-09-23', '17-11-23'],
+          label: 'End Date',
+          data: [78, 59, 80, 81],
+          backgroundColor: [
+            'red',
+            'orange',
+            'yellow',
+            'green',
+            // 'rgba(255, 99, 132, 0.2)',
+            // 'rgba(255, 159, 64, 0.2)',
+            // 'rgba(255, 205, 86, 0.2)',
+            // 'rgba(75, 192, 192, 0.2)',
+            // 'rgba(54, 162, 235, 0.2)',
+            // 'rgba(153, 102, 255, 0.2)',
+            // 'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'red',
+            'orange',
+            'yellow',
+            'green',
+          ],
+          borderWidth: 1
+        }
+      ]
+      },
+    });
+    this.chart = new Chart('attendance', {
+      type: 'line',
+      data:  {
+        labels:  ['Mon', 'Tue', 'Wed', 'Thu','Fri','Sat'],
+        datasets: [{
+          label: 'Number of Employee',
+          data: [5, 10, 9, 15,3, 20, 14],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(201, 203, 207, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+          ],
+          borderWidth: 1
+        }]
+      },
+    });
+    this.chart = new Chart('leave_type', {
+      type: 'pie',
+      data: {
+        labels: [
+          'Vacation',
+          'Sick',
+          'Personal',
+          'Unpaid',
+        ],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [20, 12,25,34],
+          // hoverBackgroundColor: ['lightcoral', 'lightblue', 'lightgreen', 'lightyellow', 'lightsalmon'],
+          backgroundColor: [
+           'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+          ],
+          // hoverOffset: 4;
+        }]
+      }
+    });
+
+  }
+  
 
 }
