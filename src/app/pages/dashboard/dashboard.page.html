@@ -86,7 +86,7 @@
           </ion-card>
         </ion-col>
         <ion-col size="6" size-md="4" size-lg="2">
-          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/check-in">
+          <ion-card *ngIf="userRole === '5' || userRole === '4'|| userRole === '3'|| userRole === '2'" routerLink="/fill-attendance">
             <ion-card-content>
               <ion-icon name="checkmark-circle"class="icon1"></ion-icon>
               <p>Fill Attendance</p>
@@ -124,11 +124,89 @@
               <p>Coming soon</p>
             </ion-card-content>
           </ion-card>
-
         </ion-col>
-       
       </ion-row>
+    </ion-grid>
+
     
+    
+    <ion-grid >
+      
+    <ion-row >
+      <ion-col size-md="3"size-lg="3"size-sm="6"size-xs="12">
+       <ion-card class="chartCard">
+         <ion-card-header>
+           <ion-label style="font-weight: bold; font-size: 19px; text-align: center;">
+             No.of Employees in epartment
+           </ion-label>
+         </ion-card-header>
+         <ion-card-content>
+           <div style="height: 300px; display: flex; align-items: center; justify-content: center;">
+             <canvas id="dep" width="300" height="300"></canvas>
+           </div>
+         </ion-card-content>
+       </ion-card>
+      </ion-col>
+      <ion-col size-md="3"size-lg="3"size-sm="6"size-xs="12">
+       <ion-card class="chartCard">
+         <ion-card-header>
+           <ion-label style="font-weight: bold; font-size: 19px; text-align: center;">
+             Male and Female Ratio
+           </ion-label>
+         </ion-card-header>
+         <ion-card-content style="height: 100%;">
+           <div style="position: relative; height: 300px;">
+             <canvas id="gender" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+           </div>
+         </ion-card-content>
+       </ion-card>
+      </ion-col>
+      <!-- <ion-col size-md="3"size-lg="3"size-sm="6"size-xs="12">
+       <ion-card class="chartCard">
+         <ion-card-header>
+           <ion-label style="font-weight: bold; font-size: 19px; text-align: center;">
+             Project Deadline
+           </ion-label>
+         </ion-card-header>
+         <ion-card-content style="height: 100%;">
+           <div style="position: relative; height: 300px;">
+             <canvas id="project" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+           </div>
+         </ion-card-content>
+       </ion-card>
+      </ion-col> -->
+
+      <ion-col size-md="3"size-lg="3"size-sm="6"size-xs="12">
+       <ion-card class="chartCard" >
+         <ion-card-header>
+           <ion-label style="font-weight: bold; font-size: 19px; text-align: center;">
+             Employee Attendance over a week
+           </ion-label>
+         </ion-card-header>
+         <ion-card-content style="height: 100%;">
+           <div style="position: relative; height: 300px;">
+             <canvas id="attendance" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+           </div>
+         </ion-card-content>
+       </ion-card>
+      </ion-col>
+
+      <ion-col size-md="3"size-lg="3"size-sm="6"size-xs="12">
+        <ion-card class="chartCard" >
+          <ion-card-header>
+            <ion-label style="font-weight: bold; font-size: 19px; text-align: center;">
+              Leave Types
+            </ion-label>
+          </ion-card-header>
+          <ion-card-content style="height: 100%;">
+            <div style="position: relative; height: 300px;">
+              <canvas id="leave_type" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+            </div>
+          </ion-card-content>
+        </ion-card>
+       </ion-col>
+     </ion-row>
+
     </ion-grid>
     
 </ion-content>

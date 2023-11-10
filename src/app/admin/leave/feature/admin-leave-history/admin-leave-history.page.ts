@@ -5,8 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { LeaveService } from 'src/app/admin/leave/data-access/leave.service';
-import { ApproveRequestsPage } from 'src/app/pages/approve-requests/approve-requests.page';
-
+import { ApproveRequestsPage } from '../approve-requests/approve-requests.page';
 
 @Component({
   selector: 'app-admin-leave-history',

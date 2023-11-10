@@ -1,0 +1,130 @@
+
+
+ion-header {
+    ion-toolbar {
+      --background: #1abc9c;
+      --color: #fff;
+  
+      ion-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+  
+      ion-button {
+        --icon-color: #fff;
+      }
+    }
+  }
+  ion-select{
+    width:80%;
+    margin:0px auto;
+  }
+  @media (max-width:576px){
+    ion-select{
+      width:80%;
+      margin:0px auto;
+    }
+  }
+  @media (max-width:370px){
+    ion-select{
+      width:80%;
+    }
+  }
+  @media (max-width:568px){
+    ion-select{
+      width:80%;
+    }
+  }
+  h1{
+    line-height: 15px;
+  }
+  h3{
+    line-height: 10px;
+  }
+  .y_color{
+      // color: orange;
+      color: #1abc9c;
+      margin-bottom: 0px;
+  }
+  
+  .btn_center {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto;
+      // align-items: center;
+      // width: 120px;
+      // height: 130px;
+      // font-size: 2.5rem;
+      // background:orange;
+      // color: #fff;
+      // border: none;
+      // border-radius: 50%;
+      // cursor: pointer;
+      // box-shadow: 5px 5px 10px #AAB8C2;
+    
+    }
+    
+    .icon_big{
+      font-size: 40px;
+    }
+  
+  
+    .custom-icon {
+      font-size:45px;
+      // background:orange;
+      background: #1abc9c;;
+      padding:25px;
+      -webkit-border-radius:1100%;
+      -moz-border-radius:100%;
+      -o-border-radius:100%;
+      border-radius:20%;
+      border:2px solid #ccc;
+      color:#fff;
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle;
+      -moz-transition:.5s;
+      -webkit-transition:.5s;
+      -o-transition:.5s;
+      transition:.5s;
+    }
+  
+    .custom-icon2 {
+      font-size:45px;
+      background:#16a085;
+      padding:30px;
+      -webkit-border-radius:1100%;
+      -moz-border-radius:100%;
+      -o-border-radius:100%;
+      border-radius:20%;
+      border:2px solid #ccc;
+      color:#fff;
+      text-align:center;
+      display:table-cell;
+      vertical-align:middle;
+      -moz-transition:.5s;
+      -webkit-transition:.5s;
+      -o-transition:.5s;
+      transition:.5s;
+    }
+   
+    
+    .fix-editor {
+      display:none;
+    }
+    .icon-wrapper {
+      display:inline-block;
+      cursor: pointer;
+    }
+  
+    .Thanks_img img{
+      height: 200px;
+  
+    }
+  #Thanks_img{
+    display: none;
+  }
+  
+  .for_m_t10{
+    margin-top: 10px;
+  }

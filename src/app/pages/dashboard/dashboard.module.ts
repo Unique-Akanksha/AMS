@@ -8,7 +8,6 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { MatIconModule } from '@angular/material/icon';
-import { ChartComponent } from 'src/app/shared/components/chart/chart.component';
 
 @NgModule({
   imports: [
@@ -18,6 +17,6 @@ import { ChartComponent } from 'src/app/shared/components/chart/chart.component'
     DashboardPageRoutingModule,
     MatIconModule
   ],
-  declarations: [DashboardPage,ChartComponent]
+  declarations: [DashboardPage]
 })
 export class DashboardPageModule {}

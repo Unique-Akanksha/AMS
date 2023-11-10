@@ -3,10 +3,10 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  // {
-  //   path: 'home',
-  //   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  // },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
   {
     path: '',
     redirectTo: '/login',
@@ -33,9 +33,8 @@ const routes: Routes = [
   },
  
   {
-    path: 'check-in',
-    loadChildren: () => import('./pages/check-in/check-in.module').then( m => m.CheckInPageModule),
-    canActivate: [AuthGuard]
+    path: 'fill-attendance',
+    loadChildren: () => import('./admin/attendance/feature/fill-attendance/fill-attendance.module').then( m => m.FillAttendancePageModule)
   },
   {
     path: 'profile-emp',
@@ -63,7 +62,7 @@ const routes: Routes = [
 
   {
     path: 'approve-requests',
-    loadChildren: () => import('./pages/approve-requests/approve-requests.module').then( m => m.ApproveRequestsPageModule)
+    loadChildren: () => import('./admin/leave/feature/approve-requests/approve-requests.module').then( m => m.ApproveRequestsPageModule)
   },
   
   {
@@ -111,6 +110,11 @@ const routes: Routes = [
     redirectTo: 'page-not-found',
     pathMatch: 'full'
   },
+ 
+
+
+  
+
  
   
 
