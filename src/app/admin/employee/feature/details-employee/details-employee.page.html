@@ -1,4 +1,4 @@
-<ion-content>
+<!-- <ion-content>
 
   <ion-header>
     <ion-toolbar>
@@ -17,7 +17,7 @@
       <div id="details">
         <ion-list>
           <ion-item>
-            <ion-img class="custom-image" [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + tempImageUrl"  *ngIf="tempImageUrl"></ion-img>
+            <ion-img class="custom-image" [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + tempImageUrl" ></ion-img>
           </ion-item>
           <ion-item>
             <ion-label><b>Employee Name :</b> {{dataToUpdate.first_name}} {{dataToUpdate.middle_name}} {{dataToUpdate.last_name}}</ion-label>
@@ -39,4 +39,66 @@
     </div>
     </div>
 
-</ion-content>
+</ion-content> -->
+
+<ion-content class="ion-padding">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="medium" (click)="closeModal(false)">Cancel</ion-button>
+      </ion-buttons>
+      <ion-title>{{ actionType === 'view' ? 'View Employee' : 'Update Employee' }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <form [formGroup]="empForm" (ngSubmit)="closeModal(true)" enctype="multipart/form-data">
+      
+      <ion-item>
+
+        <ion-img class="custom-image" [src]="'https://demo101.websartech.com/AMS_APIS/backend/' + tempImageUrl"  *ngIf="tempImageUrl"></ion-img>
+      </ion-item>
+
+
+      <ion-item>
+
+        <ion-input labelPlacement="stacked" label="Enter First name" formControlName="first_name" readonly
+          placeholder="Your First Name"></ion-input>
+
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Middle name" formControlName="middle_name" readonly
+          placeholder="Your Middle Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Last name" formControlName="last_name" readonly
+          placeholder="Your Last Name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Email" formControlName="email" placeholder="Your Email" readonly></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Hire Date" formControlName="hire_date" placeholder="Hire Date"
+          type="date" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter Role" formControlName="role" placeholder="Your role" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Enter department" formControlName="department" placeholder="Your department" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input labelPlacement="stacked" label="Select Position" formControlName="position" placeholder="Your Position" readonly></ion-input>
+      </ion-item>
+
+    </form>
+  </ion-content>

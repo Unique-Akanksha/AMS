@@ -13,7 +13,7 @@
   </ion-header>
   
   <ion-content class="ion-padding">
-    <form [formGroup]="projectForm" (ngSubmit)="closeModal(true)">
+    <!-- <form [formGroup]="projectForm" (ngSubmit)="closeModal(true)">
       <ion-item>
         <ion-input labelPlacement="stacked" label="Enter Project name" formControlName="name" appAlphabetOnly placeholder="Project name" (paste)="onPaste($event)"></ion-input>
       </ion-item>
@@ -41,5 +41,18 @@
       <div *ngIf="projectForm.controls['end_date'].touched && projectForm.controls['end_date'].invalid">
         <ion-text color="danger">End Date is required.</ion-text>
       </div>
-    </form>
+    </form> -->
+
+    <div id="box">
+      <div id="form">
+        <form [formGroup]="projectForm" (ngSubmit)="closeModal(true)">
+          <ion-input label="Enter Project name" labelPlacement="floating" fill="outline" appAlphabetOnly placeholder="Project name" formControlName="name" (paste)="onPaste($event)"></ion-input><br>
+          <ion-input label="Enter Project Description" labelPlacement="floating" fill="outline" appAlphabetOnly placeholder="Description" formControlName="description" (paste)="onPaste($event)"></ion-input><br>
+          <ion-input type="date"slot="start"fill="outline"label="Select Leave Start Date" label-placement="floating"formControlName="start_date"></ion-input><br>
+          <ion-input type="date"fill="outline"label="Select Leave End Date"label-placement="floating"formControlName="end_date"></ion-input><br>
+          
+        </form>
+      </div>
+    </div>
+    
   </ion-content>

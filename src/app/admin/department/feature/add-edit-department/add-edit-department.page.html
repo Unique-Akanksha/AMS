@@ -13,7 +13,7 @@
   </ion-header>
   
   <ion-content class="ion-padding">
-    <form [formGroup]="depForm" (ngSubmit)="closeModal(true)">
+    <!-- <form [formGroup]="depForm" (ngSubmit)="closeModal(true)">
       <ion-item>
         <ion-input labelPlacement="stacked" label="Enter your name" formControlName="name" appAlphabetOnly  placeholder="Your name" (paste)="onPaste($event)"></ion-input>
       </ion-item>
@@ -27,6 +27,17 @@
       <div *ngIf="depForm.controls['description'].touched && depForm.controls['description'].invalid">
         <ion-text color="danger">Description is required.</ion-text>
       </div>
-    </form>
+    </form> -->
+
+    <div id="box">
+      <div id="form">
+        <form [formGroup]="depForm" (ngSubmit)="closeModal(true)">
+          <ion-input  label="Enter your name" labelPlacement="floating" fill="outline" appAlphabetOnly placeholder="Enter your name"formControlName="name"></ion-input><br>
+          <ion-textarea label="Enter Department Description" labelPlacement="floating" fill="outline" appAlphabetOnly placeholder="Enter Leave Reason"formControlName="description" (paste)="onPaste($event)"></ion-textarea><br>
+    
+        </form>
+      </div>
+    </div>
+    
   </ion-content>
   
